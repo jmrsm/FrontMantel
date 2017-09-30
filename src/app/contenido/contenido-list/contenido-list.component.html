@@ -1,5 +1,5 @@
-<div class="container">
+<div class="container" style="background-color: #455A64;">
     <div class="card-columns">
-      <app-content [content]="content"></app-content>
+      <app-content *ngFor="let content of contents" [content]="content"></app-content>
     </div>
   </div>

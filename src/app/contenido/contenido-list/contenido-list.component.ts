@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Content } from '../../models/content';
+import { ContentService } from '../../services/content.service';  
 
 @Component({
   selector: 'app-contenido-list',
@@ -7,10 +8,12 @@ import { Content } from '../../models/content';
   styles: []
 })
 export class ContenidoListComponent implements OnInit {
-  content = new Content('1','Batman Vs Superman','Batman Vs Superman','http://allcalidad.com/wp-content/uploads/2016/07/batman-vs-superman-el-origen-de-la-justicia.jpg','https://');
-  constructor() { }
+    contents:Content[]=[];
+   
+  constructor(private contentservice:ContentService) { }
 
   ngOnInit() {
+    this.contents = this.contentservice.getContents();
   }
 
 }

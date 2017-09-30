@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ContentService } from './services/content.service';
 
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
@@ -28,7 +29,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     BrowserModule,
     SwiperModule.forRoot(SWIPER_CONFIG)
   ],
-  providers: [],
+  providers: [ContentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
