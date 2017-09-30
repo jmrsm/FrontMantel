@@ -7,6 +7,8 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContenidoComponent } from './contenido/contenido.component';
+import { ContenidoListComponent } from './contenido/contenido-list/contenido-list.component';
+import { ContentComponent } from './contenido/contenido-list/content.component';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -18,7 +20,9 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
   declarations: [
     AppComponent,
     NavbarComponent,
-    ContenidoComponent
+    ContenidoComponent,
+    ContenidoListComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
