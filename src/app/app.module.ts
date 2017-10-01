@@ -10,6 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ContenidoComponent } from './contenido/contenido.component';
 import { ContenidoListComponent } from './contenido/contenido-list/contenido-list.component';
 import { ContentComponent } from './contenido/contenido-list/content.component';
+import { ContentDetailComponent } from './contenido/content-detail/content-detail.component';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -23,7 +24,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     NavbarComponent,
     ContenidoComponent,
     ContenidoListComponent,
-    ContentComponent
+    ContentComponent,
+    ContentDetailComponent
   ],
   imports: [
     BrowserModule,
