@@ -16,6 +16,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import {FormsModule} from '@angular/forms';
+import { AltaempresaComponent } from './altaempresa/altaempresa.component';
 
 
 const  appRoutes: Routes = [
@@ -23,6 +24,7 @@ const  appRoutes: Routes = [
   {path:'contenido',component:ContenidoComponent},
   {path:'login',component:LoginComponent},
   {path:'perfil',component:PerfilComponent},
+  {path:'altaempresa',component:AltaempresaComponent},
   {path:'admin',component:AdminComponent}
 ];
 
@@ -43,7 +45,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     ContentDetailComponent,
     PerfilComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    AltaempresaComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
