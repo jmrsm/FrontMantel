@@ -5,6 +5,9 @@ import { ContentService } from './services/content.service';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
+import {LoginGuard} from './login.guard';
+import {NoLoginGuard} from './no-login.guard';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContenidoComponent } from './contenido/contenido.component';
@@ -18,14 +21,13 @@ import { AdminComponent } from './admin/admin.component';
 import {FormsModule} from '@angular/forms';
 import { AltaempresaComponent } from './altaempresa/altaempresa.component';
 
-
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/contenido',pathMatch:'full'},
-  {path:'contenido',component:ContenidoComponent},
+  {path:'contenido',component:ContenidoComponent, canActivate: [LoginGuard]},
   {path:'login',component:LoginComponent},
-  {path:'perfil',component:PerfilComponent},
-  {path:'altaempresa',component:AltaempresaComponent},
-  {path:'admin',component:AdminComponent}
+  {path:'perfil',component:PerfilComponent,canActivate: [LoginGuard]},
+  {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
+  {path:'admin',component:AdminComponent,canActivate: [LoginGuard]}
 ];
 
 
@@ -54,7 +56,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     FormsModule,
     SwiperModule.forRoot(SWIPER_CONFIG)
   ],
-  providers: [ContentService],
+  providers: [ContentService,LoginGuard,NoLoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

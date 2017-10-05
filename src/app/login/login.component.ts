@@ -20,8 +20,14 @@ export class LoginComponent implements OnInit {
     //var pass = e.target.element[1].value;
     //console.log(user);
     if(form.value.email=='admin@admin' && form.value.password=='admin'){
+      //falta crear un ws par defenir el tipo de usuario
+      localStorage.setItem( 'email' , form.value.email);
+      localStorage.setItem('tipo','admin');
+      console.log(localStorage.getItem('email'));
       this.router.navigate(['admin']);
     }else{
+      localStorage.setItem('tipo','usuario');
+      localStorage.setItem( 'email' , form.value.email);
       this.router.navigate(['contenido']);
     }
 
