@@ -20,10 +20,12 @@ import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import {FormsModule} from '@angular/forms';
 import { AltaempresaComponent } from './altaempresa/altaempresa.component';
+import { RegistrarComponent } from './registrar/registrar.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/contenido',pathMatch:'full'},
   {path:'contenido',component:ContenidoComponent, canActivate: [LoginGuard]},
+  {path:'registrar',component:RegistrarComponent},
   {path:'login',component:LoginComponent},
   {path:'perfil',component:PerfilComponent,canActivate: [LoginGuard]},
   {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
@@ -48,7 +50,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     PerfilComponent,
     LoginComponent,
     AdminComponent,
-    AltaempresaComponent
+    AltaempresaComponent,
+    RegistrarComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
