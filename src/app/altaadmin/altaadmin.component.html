@@ -1,35 +1,32 @@
 <div class="container">
     <br>
-    <h3 class="text-center">Alta Admin</h3>
+    <h3 class="text-center">Alta Administrador</h3>
     <form #altaAdminForm="ngForm" (ngSubmit)="Altaadmin(altaAdminForm)">
         <br>
-        <br>
-        <div >
-          <div class="text-center" >
+        <div>
+          <div class="text-center">
               <div class="row">
                   <div class="col-sm-12 col-lg-3">
-                     
                   </div>
                    <div class="form-group col-6">
                       <label for="exampleSelect1">Seleccione empresa</label>
                       <select class="form-control" id="exampleSelect1">
+           <!--ACA DESPUÉS TRAE LA LISTA DE EMPRESAS DISPONIBLES -->
                         <option>Fox</option>
                         <option>Netflix</option>
                         <option>otra</option>
                          <option></option>
                       </select>
-                  </div>
-                 
-             
+                  </div>   
+                  
                <div class="form-group col-6">
                 <label for="exampleInputNombre">Nombre</label>
                 <input name="Nombre" type="nombre" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="Nombre" ngModel>
-    </div>
+              </div>
      <div class="form-group col-6">
                 <label for="exampleInputApellido">Apellido</label>
                 <input name="Apellido" type="apellido" class="form-control" id="apellido" aria-describedby="apellidoHelp" placeholder="Apellido" ngModel>
     </div>
-    
     <div >
           <div>
           <div class="row">
@@ -43,17 +40,13 @@
               </div>
           </div>  
       </div>
-    
-    </div>
-                                  
-              </div>  
           </div>
-        
+      </div>  
+          </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12 col-lg-3">
-                
             </div>
           <div class="form-group">
               <div class="col-6">
