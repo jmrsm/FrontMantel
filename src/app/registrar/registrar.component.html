@@ -1,38 +1,52 @@
 <div class="container center">
-<form #RegistrarForm="ngForm" (ngSubmit)="Registrar(RegistrarForm)">
-    <h3 class="text-center">Registrar</h3>
-        <br>
+<form #RegistrarForm="ngForm" (ngSubmit)="registrar(RegistrarForm)">
     <br>
-    <div class="form-group col-6">
-                <label for="exampleInputNombre">Nombre</label>
-                <input name="Nombre" type="nombre" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="Nombre" ngModel>
-    </div>
-     <div class="form-group col-6">
-                <label for="exampleInputApellido">Apellido</label>
-                <input name="Apellido" type="apellido" class="form-control" id="apellido" aria-describedby="apellidoHelp" placeholder="Apellido" ngModel>
-    </div>
-    
-    <div >
-          <div>
-          <div class="row">
+    <h3 class="text-center">Registrar</h3>
+      <br>
+      <br>
+        <div class="row">
+            <div class="form-group col-3">
+            </div>  
+          <div class="form-group col-6">
+            <label for="exampleInputNombre">Nombre</label>
+            <input name="nombre" type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="Nombre" ngModel>
+          </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-3">
+              </div>  
+          <div class="form-group col-6">
+            <label for="exampleInputApellido">Apellido</label>
+            <input name="apellido" type="text" class="form-control" id="apellido" aria-describedby="apellidoHelp" placeholder="Apellido" ngModel>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-3">
+              </div>  
+          <div class="form-group col-6">
+              <label for="exampleInputEmail1">Email address</label>
+              <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" ngModel>
+              <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más..</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-3">
+              </div>  
             <div class="form-group col-6">
-                <label for="exampleInputEmail1">Email address</label>
-                <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" ngModel>
-                <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más..</small>
-              </div>
-              <div class="form-group col-6">
-                <label for="exampleInputPassword1">Password</label>
-                <input  name="password"  type="password" class="form-control" id="password" placeholder="Password" ngModel>
-              </div>
-          </div>  
-      </div>
-    
-    </div>
-    
-    <div class="form-group row">
-      <div class="col-6">
-        <input type="submit" class="btn btn-primary" value="Registrar">
-      </div>
-    </div>
-      </form>
+              <label for="exampleInputPassword1">Password</label>
+              <input  name="password"  type="password" class="form-control" id="password" placeholder="Password" ngModel>
+            </div>
+        </div>  
+        
+        <div class="form-group row">
+            <div class="form-group col-3">
+              </div>  
+          <div class="col-6">
+            <input type="submit" class="btn btn-primary" value="Registrar">
+          </div>
+        </div>
+    </form>
+    <br>
+    <br>
  </div>

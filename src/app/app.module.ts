@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ContentService } from './services/content.service';
+import { HttpModule } from '@angular/http';
 
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
@@ -18,7 +19,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PerfilComponent } from './perfil/perfil.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AltaempresaComponent } from './altaempresa/altaempresa.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 
@@ -57,6 +58,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
+    HttpModule,
     SwiperModule.forRoot(SWIPER_CONFIG)
   ],
   providers: [ContentService,LoginGuard,NoLoginGuard],
