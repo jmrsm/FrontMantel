@@ -30,6 +30,7 @@ export class RegistrarComponent implements OnInit {
     //console.log(form.value.email);
     var body='email='+email+'&password='+password+'&nombre='+nombre+'&apellido='+apellido;
     
+    
     //this.user = new User(email,password,nombre,apellido);
     this.userservice.addUser(body).subscribe(p => {
 
