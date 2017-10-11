@@ -33,6 +33,12 @@ export class RegistrarComponent implements OnInit {
     
     //this.user = new User(email,password,nombre,apellido);
     this.userservice.addUser(body).subscribe(p => {
+      //console.log("dentro de if por 200");
+      this.exito = 'Cliente creado bien';
+      this.router.navigate(['/login']);
+
+    },e => this.error = e, () => this.isLoading = false);
+    /*this.userservice.addUser(body).subscribe(p => {
 
         this.status = JSON.parse(p['_body']);
 
@@ -44,7 +50,7 @@ export class RegistrarComponent implements OnInit {
 
           }
 
-      },e => this.error = e, () => this.isLoading = false);
+      },e => this.error = e, () => this.isLoading = false);*/
     return false;
   }
   
