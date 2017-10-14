@@ -25,7 +25,6 @@ import { RegistrarComponent } from './registrar/registrar.component';
 import { AltaadminComponent } from './altaadmin/altaadmin.component';
 
 const  appRoutes: Routes = [
-  {path:'',redirectTo:'/contenido',pathMatch:'full'},
   {path:'contenido',component:ContenidoComponent, canActivate: [LoginGuard]},
   {path:'registrar',component:RegistrarComponent},
   {path:'login',component:LoginComponent},
