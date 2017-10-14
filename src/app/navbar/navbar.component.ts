@@ -6,11 +6,11 @@ import {Router} from '@angular/router';
   styles: []
 })
 export class NavbarComponent implements OnInit {
-  @ViewChild('navbar') nav;
+  
   constructor(private router:Router) { }
 
   ngOnInit() {
-    console.log(this.nav);
+    
   }
   logout(){
     localStorage.removeItem('email');

@@ -23,8 +23,12 @@ import { FormsModule } from '@angular/forms';
 import { AltaempresaComponent } from './altaempresa/altaempresa.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { AltaadminComponent } from './altaadmin/altaadmin.component';
+import { NavarUserComponent } from './navar-user/navar-user.component';
+import { NavarSuperAdminComponent } from './navar-super-admin/navar-super-admin.component';
+import { NavarAdminComponent } from './navar-admin/navar-admin.component';
 
 const  appRoutes: Routes = [
+  {path:'',redirectTo:'/login',pathMatch:'full'},
   {path:'contenido',component:ContenidoComponent, canActivate: [LoginGuard]},
   {path:'registrar',component:RegistrarComponent},
   {path:'login',component:LoginComponent},
@@ -54,7 +58,10 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     AdminComponent,
     AltaempresaComponent,
     RegistrarComponent,
-    AltaadminComponent
+    AltaadminComponent,
+    NavarUserComponent,
+    NavarSuperAdminComponent,
+    NavarAdminComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
