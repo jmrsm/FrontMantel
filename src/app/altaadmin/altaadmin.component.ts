@@ -49,7 +49,7 @@ export class AltaadminComponent implements OnInit {
             console.log("dentro de if por 200");
             this.exito = 'Administrador creado con éxito';
             this.router.navigate(['/login']);
-
+//prueba subo git
           }
 
       },e => this.error = e, () => this.isLoading = false);*/
