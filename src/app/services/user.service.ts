@@ -11,10 +11,14 @@ export class UserService {
   constructor(private http:Http) { }
 
   addUser(body:String): Observable<any>{
-    console.log(this.url+'altaUsuario/?'+body);
+    console.log(this.url+'api/public/altaUsuario/?'+body);
     //return this.http.get(this.url+'altaUsuario/?'+body);
-    return  this.http.post(this.url+'/altaUsuario', body, {headers: this.getHeaders2()});
+    return  this.http.post(this.url+'/api/public/altaUsuario', body, {headers: this.getHeaders2()});
     
+  }
+  login(body:String): Observable<any>{
+    console.log(this.url+'api/public/login?'+body);
+    return this.http.get(this.url+'api/public/login/'+body);
   }
 
   
