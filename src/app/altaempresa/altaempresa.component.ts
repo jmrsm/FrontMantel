@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+//import {EmpresaService} from '../services/Empresa.service';
+
+
 @Component({
   selector: 'app-altaempresa',
   templateUrl: './altaempresa.component.html',
@@ -18,12 +21,13 @@ options: string[] = [];
   link: string = '';
   constructor(private router: Router) { }
 
-
   ngOnInit() {
   }
 Altaempresa(form: NgForm){
         var nombre=form.value.nombre;
           
+        var body='nombre='+nombre;
+    
     
     
     console.log(form.value);

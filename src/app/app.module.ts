@@ -32,6 +32,7 @@ import { AltaDirectorComponent } from './alta-director/alta-director.component';
 //import { EmpresaComponent } from './Empresa/Empresa.component';
 //import { AdminEmpresaComponent } from './admin-empresa/admin-empresa.component';
 
+
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
   {path:'contenido',component:ContenidoComponent, canActivate: [LoginGuard]},
@@ -43,8 +44,11 @@ const  appRoutes: Routes = [
   {path:'altacategoria',component:AltaCategoriaComponent,canActivate: [LoginGuard]},
   {path:'altadirector',component:AltaDirectorComponent,canActivate: [LoginGuard]},
   {path:'altaactor',component:AltaActorComponent,canActivate: [LoginGuard]},
-  {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]}
+  {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
   //{path:'admin-empresa',component:AdminEmpresaComponent,canActivate: [LoginGuard]},
+
+  {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
+  {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
 ];
 
 
