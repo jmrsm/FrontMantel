@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {EmpresaService} from '../services/Empresa.service';
-import {Empresa} from '../models/empresa';
-
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-altaempresa',
   templateUrl: './altaempresa.component.html',
   styleUrls: ['./altaempresa.component.css'],
-  providers: [EmpresaService],
+  //providers: [EmpresaService],
 })
 export class AltaempresaComponent implements OnInit {
 options: string[] = [];
@@ -18,7 +16,7 @@ options: string[] = [];
   isLoading: boolean = true;
   msj: string = '';
   link: string = '';
-  constructor(private Empresaservice: EmpresaService ,private router: Router) { }
+  constructor(private router: Router) { }
 
 
   ngOnInit() {
@@ -30,9 +28,9 @@ Altaempresa(form: NgForm){
     
     console.log(form.value);
     
-     this.Empresaservice.addEmpresa(body).subscribe(p => {
+     /*this.Empresaservice.addEmpresa(body).subscribe(p => {
       //console.log("dentro de if por 200");
-      this.exito = 'Empresa creada con éxito';
+      this.exito = 'Empresa creada con ï¿½xito';
       this.router.navigate(['/login']);
 
     },e => this.error = e, () => this.isLoading = false);
@@ -43,7 +41,7 @@ Altaempresa(form: NgForm){
           if (this.status = '200'){
 
             console.log("dentro de if por 200");
-            this.exito = 'Empresa creada con éxito';
+            this.exito = 'Empresa creada con ï¿½xito';
             this.router.navigate(['/login']);
           }
       },e => this.error = e, () => this.isLoading = false);*/
