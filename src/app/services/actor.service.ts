@@ -11,7 +11,7 @@ export class ActorService {
 
   addActor(body:String): Observable<any>{
     console.log(body);
-    return  this.http.post(this.url+'/api/public/altaUsuario', body, {headers: this.getHeaders2()});
+    return  this.http.post(this.url+'/api/admin/actor', body, {headers: this.getHeaders2()});
   }
   private getHeaders2(){
     let headers = new Headers();
