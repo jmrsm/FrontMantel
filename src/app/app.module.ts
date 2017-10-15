@@ -29,6 +29,7 @@ import { NavarAdminComponent } from './navar-admin/navar-admin.component';
 import { AltaCategoriaComponent } from './alta-categoria/alta-categoria.component';
 import { AltaActorComponent } from './alta-actor/alta-actor.component';
 import { AltaDirectorComponent } from './alta-director/alta-director.component';
+//import { EmpresaComponent } from './Empresa/Empresa.component';
 //import { AdminEmpresaComponent } from './admin-empresa/admin-empresa.component';
 
 const  appRoutes: Routes = [
@@ -64,6 +65,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     PerfilComponent,
     LoginComponent,
     AdminComponent,
+   // EmpresaComponent,
     AltaempresaComponent,
     RegistrarComponent,
     AltaadminComponent,
