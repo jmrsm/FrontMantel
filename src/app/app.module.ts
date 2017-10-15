@@ -26,6 +26,7 @@ import { AltaadminComponent } from './altaadmin/altaadmin.component';
 import { NavarUserComponent } from './navar-user/navar-user.component';
 import { NavarSuperAdminComponent } from './navar-super-admin/navar-super-admin.component';
 import { NavarAdminComponent } from './navar-admin/navar-admin.component';
+import { AdminEmpresaComponent } from './admin-empresa/admin-empresa.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -36,6 +37,7 @@ const  appRoutes: Routes = [
   {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
   {path:'admin',component:AdminComponent,canActivate: [LoginGuard]},
   {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
+  {path:'admin-empresa',component:AdminEmpresaComponent,canActivate: [LoginGuard]},
 ];
 
 
@@ -61,7 +63,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     AltaadminComponent,
     NavarUserComponent,
     NavarSuperAdminComponent,
-    NavarAdminComponent
+    NavarAdminComponent,
+    AdminEmpresaComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
