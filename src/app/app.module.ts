@@ -26,7 +26,10 @@ import { AltaadminComponent } from './altaadmin/altaadmin.component';
 import { NavarUserComponent } from './navar-user/navar-user.component';
 import { NavarSuperAdminComponent } from './navar-super-admin/navar-super-admin.component';
 import { NavarAdminComponent } from './navar-admin/navar-admin.component';
-import { AdminEmpresaComponent } from './admin-empresa/admin-empresa.component';
+import { AltaCategoriaComponent } from './alta-categoria/alta-categoria.component';
+import { AltaActorComponent } from './alta-actor/alta-actor.component';
+import { AltaDirectorComponent } from './alta-director/alta-director.component';
+//import { AdminEmpresaComponent } from './admin-empresa/admin-empresa.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -36,8 +39,11 @@ const  appRoutes: Routes = [
   {path:'perfil',component:PerfilComponent,canActivate: [LoginGuard]},
   {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
   {path:'admin',component:AdminComponent,canActivate: [LoginGuard]},
-  {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
-  {path:'admin-empresa',component:AdminEmpresaComponent,canActivate: [LoginGuard]},
+  {path:'altacategoria',component:AltaCategoriaComponent,canActivate: [LoginGuard]},
+  {path:'altadirector',component:AltaDirectorComponent,canActivate: [LoginGuard]},
+  {path:'altaactor',component:AltaActorComponent,canActivate: [LoginGuard]},
+  {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]}
+  //{path:'admin-empresa',component:AdminEmpresaComponent,canActivate: [LoginGuard]},
 ];
 
 
@@ -64,7 +70,10 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     NavarUserComponent,
     NavarSuperAdminComponent,
     NavarAdminComponent,
-    AdminEmpresaComponent
+    AltaCategoriaComponent,
+    AltaActorComponent,
+    AltaDirectorComponent
+    //AdminEmpresaComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
