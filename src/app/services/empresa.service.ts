@@ -12,10 +12,10 @@ export class EmpresaService {
   constructor(private http:Http) { }
 
   addEmpresa(body:String): Observable<any>{
-    console.log(this.url+'api/public/proveedorContenido/?'+body);
-    //return this.http.get(this.url+'proveedorContenido/?'+body);
-    return  this.http.post(this.url+'/api/public/proveedorContenido', body, {headers: this.getHeaders()});
-    
+    console.log(this.url+'api/superAdmin/proveedorContenido/?'+body);
+    //return this.http.get(this.url+'/superAdmin/proveedorContenido/?'+body);
+    return this.http.post(this.url+'api/superAdmin/proveedorContenido', body, {headers: this.getHeaders()});
+ 
   }
   login(body:String): Observable<any>{
     console.log(this.url+'api/public/login?'+body);

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-//import {EmpresaService} from '../services/Empresa.service';
+import {EmpresaService} from '../services/Empresa.service';
 
 
 @Component({
   selector: 'app-altaempresa',
   templateUrl: './altaempresa.component.html',
   styleUrls: ['./altaempresa.component.css'],
-  //providers: [EmpresaService],
+  providers: [EmpresaService],
 })
 export class AltaempresaComponent implements OnInit {
 options: string[] = [];
