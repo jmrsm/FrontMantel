@@ -22,8 +22,19 @@ export class AltaActorComponent implements OnInit {
   ngOnInit() {
   }
   altaactor(form: NgForm){
-    var body= 'nombre='+form.value.nombre;
-    this.actorservice.addActor(body).subscribe(p => {
+    //var body= 'nombre='+form.value.nombre+'&id=0'+'&apellido='+form.value.apellido;
+    var nombre = form.value.nombre;
+    var apellido = form.value.apellido;
+    let test_this = {"nombre": nombre,
+    "id":0,
+    "apellido":apellido
+  };
+    //var body = {
+      //apellido,
+      //nombre 
+    //};
+   //var body = '{"nombre": "' + nombre + '", '+a+'"apellido": "' + apellido + '"}';
+    this.actorservice.addActor(test_this).subscribe(p => {
       //console.log("dentro de if por 200");
       this.exito = 'Actor creado bien';
       this.router.navigate(['admin']);

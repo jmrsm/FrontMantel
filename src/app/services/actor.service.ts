@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response, Headers,RequestOptions } from '@angular/http';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Rx';
@@ -9,9 +9,15 @@ export class ActorService {
   private url:string= 'http://localhost:8080/';
   constructor(private http:Http) { }
 
-  addActor(body:String): Observable<any>{
-    console.log(body);
-    return  this.http.post(this.url+'/api/admin/actor', body, {headers: this.getHeaders2()});
+  addActor(body): Observable<any>{
+    console.log(JSON.stringify(body));
+    let headers = new Headers ({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers, method: "post" });
+    /*return this.http.post(this.url+'api/admin/actor', JSON.stringify(body), options).toPromise().then(
+      response=>{return response.text();}
+    );*/
+    
+    return  this.http.post(this.url+'api/admin/actor', JSON.stringify(body), {headers: this.getHeaders()});
   }
   private getHeaders2(){
     let headers = new Headers();
@@ -19,5 +25,10 @@ export class ActorService {
     console.log(headers.toJSON);
     return headers;
 
+  }
+  private getHeaders(){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return headers;
   }
 }
