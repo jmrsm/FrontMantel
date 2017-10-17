@@ -29,28 +29,30 @@ export class LoginComponent implements OnInit {
     //var pass = e.target.element[1].value;
     //console.log(user);
     var body='?email='+form.value.email+'&password='+form.value.password;
-    /*this.userservice.login(body).subscribe(p => {
+    this.userservice.login(body).subscribe(p => {
       //console.log("dentro de if por 200");
     console.log(p['_body']);
     if(p['_body']==='Usuario'){
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('tipo','Usuario');
       this.router.navigate(['/contenido']);
-    }else if(p['_body']==='Tenant_admin'){
+    } 
+    if(p['_body']==='Tenant_admin'){
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('tipo','Tenant_admin');
-    }else if(p['_body']==='Super_admin'){
+    }
+    if(p['_body']==='Super_admin'){
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('tipo','Super_admin');
-      this.router.navigate(['admin']);
+      this.router.navigate(['/admin']);
     }
     
-    },e => this.error = e, () => this.isLoading = false);*/
-    if(form.value.email=='admin@admin'){
+    },e => this.error = e, () => this.isLoading = false);
+    /*if(form.value.email=='admin@admin'){
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('tipo','Super_admin');
       this.router.navigate(['admin']);
-    }
+    }*/
     
   }
 

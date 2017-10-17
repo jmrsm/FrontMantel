@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {EmpresaService} from '../services/Empresa.service';
+import {EmpresaService} from '../services/empresa.service';
 
 
 @Component({
@@ -24,12 +24,9 @@ options: string[] = [];
   ngOnInit() {
   }
 Altaempresa(form: NgForm){
-        var nombre=form.value.nombre;
-          
-        var body='nombre='+nombre;
-    
-    
-    
+    var nombre=form.value.nombre;
+      
+    var body='nombre='+nombre;
     console.log(form.value);
     
      /*this.Empresaservice.addEmpresa(body).subscribe(p => {
