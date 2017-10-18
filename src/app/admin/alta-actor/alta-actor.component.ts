@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {ActorService} from '../services/actor.service';
+import {ActorService} from '../../services/actor.service';
 import {NgForm} from '@angular/forms';
 @Component({
   selector: 'app-alta-actor',

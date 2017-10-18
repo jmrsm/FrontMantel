@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {CategoriaService} from '../services/categoria.service';
+import {CategoriaService} from '../../services/categoria.service';
 @Component({
   selector: 'app-alta-categoria',
   templateUrl: './alta-categoria.component.html',

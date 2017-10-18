@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {DirectorService} from '../services/director.service';
+import {DirectorService} from '../../services/director.service';
 import {NgForm} from '@angular/forms';
 @Component({
   selector: 'app-alta-director',

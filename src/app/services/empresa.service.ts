@@ -24,7 +24,8 @@ export class EmpresaService {
  
   private getHeaders(){
     let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    console.log(headers.toJSON);
     return headers;
   }
 }

@@ -21,6 +21,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    var tipo= localStorage.getItem('tipo');
+    if(tipo==='Usuario'){
+      this.router.navigate(['/contenido']);
+    }
+    if(tipo==='Tenant_admin'){
+      
+      //this.router.navigate(['/contenido']);
+    } 
+    if(tipo==='Super_admin'){
+      
+      this.router.navigate(['/admin']);
+    }  
   }
   login(form: NgForm){
     

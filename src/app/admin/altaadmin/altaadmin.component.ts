@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router } from '@angular/router';
-import {AdminService} from '../services/admin.service';
+import {AdminService} from '../../services/admin.service';
 
 
 @Component({
@@ -36,7 +36,7 @@ export class AltaadminComponent implements OnInit {
    
    this.Adminservice.addAdmin(body).subscribe(p => {
       //console.log("dentro de if por 200");
-      this.exito = 'Administrador creado con éxito';
+      this.exito = 'Administrador creado con ï¿½xito';
       this.router.navigate(['/login']);
 
     },e => this.error = e, () => this.isLoading = false);
@@ -47,7 +47,7 @@ export class AltaadminComponent implements OnInit {
           if (this.status = '200'){
 
             console.log("dentro de if por 200");
-            this.exito = 'Administrador creado con éxito';
+            this.exito = 'Administrador creado con ï¿½xito';
             this.router.navigate(['/login']);
 
           }

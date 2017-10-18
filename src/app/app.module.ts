@@ -20,15 +20,16 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { FormsModule } from '@angular/forms';
-import { AltaempresaComponent } from './altaempresa/altaempresa.component';
+import { AltaempresaComponent } from './admin/altaempresa/altaempresa.component';
 import { RegistrarComponent } from './registrar/registrar.component';
-import { AltaadminComponent } from './altaadmin/altaadmin.component';
+import { AltaadminComponent } from './admin/altaadmin/altaadmin.component';
 import { NavarUserComponent } from './navar-user/navar-user.component';
 import { NavarSuperAdminComponent } from './navar-super-admin/navar-super-admin.component';
 import { NavarAdminComponent } from './navar-admin/navar-admin.component';
-import { AltaCategoriaComponent } from './alta-categoria/alta-categoria.component';
-import { AltaActorComponent } from './alta-actor/alta-actor.component';
-import { AltaDirectorComponent } from './alta-director/alta-director.component';
+import { AltaCategoriaComponent } from './admin/alta-categoria/alta-categoria.component';
+import { AltaActorComponent } from './admin/alta-actor/alta-actor.component';
+import { AltaDirectorComponent } from './admin/alta-director/alta-director.component';
+import { FooterComponent } from './footer/footer.component';
 //import { EmpresaComponent } from './Empresa/Empresa.component';
 //import { AdminEmpresaComponent } from './admin-empresa/admin-empresa.component';
 
@@ -78,7 +79,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     NavarAdminComponent,
     AltaCategoriaComponent,
     AltaActorComponent,
-    AltaDirectorComponent
+    AltaDirectorComponent,
+    FooterComponent
     //AdminEmpresaComponent
   ],
   imports: [
