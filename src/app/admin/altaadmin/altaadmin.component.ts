@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router } from '@angular/router';
 import {AdminService} from '../../services/admin.service';
 import {EmpresaService } from '../../services/empresa.service';  
+import {Empresa} from '../../models/empresa'
 
 @Component({
   selector: 'app-altaadmin',
@@ -12,6 +13,7 @@ import {EmpresaService } from '../../services/empresa.service';
 })
 
 export class AltaadminComponent implements OnInit {
+  empresa:Empresa[]=[];
   options: string[] = [];
   status: any = '';
   exito: string = '';
@@ -23,7 +25,14 @@ export class AltaadminComponent implements OnInit {
   constructor(private Adminservice: AdminService ,private router: Router, private Empresaservice: EmpresaService) { }
 
    ngOnInit() {
-    console.log(this.Empresaservice.ListaEmpresas());
+     let json;
+     this.Empresaservice.ListaEmpresas().subscribe(data=>{
+       console.log(data.text());
+       json=JSON.parse(data.text());
+       //Empresa[0]=new Empresa(json[0].id,json[0].nombre);
+       console.log(json);
+     })
+    console.log(status);
   }
   Altaadmin(form: NgForm){
     var email=form.value.email;

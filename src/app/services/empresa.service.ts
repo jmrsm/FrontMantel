@@ -29,12 +29,17 @@ export class EmpresaService {
     return headers;
   }
   
-    ListaEmpresas(): Observable<any>{
+    ListaEmpresas(){
     console.log(this.url+'api/superAdmin/proveedorContenido.ListaEmpresasNombreId()');
-    return this.http.get(this.url+'api/superAdmin/proveedorContenido.ListaEmpresasNombreId()',{headers: this.getHeaders()});
+    return this.http.get(this.url+'api/superAdmin/proveedorContenido.ListaEmpresasNombreId()', {headers: this.getHeaders2()});
+    //return this.http.get(this.url+'api/superAdmin/proveedorContenido.ListaEmpresasNombreId()').map((res:Response)=>res.json);
    }
- 
-  
+   
+   private getHeaders2(){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return headers;
+  }
 
   
 }

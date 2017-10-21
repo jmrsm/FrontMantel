@@ -38,8 +38,8 @@
 								 <select
 									class="form-control" id="exampleSelect1">
 									<table ng-show="row.empresa">
-                                      <tr ng-for="empresa in row.empresas">
-                                        <td>{{empresa.nombre}}</td>
+                                      <tr ng-for="let empresa in Empresas">
+                                        <td>{{empresa.id}}</td>
                                         </tr>
                                     </table>
 							     </select>
