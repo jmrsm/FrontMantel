@@ -34,14 +34,15 @@
 						<div class="row">
 							<div class="col-sm-12 col-lg-3"></div>
 							<div class="form-group col-6">
-								<label for="exampleSelect1">Seleccione empresa</label> <select
+								<label for="exampleSelect1">Seleccione empresa</label>
+								 <select
 									class="form-control" id="exampleSelect1">
-									<!--ACA DESPU�S TRAE LA LISTA DE EMPRESAS DISPONIBLES -->
-									<option>Fox</option>
-									<option>Netflix</option>
-									<option>otra</option>
-									<option></option>
-								</select>
+									<table ng-show="row.empresa">
+                                      <tr ng-for="empresa in row.empresas">
+                                        <td>{{empresa.nombre}}</td>
+                                        </tr>
+                                    </table>
+							     </select>
 							</div>
 							<div class="form-group col-6">
 								<label for="exampleInputNombre">Nombre</label> <input

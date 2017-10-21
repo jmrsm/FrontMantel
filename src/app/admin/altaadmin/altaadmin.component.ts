@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router } from '@angular/router';
 import {AdminService} from '../../services/admin.service';
-
+import {EmpresaService } from '../../services/empresa.service';  
 
 @Component({
   selector: 'app-altaadmin',
   templateUrl: './altaadmin.component.html',
   styleUrls: ['./altaadmin.component.css'],
-  providers: [AdminService],
+  providers: [AdminService, EmpresaService],
 })
+
 export class AltaadminComponent implements OnInit {
   options: string[] = [];
   status: any = '';
@@ -19,9 +20,10 @@ export class AltaadminComponent implements OnInit {
   isLoading: boolean = true;
   msj: string = '';
   link: string = '';
-  constructor(private Adminservice: AdminService ,private router: Router) { }
+  constructor(private Adminservice: AdminService ,private router: Router, private Empresaservice: EmpresaService) { }
 
    ngOnInit() {
+    console.log(this.Empresaservice.ListaEmpresas());
   }
   Altaadmin(form: NgForm){
     var email=form.value.email;
@@ -55,6 +57,7 @@ export class AltaadminComponent implements OnInit {
       },e => this.error = e, () => this.isLoading = false);*/
     return false;
    }
+   
   }
    
     

@@ -28,4 +28,13 @@ export class EmpresaService {
     console.log(headers.toJSON);
     return headers;
   }
+  
+    ListaEmpresas(): Observable<any>{
+    console.log(this.url+'api/superAdmin/proveedorContenido.ListaEmpresasNombreId()');
+    return this.http.get(this.url+'api/superAdmin/proveedorContenido.ListaEmpresasNombreId()',{headers: this.getHeaders()});
+   }
+ 
+  
+
+  
 }

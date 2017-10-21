@@ -30,6 +30,7 @@ import { AltaCategoriaComponent } from './admin/alta-categoria/alta-categoria.co
 import { AltaActorComponent } from './admin/alta-actor/alta-actor.component';
 import { AltaDirectorComponent } from './admin/alta-director/alta-director.component';
 import { FooterComponent } from './footer/footer.component';
+import { EmpresaslistComponent } from './empresaslist/empresaslist.component';
 //import { EmpresaComponent } from './Empresa/Empresa.component';
 //import { AdminEmpresaComponent } from './admin-empresa/admin-empresa.component';
 
@@ -80,7 +81,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     AltaCategoriaComponent,
     AltaActorComponent,
     AltaDirectorComponent,
-    FooterComponent
+    FooterComponent,
+    EmpresaslistComponent
     //AdminEmpresaComponent
   ],
   imports: [
