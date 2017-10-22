@@ -47,7 +47,7 @@ const  appRoutes: Routes = [
   {path:'altadirector',component:AltaDirectorComponent,canActivate: [LoginGuard]},
   {path:'altaactor',component:AltaActorComponent,canActivate: [LoginGuard]},
   {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
-  {path:'admin-empresa',component:AdminEmpresaComponent,canActivate: [LoginGuard]},
+  //{path:'admin-empresa',component:AdminEmpresaComponent,canActivate: [LoginGuard]},
 
   {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
   {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
@@ -82,7 +82,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     AltaActorComponent,
     AltaDirectorComponent,
     FooterComponent
-    EmpresaslistComponent
+    //EmpresaslistComponent
     //AdminEmpresaComponent
   ],
   imports: [

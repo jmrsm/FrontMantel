@@ -13,7 +13,7 @@ import {Empresa} from '../../models/empresa'
 })
 
 export class AltaadminComponent implements OnInit {
-  empresa:Empresa[]=[];
+  empresas:Empresa[]=[];
   options: string[] = [];
   status: any = '';
   exito: string = '';
@@ -27,10 +27,14 @@ export class AltaadminComponent implements OnInit {
    ngOnInit() {
      let json;
      this.Empresaservice.ListaEmpresas().subscribe(data=>{
+       let aux;
        console.log(data.text());
        json=JSON.parse(data.text());
        //Empresa[0]=new Empresa(json[0].id,json[0].nombre);
-       console.log(json);
+       for(let entry of json){
+         this.empresas.push(new Empresa(entry.nombre,entry.id))
+       }
+       console.log(this.empresas);
      })
     console.log(status);
   }
