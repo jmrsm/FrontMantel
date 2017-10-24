@@ -13,6 +13,7 @@ import {Empresa} from '../../models/empresa'
 })
 
 export class AltaadminComponent implements OnInit {
+  idEmpresa: string = '';
   empresas:Empresa[]=[];
   options: string[] = [];
   status: any = '';
@@ -44,14 +45,16 @@ export class AltaadminComponent implements OnInit {
     var nombre=form.value.nombre;
     var apellido=form.value.apellido;
     //console.log(form.value.email);
-    var body='email='+email+'&password='+password+'&nombre='+nombre+'&apellido='+apellido+'&proveedorContenidoId=2p';
-    
-    
-    console.log(form.value);
-   
-   this.Adminservice.addAdmin(body).subscribe(p => {
+    let test_this = {"apellido": apellido,
+    "email":email,
+    "id":0,
+    "nombre":nombre
+    }+'&password='+password+'&proveedorContenidoId='+this.idEmpresa;
+    //var body=test_this;
+    var body='apellido="'+apellido+'"&email='+email+'&nombre='+nombre+'&id=0'+'&password='+password+'&proveedorContenidoId='+this.idEmpresa;
+    this.Adminservice.addAdmin(body).subscribe(p => {
       //console.log("dentro de if por 200");
-      this.exito = 'Administrador creado con �xito';
+      this.exito = 'Administrador creado con Exito';
       this.router.navigate(['/login']);
 
     },e => this.error = e, () => this.isLoading = false);
@@ -70,7 +73,10 @@ export class AltaadminComponent implements OnInit {
       },e => this.error = e, () => this.isLoading = false);*/
     return false;
    }
-   
+   callType(value: any){
+        console.log(value);
+        this.idEmpresa = value;
+    }
   }
    
     
