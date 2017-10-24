@@ -11,8 +11,9 @@ export class AdminService {
 
   addAdmin(body:String): Observable<any>{
     console.log(this.url+'/api/superAdmin/admin?'+body);
+    console.log(JSON.stringify(body));
     
-    return  this.http.post(this.url+'/api/superAdmin/admin', body, {headers: this.getHeaders()});
+    return  this.http.post(this.url+'api/superAdmin/admin', body, {headers: this.getHeaders()});
     
   }
 
@@ -23,6 +24,11 @@ export class AdminService {
     console.log(headers.toJSON);
     return headers;
 
+  }
+  private getHeaders2(){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return headers;
   }
   
 }

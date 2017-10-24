@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { ContentService } from './services/content.service';
 import { HttpModule } from '@angular/http';
 
+import { SocialLoginModule } from "angular4-social-login";
+import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
+
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
@@ -54,11 +57,23 @@ const  appRoutes: Routes = [
 ];
 
 
+
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto',
   keyboardControl: true
 };
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("723433196483-67ug7hrca2643ure46up5n7r1t75oe6a.apps.googleusercontent.com")
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -90,9 +105,16 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    SocialLoginModule,
     SwiperModule.forRoot(SWIPER_CONFIG)
   ],
-  providers: [ContentService,LoginGuard,NoLoginGuard],
+  providers: [ContentService,LoginGuard,NoLoginGuard,[
+      {
+        provide: AuthServiceConfig,
+        useFactory: provideConfig
+      }
+    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

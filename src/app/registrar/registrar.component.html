@@ -1,5 +1,6 @@
 <div class="container center">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<div *ngIf="!user">
 <form #RegistrarForm="ngForm" (ngSubmit)="registrar(RegistrarForm)">
     <br>
     <h3 class="text-center">Registrar</h3>
@@ -29,7 +30,7 @@
           <div class="form-group col-6">
               <label for="exampleInputEmail1">Email address</label>
               <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" ngModel>
-              <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más..</small>
+              <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su correo electrï¿½nico con nadie mï¿½s..</small>
             </div>
         </div>
         <div class="row">
@@ -44,11 +45,102 @@
         <div class="form-group row">
             <div class="form-group col-3">
               </div>  
-          <div class="col-6">
-            <input type="submit" class="btn btn-primary" value="Registrar">
+          <div class="col-6 ">
+            <input type="submit" class="btn btn-primary btn-block" value="Registrar">
           </div>
         </div>
     </form>
+    <div class="row">
+      <div class="form-group col-3">
+      </div>
+      <div class="col-6">
+        <small id="emailHelp" class="form-text text-muted text-center">O Registrar con Google</small>
+      </div>  
+    </div>
+    <br>
+    <div class="row">
+      <div class="form-group col-3">
+      </div>
+      <div class="col-6">
+        <input type="submit" class="btn btn-danger btn-block" value="Google+" (click)="callGoogle()">
+      </div>  
+    </div>
+  </div>
+
+    <div *ngIf="user">
+      
+
+        <form #RegistrarForm="ngForm" (ngSubmit)="registrar(RegistrarForm)">
+            <br>
+            <h3 class="text-center">Registrar</h3>
+              <br>
+              <br>
+              <fieldset disabled>
+                <div class="row">
+                    <div class="form-group col-3">
+                    </div>  
+                  <div class="form-group col-6">
+                    <label for="exampleInputNombre">Nombre</label>
+                    <input name="nombre" type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="{{ user.name }}" ngModel>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-3">
+                      </div>  
+                  <div class="form-group col-6">
+                    <label for="exampleInputApellido">Apellido</label>
+                    <input name="apellido" type="text" class="form-control" id="apellido" aria-describedby="apellidoHelp" placeholder="{{ user.name }}" ngModel>
+                  </div>
+                </div>
+        
+                
+                <div class="row">
+                    <div class="form-group col-3">
+                      </div>  
+                  <div class="form-group col-6">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{ user.email }}" ngModel>
+                      <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su correo electrï¿½nico con nadie mï¿½s..</small>
+                    </div>
+                </div>
+              </fieldset>
+                <div class="row">
+                    <div class="form-group col-3">
+                      </div>  
+                    <div class="form-group col-6">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input  name="password"  type="password" class="form-control" id="password" placeholder="Password" ngModel>
+                    </div>
+                </div>  
+                
+                <div class="form-group row">
+                    <div class="form-group col-3">
+                      </div>  
+                  <div class="col-6 ">
+                    <input type="submit" class="btn btn-primary btn-block" value="Registrar">
+                  </div>
+                </div>
+            </form>
+            <div class="row">
+              <div class="form-group col-3">
+              </div>
+              <div class="col-6">
+                <small id="emailHelp" class="form-text text-muted text-center">O Registrar con Google</small>
+              </div>  
+            </div>
+            <br>
+            <fieldset disabled>
+            <div class="row">
+              <div class="form-group col-3">
+              </div>
+              <div class="col-6">
+                <input type="submit" class="btn btn-danger btn-block" value="Google+" (click)="callGoogle()">
+              </div>  
+            </div>
+          </fieldset>
+
+      
+    </div>
     <br>
     <br>
  </div>
