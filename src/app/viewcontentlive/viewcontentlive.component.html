@@ -1,0 +1,34 @@
+<app-navar-user></app-navar-user>
+<div class="container" style="background-color: #ffffff;">
+		<div class="row">
+			<div class="col-4">
+				<h1 class="display-4">Chat Firebase</h1>
+				<form #enviarMensaje="ngForm" (ngSubmit)="enviar(enviarMensaje)" action="">
+					<div class="form-group" >
+						<label for="formGroupExampleInput">Nombre</label>
+						<input name="nombre" class="form-control" type="text" id="nombre" ngModel> 
+					</div>
+					<div class="form-group">
+						<label for="exampleTextarea">Mensaje</label>
+						<textarea name="mensaje" class="form-control" id="mensaje" ngModel></textarea>
+					</div>
+					<button class="btn btn-primary" type="submit" id="btnEnviar">Enviar</button>
+				</form>
+				<br>
+				<table id="chatUL" class="table table-sm ">
+				  <thead class="bg-info">
+				    <tr>
+				      <th class="text-white">Mensajes</th>
+				    </tr>
+				  </thead>
+				  <tbody *ngFor="let item of item | async">
+						<tr>
+						<th scope='row'>
+						<span class='badge badge-pill badge-danger'>{{item.name+': '}}</span><kbd>{{item.message}}</kbd>
+						</th>
+						</tr>
+						</tbody>
+				</table>
+			</div>
+		</div>
+	</div>

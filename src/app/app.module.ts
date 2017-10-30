@@ -36,7 +36,10 @@ import { FooterComponent } from './footer/footer.component';
 //import { EmpresaslistComponent } from './empresaslist/empresaslist.component';
 //import { EmpresaComponent } from './Empresa/Empresa.component';
 //import { AdminEmpresaComponent } from './admin-empresa/admin-empresa.component';
-
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { ViewcontentliveComponent } from './viewcontentlive/viewcontentlive.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -50,6 +53,7 @@ const  appRoutes: Routes = [
   {path:'altadirector',component:AltaDirectorComponent,canActivate: [LoginGuard]},
   {path:'altaactor',component:AltaActorComponent,canActivate: [LoginGuard]},
   {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
+  {path:'viewcontentlive',component:ViewcontentliveComponent,canActivate: [LoginGuard]},
   //{path:'admin-empresa',component:AdminEmpresaComponent,canActivate: [LoginGuard]},
 
   {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
@@ -96,7 +100,8 @@ export function provideConfig() {
     AltaCategoriaComponent,
     AltaActorComponent,
     AltaDirectorComponent,
-    FooterComponent
+    FooterComponent,
+    ViewcontentliveComponent
     //EmpresaslistComponent
     //AdminEmpresaComponent
   ],
@@ -106,7 +111,9 @@ export function provideConfig() {
     FormsModule,
     HttpModule,
     SocialLoginModule,
-    SwiperModule.forRoot(SWIPER_CONFIG)
+    SwiperModule.forRoot(SWIPER_CONFIG),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [ContentService,LoginGuard,NoLoginGuard,[
       {
@@ -114,6 +121,8 @@ export function provideConfig() {
         useFactory: provideConfig
       }
     ],
+    AngularFireModule,
+    AngularFireDatabaseModule,
   ],
   bootstrap: [AppComponent]
 })
