@@ -15,8 +15,8 @@ export class ViewcontentliveComponent implements OnInit {
   itemsRef: AngularFireList<any>;  
   item: Observable<any[]>;
   constructor(private db: AngularFireDatabase) { 
-    this.itemsRef = db.list('chat');
-    this.item = db.list('chat').valueChanges();
+    this.itemsRef = db.list('chat1');
+    this.item = db.list('chat1').valueChanges();
 
   }
 

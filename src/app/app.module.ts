@@ -40,6 +40,7 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ViewcontentliveComponent } from './viewcontentlive/viewcontentlive.component';
+import { AdminTenantComponent } from './admin-tenant/admin-tenant.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -55,7 +56,7 @@ const  appRoutes: Routes = [
   {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
   {path:'viewcontentlive',component:ViewcontentliveComponent,canActivate: [LoginGuard]},
   //{path:'admin-empresa',component:AdminEmpresaComponent,canActivate: [LoginGuard]},
-
+  {path:'admintenant',component:AdminTenantComponent,canActivate: [LoginGuard]},
   {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
   {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
 ];
@@ -101,7 +102,8 @@ export function provideConfig() {
     AltaActorComponent,
     AltaDirectorComponent,
     FooterComponent,
-    ViewcontentliveComponent
+    ViewcontentliveComponent,
+    AdminTenantComponent
     //EmpresaslistComponent
     //AdminEmpresaComponent
   ],
