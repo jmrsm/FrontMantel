@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     }
     if(tipo==='Tenant_admin'){
       
-      //this.router.navigate(['/contenido']);
+      this.router.navigate(['/admintenant']);
     } 
     if(tipo==='Super_admin'){
       
@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
     if(p['_body']==='Tenant_admin'){
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('tipo','Tenant_admin');
+      this.router.navigate(['/admintenant']);
     }
     if(p['_body']==='Super_admin'){
       localStorage.setItem( 'email' , form.value.email);
