@@ -43,18 +43,18 @@ export class LoginComponent implements OnInit {
     var body='?email='+form.value.email+'&password='+form.value.password;
     this.userservice.login(body).subscribe(p => {
       //console.log("dentro de if por 200");
-    console.log(p['_body']);
-    if(p['_body']==='Usuario'){
+    console.log(JSON.parse(p['_body'])['tipoUsuario']);
+    if(JSON.parse(p['_body'])['tipoUsuario']==='Usuario'){
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('tipo','Usuario');
       this.router.navigate(['/contenido']);
     } 
-    if(p['_body']==='Tenant_admin'){
+    if(JSON.parse(p['_body'])['tipoUsuario']==='Tenant_admin'){
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('tipo','Tenant_admin');
       this.router.navigate(['/admintenant']);
     }
-    if(p['_body']==='Super_admin'){
+    if(JSON.parse(p['_body'])['tipoUsuario']==='Super_admin'){
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('tipo','Super_admin');
       this.router.navigate(['/admin']);

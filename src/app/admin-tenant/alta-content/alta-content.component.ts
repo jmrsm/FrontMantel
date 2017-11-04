@@ -17,6 +17,8 @@ export class AltaContentComponent implements OnInit {
   isSerie: boolean = false;
   isEvento: boolean = false;
   isDestacado: boolean = false;
+  isDeportivo:boolean = false;
+  isEspectaculo:boolean = false;
   error: string = '';
   isLoading: boolean = true;
   item : ContentOMBDDTO[]=[];
@@ -43,6 +45,14 @@ export class AltaContentComponent implements OnInit {
 
       //console.log(this.item);
     },e => this.error = e, () => this.isLoading = false);
+  }
+  onEventSelect(selectValue:string){
+    if(selectValue=='1'){
+      this.isEspectaculo=true;
+    }
+    if(selectValue=='2'){
+      this.isDeportivo=false;
+    }
   }
   onEventDestacado(selectValue : string){
     if(selectValue=='1'){

@@ -45,4 +45,7 @@ export class ContentService {
     console.log(this.url+'/api/admin/contenidoOmdb?'+body);
     return this.http.post(this.url+'api/admin/contenidoOmdb',body, {headers: this.getHeaders()});
   }
+  getMyContent(body:string){
+    return  this.http.get(this.url+'api/admin/listarmicontenido'+body, {headers: this.getHeaders()});
+  }
 }
