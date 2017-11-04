@@ -16,5 +16,19 @@ export class ContentComponent implements OnInit {
 
   ngOnInit() {
   }
+  openCheckout() {
+    var handler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_JOHebQTrkgPUeecYROmEOPGO',
+      locale: 'auto',
+      token: function (token: any) {
+        console.log(token);
+      }
+    });
 
+    handler.open({
+      name: 'Demo Site',
+      description: '2 widgets',
+      amount: 2000
+    });
+  }
 }

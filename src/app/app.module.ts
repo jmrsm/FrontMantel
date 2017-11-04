@@ -41,6 +41,7 @@ import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ViewcontentliveComponent } from './viewcontentlive/viewcontentlive.component';
 import { AdminTenantComponent } from './admin-tenant/admin-tenant.component';
+import { AltaContentComponent } from './admin-tenant/alta-content/alta-content.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -57,6 +58,7 @@ const  appRoutes: Routes = [
   {path:'viewcontentlive',component:ViewcontentliveComponent,canActivate: [LoginGuard]},
   //{path:'admin-empresa',component:AdminEmpresaComponent,canActivate: [LoginGuard]},
   {path:'admintenant',component:AdminTenantComponent,canActivate: [LoginGuard]},
+  {path:'altacontenidoomdb',component:AltaContentComponent,canActivate: [LoginGuard]},
   {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
   {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
 ];
@@ -103,7 +105,8 @@ export function provideConfig() {
     AltaDirectorComponent,
     FooterComponent,
     ViewcontentliveComponent,
-    AdminTenantComponent
+    AdminTenantComponent,
+    AltaContentComponent
     //EmpresaslistComponent
     //AdminEmpresaComponent
   ],
