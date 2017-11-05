@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ContenidoPlayerComponent } from "./contenido-player.component";
+import { ContenidoComunComponent } from "./contenido-comun.component";
 import { FormsModule } from "@angular/forms";
 import { VgCoreModule } from "videogular2/core";
 import { VgControlsModule } from "videogular2/controls";
@@ -18,8 +18,8 @@ import { SimpleTimer } from 'ng2-simple-timer';
         VgOverlayPlayModule,
         VgBufferingModule
     ],
-    declarations: [ ContenidoPlayerComponent ]
+    declarations: [ ContenidoComunComponent ]
 })
   
-export class ContenidoPlayerModule {
+export class ContenidoComunModule {
 }

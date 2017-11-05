@@ -40,7 +40,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ViewcontentliveComponent } from './viewcontentlive/viewcontentlive.component';
 import { AdminTenantComponent } from './admin-tenant/admin-tenant.component';
 import { AltaContentComponent } from './admin-tenant/alta-content/alta-content.component';
-import { ContenidoPlayerModule } from './contenido/contenido-player/contenido-player.module';
+import { ContenidoComunModule } from './contenido/contenido-comun/contenido-comun.module';
+import { ContenidoVivoModule } from './contenido/contenido-vivo/contenido-vivo.module';
 import { ROUTES } from './routes/routes';
 
 const  appRoutes: Routes = [
@@ -117,7 +118,8 @@ export function provideConfig() {
     SwiperModule.forRoot(SWIPER_CONFIG),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    ContenidoPlayerModule
+    ContenidoComunModule,
+    ContenidoVivoModule
   ],
   providers: [ContentService,LoginGuard,NoLoginGuard,[
       {

@@ -6,12 +6,12 @@ import {SimpleTimer} from 'ng2-simple-timer';
 import { Content } from '../../models/content';
 import { ContentService } from '../../services/content.service';
 @Component({
-  selector: 'app-player',
-  templateUrl: './contenido-player.component.html',
-  styleUrls: ['./contenido-player.component.css'],
+  selector: 'app-repro-comun',
+  templateUrl: './contenido-comun.component.html',
+  styleUrls: ['./contenido-comun.component.css'],
   providers: [ContentService]
 })
-export class ContenidoPlayerComponent implements OnInit {
+export class ContenidoComunComponent implements OnInit {
   sources: Array<Object>;
   api: VgAPI;
   fsAPI: VgFullscreenAPI;
@@ -33,8 +33,8 @@ export class ContenidoPlayerComponent implements OnInit {
   ngOnInit() {
       this._route.params.forEach((params: Params) => {
       this.srcVideo = localStorage.getItem('videoSrc');
-      this.startTimeVideo = localStorage.getItem('videoTime');
       this.idVideo = localStorage.getItem('videoId');
+      this.idUsuario = localStorage.getItem('idUsuario');
 
       this.st.newTimer('5sec', 5);
     });
@@ -90,12 +90,15 @@ export class ContenidoPlayerComponent implements OnInit {
     }
   
   persistirCurrentTime() {
-    this.contentservice.setTimeCurrent('1', '1', this.currentTimeVideo).subscribe(p => {
-      console.log(p);
-    });
+    if (this.currentTimeVideo !== 'undefined' && this.idUsuario !== 'undefined' && this.idVideo !== 'undefined') {
+       
+       this.contentservice.setTimeCurrent(this.idUsuario, this.idVideo, this.currentTimeVideo).subscribe(p => {
+          console.log(p);
+       });
+    }
   }
   
   startTime() {
-    this.startTimeVideo = this.contentservice.getTimeUserView('1', '1');
+    this.startTimeVideo = this.contentservice.getTimeUserView(this.idUsuario, this.idVideo);
   }
 }

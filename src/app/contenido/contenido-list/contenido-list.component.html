@@ -1,4 +1,5 @@
 <div class="container" style="background-color: #455A64;">
+<button (click)="anterior()">Pagina Anterior</button><button (click)="inicio()">Pagina Inicio</button><button (click)="siguiente()">Pagina Siguiente</button>
     <div class="card-columns">
       <app-content *ngFor="let content of data.content" [content]="content"></app-content>
     </div>

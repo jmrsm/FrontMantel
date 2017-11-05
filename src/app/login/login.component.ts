@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
     if(JSON.parse(p['_body'])['tipoUsuario']==='Usuario'){
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('tipo','Usuario');
+      localStorage.setItem('idUsuario', JSON.parse(p['_body'])['id']);
       this.router.navigate(['/contenido']);
     } 
     if(JSON.parse(p['_body'])['tipoUsuario']==='Tenant_admin'){
