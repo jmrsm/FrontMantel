@@ -90,9 +90,12 @@ export class ContenidoComunComponent implements OnInit {
     }
   
   persistirCurrentTime() {
-    this.contentservice.setTimeCurrent(this.idUsuario, this.idVideo, this.currentTimeVideo).subscribe(p => {
-      console.log(p);
-    });
+    if (this.currentTimeVideo !== 'undefined' && this.idUsuario !== 'undefined' && this.idVideo !== 'undefined') {
+       
+       this.contentservice.setTimeCurrent(this.idUsuario, this.idVideo, this.currentTimeVideo).subscribe(p => {
+          console.log(p);
+       });
+    }
   }
   
   startTime() {

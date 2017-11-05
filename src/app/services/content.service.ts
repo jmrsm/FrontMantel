@@ -44,8 +44,9 @@ export class ContentService {
   }
   
   // comunicacion con la api para obtener todas las peliculas
-   public getData() {
-    return this.httpc.get(this.url+'api/usuario/listarTodasPeliculas?_start=0 &_end=10').map((res: Response) => res);
+   public getData(start_index, end_index) {
+    return this.httpc.get(this.url+'api/usuario/listarTodasPeliculas?_start=' + 
+      start_index + '&_end=' + end_index).map((res: Response) => res);
   }
   
   // comunicacion con la api para obtener el tiempo que un usuario lleva viendo u  contenido de tipo pelicula
