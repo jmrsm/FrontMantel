@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Content } from '../../models/content';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -12,7 +14,7 @@ import { Content } from '../../models/content';
 })
 export class ContentComponent implements OnInit {
   @Input() content:Content;
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
@@ -30,5 +32,12 @@ export class ContentComponent implements OnInit {
       description: '2 widgets',
       amount: 2000
     });
+  }
+  
+  play() {
+    localStorage.setItem('videoSrc', this.content.path);
+    localStorage.setItem('videoTime', '120');
+    localStorage.setItem('videoId', this.content.id);
+    this.router.navigate(['/player']);
   }
 }

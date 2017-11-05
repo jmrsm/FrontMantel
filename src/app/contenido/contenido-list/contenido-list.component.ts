@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Content } from '../../models/content';
-import { ContentService } from '../../services/content.service';  
+import { ContentService } from '../../services/content.service';
+import { NgForm } from '@angular/forms';  
 
 @Component({
   selector: 'app-contenido-list',
@@ -9,11 +10,17 @@ import { ContentService } from '../../services/content.service';
 })
 export class ContenidoListComponent implements OnInit {
     contents:Content[]=[];
+    data: any = {};
    
   constructor(private contentservice:ContentService) { }
 
   ngOnInit() {
-    this.contents = this.contentservice.getContents();
+    this.getContents();
   }
 
+  public getContents() {
+    this.contentservice.getData().subscribe(data => {
+      this.data = data;
+    });
+  }
 }

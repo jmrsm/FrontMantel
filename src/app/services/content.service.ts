@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { Content } from '../models/content';
 import { Http, Response, Headers } from '@angular/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {Ng2Webstorage} from 'ng2-webstorage';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Rx';
+import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class ContentService {
@@ -16,7 +19,9 @@ export class ContentService {
   new Content('5','Pirate of Caribbean','Pirate of Caribian','https://images-na.ssl-images-amazon.com/images/M/MV5BN2YyZjQ0NTEtNzU5MS00NGZkLTg0MTEtYzJmMWY3MWRhZjM2XkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_UY1200_CR90,0,630,1200_AL_.jpg','https://'),
   new Content('6','Thor','Thor','http://images6.fanpop.com/image/photos/34200000/THOR-THE-DARK-WORLD-Movie-Poster-thor-34278279-338-500.jpg','https://')
   ];
-  constructor(private http:Http) { }
+  constructor(
+      private http:Http,
+      private httpc:HttpClient) { }
   getContents(){
     return this.contents;
   }
@@ -47,5 +52,18 @@ export class ContentService {
   }
   getMyContent(body:string){
     return  this.http.get(this.url+'api/admin/listarmicontenido'+body, {headers: this.getHeaders()});
+  }
+  
+   public getData() {
+    return this.httpc.get(this.url+'api/usuario/listarTodasPeliculas?_start=0 &_end=10').map((res: Response) => res);
+  }
+  
+  public getTimeUserView(usuarioId: string, contenidoId: string): Observable<any> {
+    return this.httpc.get(this.url+'api/usuario/verContenido?usuarioId=' + usuarioId + '&contenidoId=' + contenidoId).map((res: Response) => res);
+  }
+  
+  setTimeCurrent(idUsuario: string, idContenido: string, Tiempo: string): Observable<any>{
+    return this.httpc.get(this.url + 'api/usuario/guardarReproduccion' + '?idUsuario=' + 
+      idUsuario + '&idContenido=' + idContenido + '&Tiempo=' + Tiempo).map((res: Response) => res);
   }
 }

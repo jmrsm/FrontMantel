@@ -1,5 +1,5 @@
 export class Content {
-    constructor(public id:string,public title:string, public descrip:string,public img:string, public video:string){
+    constructor(public id:string,public titulo:string, public descipcion:string,public Poster:string, public path:string){
 
     }
 

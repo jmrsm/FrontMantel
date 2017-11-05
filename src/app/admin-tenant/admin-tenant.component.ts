@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ContentService} from '../services/content.service';
-import {Observable} from 'rxjs'
+import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'app-admin-tenant',
   templateUrl: './admin-tenant.component.html',
@@ -14,7 +14,7 @@ export class AdminTenantComponent implements OnInit {
 
   ngOnInit() {
 
-    var body='?email='+localStorage.getItem('email');;
+    var body='?email='+localStorage.getItem('email');
     this.contentService.getMyContent(body).subscribe(p => {
       console.log(body);
       this.contenido  = JSON.parse(p['_body']);

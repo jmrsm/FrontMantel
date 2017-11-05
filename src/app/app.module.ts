@@ -12,6 +12,7 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import {LoginGuard} from './login.guard';
 import {NoLoginGuard} from './no-login.guard';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContenidoComponent } from './contenido/contenido.component';
@@ -33,15 +34,14 @@ import { AltaCategoriaComponent } from './admin/alta-categoria/alta-categoria.co
 import { AltaActorComponent } from './admin/alta-actor/alta-actor.component';
 import { AltaDirectorComponent } from './admin/alta-director/alta-director.component';
 import { FooterComponent } from './footer/footer.component';
-//import { EmpresaslistComponent } from './empresaslist/empresaslist.component';
-//import { EmpresaComponent } from './Empresa/Empresa.component';
-//import { AdminEmpresaComponent } from './admin-empresa/admin-empresa.component';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ViewcontentliveComponent } from './viewcontentlive/viewcontentlive.component';
 import { AdminTenantComponent } from './admin-tenant/admin-tenant.component';
 import { AltaContentComponent } from './admin-tenant/alta-content/alta-content.component';
+import { ContenidoPlayerModule } from './contenido/contenido-player/contenido-player.module';
+import { ROUTES } from './routes/routes';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -56,7 +56,6 @@ const  appRoutes: Routes = [
   {path:'altaactor',component:AltaActorComponent,canActivate: [LoginGuard]},
   {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
   {path:'viewcontentlive',component:ViewcontentliveComponent,canActivate: [LoginGuard]},
-  //{path:'admin-empresa',component:AdminEmpresaComponent,canActivate: [LoginGuard]},
   {path:'admintenant',component:AdminTenantComponent,canActivate: [LoginGuard]},
   {path:'altacontenidoomdb',component:AltaContentComponent,canActivate: [LoginGuard]},
   {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
@@ -93,7 +92,6 @@ export function provideConfig() {
     PerfilComponent,
     LoginComponent,
     AdminComponent,
-   // EmpresaComponent,
     AltaempresaComponent,
     RegistrarComponent,
     AltaadminComponent,
@@ -107,18 +105,19 @@ export function provideConfig() {
     ViewcontentliveComponent,
     AdminTenantComponent,
     AltaContentComponent
-    //EmpresaslistComponent
-    //AdminEmpresaComponent
   ],
   imports: [
+    RouterModule.forRoot(ROUTES, { useHash: true }),
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
     HttpModule,
     SocialLoginModule,
+    HttpClientModule,
     SwiperModule.forRoot(SWIPER_CONFIG),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ContenidoPlayerModule
   ],
   providers: [ContentService,LoginGuard,NoLoginGuard,[
       {

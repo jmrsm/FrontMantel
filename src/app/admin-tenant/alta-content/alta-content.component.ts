@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ContentService} from '../../services/content.service';
-import {Observable} from 'rxjs'
+import {Observable} from 'rxjs/Observable';
 import {ContentOMBDDTO} from '../../models/content';
 import { FirebaseApp } from 'angularfire2';
 import 'firebase/storage';
@@ -47,23 +47,23 @@ export class AltaContentComponent implements OnInit {
     },e => this.error = e, () => this.isLoading = false);
   }
   onEventSelect(selectValue:string){
-    if(selectValue=='1'){
+    if(selectValue==='1'){
       this.isEspectaculo=true;
     }
-    if(selectValue=='2'){
+    if(selectValue==='2'){
       this.isDeportivo=false;
     }
   }
   onEventDestacado(selectValue : string){
-    if(selectValue=='1'){
+    if(selectValue==='1'){
       this.isDestacado=true;
     }
-    if(selectValue=='2'){
+    if(selectValue==='2'){
       this.isDestacado=false;
     }
   }
   onEventClick(selectValue : string ) {  
-    if(selectValue=='1'){
+    if(selectValue==='1'){
       //pelicula
       this.isPelicula=true;
       this.isEvento=false;
@@ -71,7 +71,7 @@ export class AltaContentComponent implements OnInit {
       
       console.log("Pelicula");
     }
-    if(selectValue=='2'){
+    if(selectValue==='2'){
       //serie
       this.isPelicula=false;
       this.isEvento=false;
@@ -79,7 +79,7 @@ export class AltaContentComponent implements OnInit {
       this.isLoading=true;
       console.log("Serie");
     }
-    if(selectValue=='3'){
+    if(selectValue==='3'){
       //evento
       this.isPelicula=false;
       this.isEvento=true;
@@ -105,9 +105,9 @@ export class AltaContentComponent implements OnInit {
       task.on(firebase.storage.TaskEvent.STATE_CHANGED,
       
         (snapshot) =>{
-          const snap = snapshot as firebase.storage.UploadTaskSnapshot
+          const snap = snapshot as firebase.storage.UploadTaskSnapshot;
           
-          this.progreso = (snap.bytesTransferred / snap.totalBytes) * 100
+          this.progreso = (snap.bytesTransferred / snap.totalBytes) * 100;
           if(this.progreso===100){
             this.isUploadFirebase=true;
             //storageRef.getDownloadURL().then(url=>this.path=url);
@@ -123,7 +123,7 @@ export class AltaContentComponent implements OnInit {
             };
             
         }
-      )
+      );
     }
   }
   download(){

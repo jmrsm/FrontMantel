@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router } from '@angular/router';
 import {AdminService} from '../../services/admin.service';
 import {EmpresaService } from '../../services/empresa.service';  
-import {Empresa} from '../../models/empresa'
+import {Empresa} from '../../models/empresa';
 
 @Component({
   selector: 'app-altaadmin',
@@ -33,10 +33,10 @@ export class AltaadminComponent implements OnInit {
        json=JSON.parse(data.text());
        //Empresa[0]=new Empresa(json[0].id,json[0].nombre);
        for(let entry of json){
-         this.empresas.push(new Empresa(entry.nombre,entry.id))
+         this.empresas.push(new Empresa(entry.nombre,entry.id));
        }
        console.log(this.empresas);
-     })
+     });
     console.log(status);
   }
   Altaadmin(form: NgForm){
