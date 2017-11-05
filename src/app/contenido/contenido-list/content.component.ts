@@ -36,8 +36,7 @@ export class ContentComponent implements OnInit {
   
   play() {
     localStorage.setItem('videoSrc', this.content.path);
-    localStorage.setItem('videoTime', '120');
     localStorage.setItem('videoId', this.content.id);
-    this.router.navigate(['/player']);
+    this.router.navigate(['/reproComun']);
   }
 }

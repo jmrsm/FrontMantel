@@ -1,23 +1,22 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ContenidoPlayerComponent } from './contenido-player.component';
+import { ContenidoComunComponent } from './contenido-comun.component';
 
-describe('ContenidoPlayerComponent', () => {
-  let component: ContenidoPlayerComponent;
-  let fixture: ComponentFixture<ContenidoPlayerComponent>;
+describe('ContenidoComunComponent', () => {
+  let component: ContenidoComunComponent;
+  let fixture: ComponentFixture<ContenidoComunComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContenidoPlayerComponent ]
+      declarations: [ ContenidoComunComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContenidoPlayerComponent);
+    fixture = TestBed.createComponent(ContenidoComunComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

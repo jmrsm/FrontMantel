@@ -19,7 +19,7 @@ export class ContenidoListComponent implements OnInit {
   }
 
   public getContents() {
-    this.contentservice.getData().subscribe(data => {
+      this.contentservice.getData().subscribe(data => {
       this.data = data;
     });
   }

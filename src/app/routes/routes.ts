@@ -1,6 +1,8 @@
 import { Routes } from "@angular/router";
-import { ContenidoPlayerComponent } from "../contenido/contenido-player/contenido-player.component";
+import { ContenidoComunComponent } from "../contenido/contenido-comun/contenido-comun.component";
+import { ContenidoVivoComponent } from "../contenido/contenido-vivo/contenido-vivo.component";
 
 export const ROUTES: Routes = [
-    { path: 'player', component: ContenidoPlayerComponent }
+    { path: 'reproComun', component: ContenidoComunComponent },
+    { path: 'reproVivo', component: ContenidoVivoComponent }
 ];
