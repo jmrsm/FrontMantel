@@ -147,7 +147,9 @@ export class AltaContentComponent implements OnInit {
    
   }
   sendservicealta(url:any){
+    url=url.replace('&token','%26token')
     this.path=url;
+
     let body='?email='+localStorage.getItem('email');
     this.contentService.findAdminID(body).subscribe(p => {
       
