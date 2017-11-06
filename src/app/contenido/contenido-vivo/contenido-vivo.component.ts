@@ -17,12 +17,16 @@ export class ContenidoVivoComponent implements OnInit {
   fsAPI: VgFullscreenAPI;
   nativeFs: boolean = true;
   public srcVideo;
-  public currentTimeVideoArray: string[];
-  public currentTimeVideo: string;
+  public currentTimeVideo;
   public startTimeVideo;
   public idVideo;
   public idUsuario;
   public timerId: string;
+  fechaComienzo: string = '11/6/2017 00:45:00';
+  cFecheDate: Date;
+  fechaServidor: string;
+  sFechaDate: Date;
+  
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -36,66 +40,75 @@ export class ContenidoVivoComponent implements OnInit {
       this.startTimeVideo = localStorage.getItem('videoTime');
       this.idVideo = localStorage.getItem('videoId');
 
-      this.st.newTimer('5sec', 5);
+      this.cargarFechaServidor();
+      this.cFecheDate = new Date(this.fechaComienzo);
+        
+      this.st.newTimer('1sec', 1);
+        
     });
-
-    this.sources = [
-      {
-        src: this.srcVideo,
-        type: "video/mp4"
-      },
-
-      {
-        src: this.srcVideo,
-        type: "video/ogg"
-      },
-
-      {
-        src: this.srcVideo,
-        type: "video/webm"
-      }
-    ];
-    this.subscribeTimer();
-  }
-
-
-  subscribeTimer() {
-    if (this.timerId) {
-      this.st.unsubscribe(this.timerId);
-      this.timerId = undefined;
-    } else {
-      this.timerId = this.st.subscribe('5sec', () => this.timercallback());
-    }
-    console.log(this.st.getSubscription());
   }
   
-
-  timercallback(): void {
-    this.currentTimeVideo = this.api.currentTime+'';
-    this.currentTimeVideoArray = this.currentTimeVideo.split('.');
-    this.currentTimeVideo = this.currentTimeVideoArray[0];
-    
-    this.persistirCurrentTime();
+  // Se carga la fecha del servidor
+  cargarFechaServidor() {
+    this.contentservice.getServerDate().subscribe(
+      result => {
+        this.fechaServidor = result._body;
+        this.sFechaDate = new Date(this.fechaServidor);
+        this.comenzarReproduccion();
+      },
+      error => {
+        console.log(<any>error);
+      }
+    ); 
   }
-      onPlayerReady(api: VgAPI) {
+  
+  // Se comienza la reproduccion  dependiendo de la fecha de comienzo del contenido y la fecha actual en el servidor
+  
+    comenzarReproduccion() {
+      console.log('serv: '+this.sFechaDate+' cont: '+this.cFecheDate);
+      
+      if (this.sFechaDate < this.cFecheDate) {
+          this.iniciarEspera();
+      }
+      else {
+          this.iniciarReproduccion();
+      }
+    }
+  
+    // Si la fecha del contenido es posterior a la fecha del servidor se inicia un contador paara el inicio
+    iniciarEspera() {
+        
+    }
+  
+    // Si la fecha del contenido es igual o anterior a la fecha del servidor se inicia la reproduccion
+    // Mejora a hacer, teniendo la duracion del contenido se podria simular un fin de transmision
+    iniciarReproduccion() {
+      let dserv = this.sFechaDate.getTime() / 1000;
+      let dcont = this.cFecheDate.getTime() / 1000;
+      
+      let res = dserv - dcont; 
+      this.currentTimeVideo = res;
+      
+      this.play(this.api);
+      
+    }
+  
+     onPlayerReady(api: VgAPI) {
         this.api = api;
         this.fsAPI = this.api.fsAPI;
         this.nativeFs = this.fsAPI.nativeFullscreen;
-
-        this.api.getDefaultMedia().subscriptions.ended.subscribe(
-            () => {
-                this.api.getDefaultMedia().currentTime = 15;
-            }
-        );
+        
+        this.api.getDefaultMedia().currentTime = +this.startTimeVideo;
+        this.api.getDefaultMedia().play();
     }
   
-  persistirCurrentTime() {
-    this.contentservice.setTimeCurrent(this.idUsuario, this.idVideo, this.currentTimeVideo).subscribe(p => {
-      console.log(p);
-    });
-  }
+    play(api: VgAPI) {
+        this.api = api;
+        
+        this.api.getDefaultMedia().currentTime = +this.startTimeVideo;
+        this.api.getDefaultMedia().play();
+    }
   
-  startTime() {
-    this.startTimeVideo = this.contentservice.getTimeUserView(this.idUsuario, this.idVideo);
-  }
+  
+  
 }

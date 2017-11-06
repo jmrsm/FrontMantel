@@ -19,7 +19,7 @@ export class ContenidoComunComponent implements OnInit {
   public srcVideo;
   public currentTimeVideoArray: string[];
   public currentTimeVideo: string;
-  public startTimeVideo;
+  public startTimeVideo = 0;
   public idVideo;
   public idUsuario;
   public timerId: string;
@@ -35,7 +35,7 @@ export class ContenidoComunComponent implements OnInit {
       this.srcVideo = localStorage.getItem('videoSrc');
       this.idVideo = localStorage.getItem('videoId');
       this.idUsuario = localStorage.getItem('idUsuario');
-
+      this.startTime();
       this.st.newTimer('5sec', 5);
     });
 
@@ -81,24 +81,34 @@ export class ContenidoComunComponent implements OnInit {
         this.api = api;
         this.fsAPI = this.api.fsAPI;
         this.nativeFs = this.fsAPI.nativeFullscreen;
-
-        this.api.getDefaultMedia().subscriptions.ended.subscribe(
-            () => {
-                this.api.getDefaultMedia().currentTime = 15;
-            }
-        );
     }
   
   persistirCurrentTime() {
-    if (this.currentTimeVideo !== 'undefined' && this.idUsuario !== 'undefined' && this.idVideo !== 'undefined') {
+    if (this.currentTimeVideo !== null && this.idUsuario !== null && this.idVideo !== null) {
+      if (this.currentTimeVideo !== 'undefined' && this.idUsuario !== 'undefined' && this.idVideo !== 'undefined') {
        
-       this.contentservice.setTimeCurrent(this.idUsuario, this.idVideo, this.currentTimeVideo).subscribe(p => {
-          console.log(p);
-       });
+        this.contentservice.setTimeCurrent(this.idUsuario, this.idVideo, this.currentTimeVideo).subscribe(p => {
+            console.log(p);
+        });
+      }
     }
   }
   
-  startTime() {
-    this.startTimeVideo = this.contentservice.getTimeUserView(this.idUsuario, this.idVideo);
+   startTime() {
+   this.contentservice.getTimeUserView(this.idUsuario, this.idVideo).subscribe(
+      result => {
+        this.startTimeVideo = result;
+        if (result > 5) {
+          this.api.getDefaultMedia().currentTime = +this.startTimeVideo - 5; 
+        }
+        else {
+          this.api.getDefaultMedia().currentTime = +this.startTimeVideo;
+        }
+        this.api.getDefaultMedia().play();
+      },
+      error => {
+        console.log(<any>error);
+      }
+    ); 
   }
 }

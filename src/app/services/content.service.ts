@@ -51,7 +51,7 @@ export class ContentService {
   
   // comunicacion con la api para obtener el tiempo que un usuario lleva viendo u  contenido de tipo pelicula
   public getTimeUserView(usuarioId: string, contenidoId: string): Observable<any> {
-    return this.httpc.get(this.url+'api/usuario/verContenido?usuarioId=' + usuarioId + '&contenidoId=' + contenidoId).map((res: Response) => res);
+    return this.httpc.get(this.url+'api/usuario/verContenido?usuarioID=' + usuarioId + '&contenidoId=' + contenidoId).map((res: Response) => res);
   }
   
   // comunicacion con la api para persistir el tiempo relativo de la reproduccion de un contenido por parte del usuario
@@ -62,7 +62,7 @@ export class ContentService {
   }
   
   // comunicacion con la api para obtener la fecha y hora del servidor
-  getServarDate(): Observable<any> {
+  public getServerDate(): Observable<any> {
     return this.http.get(this.url + 'api/usuario/relojSistema').map((res: Response) => res);
   }
   

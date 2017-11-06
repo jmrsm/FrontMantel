@@ -1,4 +1,4 @@
-<div>
+<div heigth="100%">
 <vg-player (onPlayerReady)="onPlayerReady($event)">
     <vg-overlay-play></vg-overlay-play>
     <vg-buffering></vg-buffering>
@@ -24,4 +24,5 @@
         <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
     </video>
 </vg-player>
+<button (click)="startTime()">Empezar</button>
 </div>
