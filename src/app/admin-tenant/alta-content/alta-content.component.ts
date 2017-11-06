@@ -153,7 +153,7 @@ export class AltaContentComponent implements OnInit {
     let pathBody = {
       "path": this.path
     };
-    
+
     let body='?email='+localStorage.getItem('email');
     this.contentService.findAdminID(body).subscribe(p => {
       
