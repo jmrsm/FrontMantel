@@ -17,11 +17,15 @@ export class UserService {
     
   }
   login(body:String): Observable<any>{
-    console.log(this.url+'api/public/login?'+body);
     return this.http.get(this.url+'api/public/login/'+body);
   }
 
-  
+  getuser(body:string){
+    return this.http.get(this.url+'api/superAdmin/usuario'+body, {headers: this.getHeaders()});
+  }
+  getCategorias(){
+    return this.http.get(this.url+'api/usuario/categoria', {headers: this.getHeaders()});
+  }
   private getHeaders2(){
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');

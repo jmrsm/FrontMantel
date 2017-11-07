@@ -7,19 +7,18 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./admin-tenant.component.css']
 })
 export class AdminTenantComponent implements OnInit {
-  contenido:Observable<any[]>;
+  contenidos:Observable<any[]>;
   error: string = '';
   isLoading: boolean = true;
   constructor(private contentService:ContentService) { }
 
   ngOnInit() {
-
     var body='?email='+localStorage.getItem('email');
     this.contentService.getMyContent(body).subscribe(p => {
       console.log(body);
-      this.contenido  = JSON.parse(p['_body']);
-      console.log(this.contenido);
-      //console.log(this.item);
+      this.contenidos  = JSON.parse(p['_body']);
+      //this.contenidos = (p['_body']);
+      console.log(this.contenidos);
     },e => this.error = e, () => this.isLoading = false);
   
   }

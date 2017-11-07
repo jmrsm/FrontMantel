@@ -1,6 +1,32 @@
 <div class="container" style="background-color: #455A64;">
-<button (click)="anterior()">Pagina Anterior</button><button (click)="inicio()">Pagina Inicio</button><button (click)="siguiente()">Pagina Siguiente</button>
     <div class="card-columns">
       <app-content *ngFor="let content of data.content" [content]="content"></app-content>
     </div>
+    <button (click)="onSelected(content,contentModal)" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Mas info</button>
+    <div class="row"> 
+        <div class="col-sm-12 col-lg-4">
+            
+        </div>  
+        <div class="form-group col-6">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li (click)="anterior()" class="page-item"><a class="page-link" href="#">Pagina Anterior</a></li>
+            <li (click)="inicio()" class="page-item"><a class="page-link" href="#">Pagina Inicio</a></li>
+            <li (click)="siguiente()" class="page-item"><a class="page-link" href="#">Pagina Siguiente</a></li>
+          </ul>
+        </nav>
+      </div>
+      </div>
   </div>
+
+  <ng-template #contentModal>
+    <div class="modal-header">
+      <h4>Titulo</h4>  
+    </div>
+    <div class="modal-body">
+        <h4>Titulo</h4>  
+    </div>
+    <div class="modal-footer">
+        <h4>Titulo</h4>  
+      </div>
+  </ng-template>

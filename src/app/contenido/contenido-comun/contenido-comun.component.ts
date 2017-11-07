@@ -23,6 +23,7 @@ export class ContenidoComunComponent implements OnInit {
   public idVideo;
   public idUsuario;
   public timerId: string;
+  pepe:string;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -33,6 +34,7 @@ export class ContenidoComunComponent implements OnInit {
   ngOnInit() {
       this._route.params.forEach((params: Params) => {
       this.srcVideo = localStorage.getItem('videoSrc');
+      this.pepe = localStorage.getItem('videoSrc');
       this.idVideo = localStorage.getItem('videoId');
       this.idUsuario = localStorage.getItem('idUsuario');
 

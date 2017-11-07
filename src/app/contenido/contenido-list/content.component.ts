@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Content } from '../../models/content';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -10,10 +9,19 @@ import { Router } from '@angular/router';
   .card-img-top{
     width: 400px;
     height: 400px;
-}`]
+}`],
 })
 export class ContentComponent implements OnInit {
   @Input() content:Content;
+  contSelected:any={
+    Title:'',
+    Plot:'',
+    Genre:'',
+    esPago:'',
+    Director:'',
+    Actors:'',
+    Poster:''
+  };
   constructor(private router:Router) { }
 
   ngOnInit() {
@@ -33,7 +41,11 @@ export class ContentComponent implements OnInit {
       amount: 2000
     });
   }
-  
+  onSelected(cont:any){
+    console.log(cont.Poster);
+    this.contSelected.Poster=cont.Poster;
+    console.log(this.contSelected.Poster);
+  }
   play() {
     localStorage.setItem('videoSrc', this.content.path);
     localStorage.setItem('videoId', this.content.id);
