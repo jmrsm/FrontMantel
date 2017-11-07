@@ -1,9 +1,15 @@
+<table>
+<tr>
+<th>
 <div>
+<div style="background-color: white"><h3>La reproduccion de este contenido comenzara en:  {{message}}</h3></div>
 <vg-player (onPlayerReady)="onPlayerReady($event)">
-    <vg-overlay-play></vg-overlay-play>
-
+<!--     <vg-overlay-play></vg-overlay-play> -->
     <vg-controls>
-        <vg-play-pause></vg-play-pause>
+<!--         <vg-play-pause></vg-play-pause> -->
+        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+<!--         <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar> -->
+<!--         <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display> -->
         <vg-mute></vg-mute>
         <vg-volume></vg-volume>
         <vg-fullscreen></vg-fullscreen>
@@ -13,7 +19,46 @@
     id="singleVideo" 
     preload="auto" crossorigin>
         <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
+        
     </video>
 </vg-player>
-<button (click)="startTime()">Play</button>
 </div>
+</th>
+<th>
+<div class="container" style="background-color: #ffffff;">
+		<div class="row">
+			<div class="col-4">
+				<h1 class="display-4">Chat Mantel en Vivo</h1>
+				<form #enviarMensaje="ngForm" (ngSubmit)="enviar(enviarMensaje)" action="">
+					<div class="form-group" >
+						<label for="formGroupExampleInput">Nombre</label>
+						<input name="nombre" class="form-control" type="text" id="nombre" ngModel> 
+					</div>
+					<div class="form-group">
+						<label for="exampleTextarea">Mensaje</label>
+						<textarea name="mensaje" class="form-control" id="mensaje" ngModel></textarea>
+					</div>
+					<button class="btn btn-primary" type="submit" id="btnEnviar">Enviar</button>
+				</form>
+				<br>
+				<table id="chatUL" class="table table-sm ">
+				  <thead class="bg-info">
+				    <tr>
+				      <th class="text-white">Mensajes</th>
+				    </tr>
+				  </thead>
+				  <tbody *ngFor="let item of item | async">
+						<tr>
+						<th scope='row'>
+						<span class='badge badge-pill badge-danger'>{{item.name+': '}}</span><kbd>{{item.message}}</kbd>
+						</th>
+						</tr>
+						</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	</th>
+	</tr>
+	</tbody>
+</table>

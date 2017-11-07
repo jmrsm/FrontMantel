@@ -29,7 +29,7 @@ export class AltaContentComponent implements OnInit {
   progreso:number;
   chosenOption: string;
   isUploadFirebase:boolean=false;
-  path:any;
+  path:string;
   ref:string;
   idAdmin:string;
   
@@ -147,15 +147,19 @@ export class AltaContentComponent implements OnInit {
    
   }
   sendservicealta(url:any){
-    url=url.replace('&token','%26token')
-    this.path=url;
+     url=url.replace('&token','%26token');
+      this.path=url;
+//    this.path = this.path.replace('&', '%26');
+    let pathBody = {
+      "path": this.path
+    };
 
     let body='?email='+localStorage.getItem('email');
     this.contentService.findAdminID(body).subscribe(p => {
       
       this.idAdmin=p['_body'];
       if(this.isPelicula){
-        let subbody='proveedorContenidoId='+this.idAdmin+'&omdbId='+this.omdbID+'&path='+this.path+'&esSerie=false&esDestacado='+this.isDestacado;
+        let subbody='proveedorContenidoId='+this.idAdmin+'&omdbId='+this.omdbID+'&path='+ this.path +'&esSerie=false&esDestacado='+this.isDestacado;
         this.contentService.addContenido(subbody).subscribe(p => {
           this.router.navigate(['/admintenant']);
         },e => this.error = e, () => this.isLoading = false);  
