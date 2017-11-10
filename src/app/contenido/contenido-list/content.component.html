@@ -5,7 +5,8 @@
     <p class="card-text">{{content.descipcion}}</p>
     
     <button (click)="onSelected(content)" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Mas info</button>
-    
+    <button class="btn btn-primary" ceiboShare  [facebook]="{u: repoUrl}">F</button>
+    <button class="btn btn-danger" ceiboShare  [googlePlus]="{url:repoUrl}">G+</button>
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">

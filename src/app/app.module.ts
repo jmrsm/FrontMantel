@@ -12,7 +12,7 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import {LoginGuard} from './login.guard';
 import {NoLoginGuard} from './no-login.guard';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HttpClientJsonpModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContenidoComponent } from './contenido/contenido.component';
@@ -43,6 +43,8 @@ import { AltaContentComponent } from './admin-tenant/alta-content/alta-content.c
 import { ContenidoComunModule } from './contenido/contenido-comun/contenido-comun.module';
 import { ContenidoVivoModule } from './contenido/contenido-vivo/contenido-vivo.module';
 import { ROUTES } from './routes/routes';
+import { ShareButtonsModule } from 'ngx-sharebuttons';
+import { CeiboShare } from 'ng2-social-share';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -105,7 +107,8 @@ export function provideConfig() {
     FooterComponent,
     ViewcontentliveComponent,
     AdminTenantComponent,
-    AltaContentComponent
+    AltaContentComponent,
+    CeiboShare
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),
@@ -119,7 +122,8 @@ export function provideConfig() {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     ContenidoComunModule,
-    ContenidoVivoModule
+    ContenidoVivoModule,
+    
   ],
   providers: [ContentService,LoginGuard,NoLoginGuard,[
       {
@@ -129,7 +133,9 @@ export function provideConfig() {
     ],
     AngularFireModule,
     AngularFireDatabaseModule,
+    
   ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

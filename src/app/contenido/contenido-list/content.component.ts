@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {  Component, OnInit, Input } from '@angular/core';
 import { Content } from '../../models/content';
 import { Router } from '@angular/router';
+import { CeiboShare } from 'ng2-social-share';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -12,6 +13,9 @@ import { Router } from '@angular/router';
 }`],
 })
 export class ContentComponent implements OnInit {
+  u: string;
+  public repoUrl = 'http://localhost:4200/contenido';
+  public imageUrl = '';  
   @Input() content:Content;
   contSelected:any={
     Title:'',
@@ -52,3 +56,5 @@ export class ContentComponent implements OnInit {
     this.router.navigate(['/reproComun']);
   }
 }
+
+
