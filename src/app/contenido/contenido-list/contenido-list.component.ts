@@ -24,7 +24,7 @@ export class ContenidoListComponent implements OnInit {
   public getContents(start_index, endIndex) {
       this.contentservice.getData(start_index, endIndex).subscribe(data => {
       this.data = data;
-    });
+     });
   }
   
   anterior() {

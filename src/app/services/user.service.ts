@@ -39,4 +39,8 @@ export class UserService {
     headers.append('Content-Type', 'application/json');
     return headers;
   }
+  getFavoritos(){
+    var user='?usuarioId='+localStorage.getItem('idUsuario');
+    return this.http.get(this.url+'api/usuario/listarFavoritos'+user,{headers: this.getHeaders()});
+  }
 }

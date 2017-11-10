@@ -2,6 +2,7 @@ import {  Component, OnInit, Input } from '@angular/core';
 import { Content } from '../../models/content';
 import { Router } from '@angular/router';
 import { CeiboShare } from 'ng2-social-share';
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -11,11 +12,13 @@ import { CeiboShare } from 'ng2-social-share';
     width: 400px;
     height: 400px;
 }`],
+  providers: [UserService]
 })
 export class ContentComponent implements OnInit {
   u: string;
-  public repoUrl = 'http://localhost:4200/contenido';
+  public repoUrl = 'http://4e7942f5.ngrok.io/reproComun/';
   public imageUrl = '';  
+  favoritos: any = {};
   @Input() content:Content;
   contSelected:any={
     Title:'',
@@ -26,9 +29,14 @@ export class ContentComponent implements OnInit {
     Actors:'',
     Poster:''
   };
-  constructor(private router:Router) { }
+  //https://cdn1.iconfinder.com/data/icons/hawcons/32/698904-icon-23-star-128.png
+  constructor(private router:Router,private userService:UserService) { }
 
   ngOnInit() {
+    this.userService.getFavoritos().subscribe(data=>{
+      this.favoritos=data;
+     });
+
   }
   openCheckout() {
     var handler = (<any>window).StripeCheckout.configure({
