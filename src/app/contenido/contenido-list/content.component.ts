@@ -16,9 +16,9 @@ import { UserService } from '../../services/user.service';
 })
 export class ContentComponent implements OnInit {
   u: string;
-  public repoUrl = 'http://4e7942f5.ngrok.io/reproComun/';
+  public repoUrl = 'http://23bd428c.ngrok.io/contenido';
   public imageUrl = '';  
-  favoritos: any = {};
+  favoritos: any;
   @Input() content:Content;
   contSelected:any={
     Title:'',
@@ -34,9 +34,9 @@ export class ContentComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getFavoritos().subscribe(data=>{
-      this.favoritos=data;
+      this.favoritos=JSON.parse(data['_body']);;
      });
-
+     console.log(this.favoritos);
   }
   openCheckout() {
     var handler = (<any>window).StripeCheckout.configure({

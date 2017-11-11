@@ -14,7 +14,9 @@ export class ContenidoListComponent implements OnInit {
     start_index;
     end_index;
     size_page = 10;
-   
+    destacado : any[]=[];
+    primero : any[]=[];
+    aux:boolean=false;
   constructor(private contentservice:ContentService) { }
 
   ngOnInit() {
@@ -24,7 +26,18 @@ export class ContenidoListComponent implements OnInit {
   public getContents(start_index, endIndex) {
       this.contentservice.getData(start_index, endIndex).subscribe(data => {
       this.data = data;
-     });
+      for(let entry of this.data.content){
+        
+        if(entry.esDestacado==true && this.aux==false){
+          this.primero.push(entry);
+          
+        }
+        if(entry.esDestacado==true && this.aux==true){
+          this.destacado.push(entry);
+        }
+        this.aux=true;
+     }
+     }); 
   }
   
   anterior() {

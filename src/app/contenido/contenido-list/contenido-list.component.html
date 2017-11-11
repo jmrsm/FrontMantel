@@ -1,4 +1,27 @@
 <div class="container" style="background-color: #455A64;">
+
+    <h1 class="text-center">Destacado del Mes</h1>
+    <div *ngIf="destacado" id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+          <div  class="carousel-item active">
+            <img style="width:100%;" class="d-block img-fluid" src="{{primero[0].Poster}}" alt="First slide">
+        </div>
+        <div *ngFor="let d of destacado"  class="carousel-item ">
+            <img style="width:100%;" class="d-block img-fluid" src="{{d.Poster}}" alt="First slide">
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
     <div class="card-columns">
       <app-content *ngFor="let content of data.content" [content]="content"></app-content>
     </div>
