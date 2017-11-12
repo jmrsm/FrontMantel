@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../services/user.service';
+//import com.mercadopago.MP;
+//import org.codehaus.jettison.json.JSONObject;
+
+
 @Component({
   selector: 'app-navar-user',
   templateUrl: './navar-user.component.html',
@@ -23,4 +27,11 @@ export class NavarUserComponent implements OnInit {
     this.router.navigate(['login']);
     return false;
   }
+  //esto sería para activar la suscripciòn
+ // sandboxInitPoint(){
+   // MP mp = new MP("CLIENT_ID", "CLIENT_SECRET");
+	//String preapprovalData = "...";
+	//JSONObject preapproval = mp.createPreapprovalPayment(preapprovalData);
+	//String sandboxInitPoint = preapproval.getJSONObject("response").getString("sandbox_init_point");
+    //  }
 }
