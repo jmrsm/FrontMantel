@@ -66,4 +66,9 @@ export class ContentService {
     return this.http.get(this.url + 'api/usuario/relojSistema').map((res: Response) => res);
   }
   
+  public getContByCategoria(start_index, end_index, categoria) {
+    return this.httpc.get(this.url+'api/usuario/listarPorGenero?_start=' + 
+      start_index + '&_end=' + end_index + '&sort=titulo' + '&generoId=' + categoria).map((res: Response) => res);
+  }
+
 }

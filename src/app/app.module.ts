@@ -45,6 +45,8 @@ import { ContenidoVivoModule } from './contenido/contenido-vivo/contenido-vivo.m
 import { ROUTES } from './routes/routes';
 import { ShareButtonsModule } from 'ngx-sharebuttons';
 import { CeiboShare } from 'ng2-social-share';
+import { ContentCatComponent } from './contenido/categorias/content.catComponent';
+import { ContenidoCategoriaComponent } from './contenido/categorias/contenido-categoria.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -63,6 +65,7 @@ const  appRoutes: Routes = [
   {path:'altacontenidoomdb',component:AltaContentComponent,canActivate: [LoginGuard]},
   {path:'altaadmin',component:AltaadminComponent,canActivate: [LoginGuard]},
   {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
+  {path:'categoria/:Id', component:ContenidoCategoriaComponent, canActivate: [LoginGuard]},
 ];
 
 
@@ -108,7 +111,9 @@ export function provideConfig() {
     ViewcontentliveComponent,
     AdminTenantComponent,
     AltaContentComponent,
-    CeiboShare
+    CeiboShare,
+    ContentCatComponent,
+    ContenidoCategoriaComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),
