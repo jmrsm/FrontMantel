@@ -64,13 +64,33 @@
         // Wait for the payment to be authorized by the customer
 
         onAuthorize: function(data, actions) {
+
             return actions.payment.execute().then(function() {
-                window.alert('Pago realizado con éxito!');
+            
+            window.alert('Pago aprobado con éxito!');
+            var xhttp = new XMLHttpRequest();
+            var urlAndParams = "http://localhost:8080/api/usuario/comprarEspectaculoPayPerView/"
+
+            urlAndParams += "?idContenido=" + "847" ;
+            urlAndParams += "&email=" + "usuario%40usuario.com" ;
+
+            console.log(urlAndParams)
+            xhttp.open("POST", urlAndParams,
+            true);
+            xhttp.send();
+            return actions.payment.execute().then(function() {
+            window.alert('Pago realizado con exito!');
+            $('#myModal').modal('hide');
+            });
+
+
+                
                 
                 //Función 
                 $.ajax({
     // 
-    url : 'http://localhost:8080/api/public/PagoPayPerViewUsuario',
+   
+
  
     // la información a enviar
     // (también es posible utilizar una cadena de datos)
@@ -85,6 +105,8 @@
     // código a ejecutar si la petición es satisfactoria;
     // la respuesta es pasada como argumento a la función
     success : function(json) {
+
+
         window.alert('Pago aprobado con éxito!');
             
     },
