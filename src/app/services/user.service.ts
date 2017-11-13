@@ -41,6 +41,7 @@ export class UserService {
   }
   getFavoritos(){
     var user='?usuarioId='+localStorage.getItem('idUsuario');
+    //console.log(this.url+'api/usuario/listarFavoritos'+user);
     return this.http.get(this.url+'api/usuario/listarFavoritos'+user,{headers: this.getHeaders()});
   }
 }

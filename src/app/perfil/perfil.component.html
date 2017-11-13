@@ -55,6 +55,31 @@
               </table>
               
         </div>  
+        <div class="col-sm-12 col-lg-12">
+            <br>
+            <br>
+            <h5>Mis favortios</h5>
+            <table class="table">
+                <thead class="thead-default">
+                  <tr>
+                    <th>#</th>
+                    <th>Id</th>
+                    <th>Titulo</th>
+                    <th>Tipo</th>
+                  </tr>
+                </thead>
+                <tbody >
+                  <tr *ngFor="let item of favoritos">
+                    <th scope="row">#</th>
+                    <td>{{item.id}}</td>
+                    <td>{{item.Title}}</td>
+                    <td>{{item.tipoContenido}}</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+              
+        </div> 
     </div>
   
 </div>

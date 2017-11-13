@@ -10,6 +10,7 @@ export class PerfilComponent implements OnInit {
   error: string = '';
   isLoading: boolean = true;
   user:any;
+  favoritos: any;
   constructor(private userService:UserService) { }
 
   ngOnInit() {
@@ -17,6 +18,10 @@ export class PerfilComponent implements OnInit {
     this.userService.getuser(body).subscribe(p => {
       this.user=JSON.parse(p['_body']);
     },e => this.error = e, () => this.isLoading = false);
+    this.userService.getFavoritos().subscribe(data=>{
+      this.favoritos=JSON.parse(data['_body']);
+      
+    });
   }
 
 }

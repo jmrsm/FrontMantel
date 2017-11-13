@@ -70,5 +70,8 @@ export class ContentService {
     return this.httpc.get(this.url+'api/usuario/listarPorGenero?_start=' + 
       start_index + '&_end=' + end_index + '&sort=titulo' + '&generoId=' + categoria).map((res: Response) => res);
   }
-
+  // api para dar de alta o baja favorito
+  changeFav(body:string){
+    return this.http.post(this.url+'api/usuario/favorito',body, {headers: this.getHeaders()});
+  }
 }

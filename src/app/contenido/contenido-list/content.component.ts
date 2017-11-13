@@ -3,6 +3,7 @@ import { Content } from '../../models/content';
 import { Router } from '@angular/router';
 import { CeiboShare } from 'ng2-social-share';
 import { UserService } from '../../services/user.service';
+import { ContentService } from '../../services/content.service';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -12,10 +13,11 @@ import { UserService } from '../../services/user.service';
     width: 400px;
     height: 400px;
 }`],
-  providers: [UserService]
+  providers: [UserService,ContentService]
 })
 export class ContentComponent implements OnInit {
   u: string;
+  vacio:boolean=true;
   public repoUrl = 'http://23bd428c.ngrok.io/contenido';
   public imageUrl = '';  
   favoritos: any;
@@ -30,13 +32,21 @@ export class ContentComponent implements OnInit {
     Poster:''
   };
   //https://cdn1.iconfinder.com/data/icons/hawcons/32/698904-icon-23-star-128.png
-  constructor(private router:Router,private userService:UserService) { }
+  constructor(private router:Router,private userService:UserService,private contentService:ContentService) { }
 
   ngOnInit() {
     this.userService.getFavoritos().subscribe(data=>{
-      this.favoritos=JSON.parse(data['_body']);;
-     });
-     console.log(this.favoritos);
+      this.favoritos=JSON.parse(data['_body']);
+      /*if(this.favoritos.length==0){
+        this.vacio=true;
+      }*/
+      for(let item of this.favoritos){
+        if(item.id==this.content.id){
+          this.vacio=false;
+        }
+      }
+    });
+    
   }
   openCheckout() {
     var handler = (<any>window).StripeCheckout.configure({
@@ -62,6 +72,22 @@ export class ContentComponent implements OnInit {
     localStorage.setItem('videoSrc', this.content.path);
     localStorage.setItem('videoId', this.content.id);
     this.router.navigate(['/reproComun']);
+  }
+  removefav(content:any){
+    console.log('remove');
+    var body='contenidoId='+content.id+'&usuarioId='+localStorage.getItem('idUsuario')+'&esFavorito=false';
+    this.contentService.changeFav(body).subscribe(data=>{
+      this.router.navigate(['/login']);
+      //this.vacio=false;
+    });
+  }
+  addfav(content:any){
+    console.log('add');
+    var body='contenidoId='+content.id+'&usuarioId='+localStorage.getItem('idUsuario')+'&esFavorito=true';
+    this.contentService.changeFav(body).subscribe(data=>{
+      this.router.navigate(['/login']);
+      //this.vacio=true;
+    });
   }
 }
 
