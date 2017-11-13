@@ -27,16 +27,17 @@ export class ContenidoListComponent implements OnInit {
       this.contentservice.getData(start_index, endIndex).subscribe(data => {
       this.data = data;
       for(let entry of this.data.content){
-        
+        //el primer contenido
         if(entry.esDestacado==true && this.aux==false){
           this.primero.push(entry);
-          
         }
         if(entry.esDestacado==true && this.aux==true){
           this.destacado.push(entry);
         }
         this.aux=true;
      }
+     console.log(this.primero);
+     console.log(this.destacado);
      }); 
   }
   

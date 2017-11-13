@@ -74,4 +74,9 @@ export class ContentService {
   changeFav(body:string){
     return this.http.post(this.url+'api/usuario/favorito',body, {headers: this.getHeaders()});
   }
+  //api para dar de alta contenido destacado.
+  changeDestacado(body:string){
+    console.log(this.url+'api/admin/destacado'+body);
+    return this.http.post(this.url+'api/admin/destacado',body, {headers: this.getHeaders()});
+  }
 }

@@ -19,22 +19,27 @@
           </div>
           <div class="col-12 col-md-8">
             <br>
-            <h4>Mi contenido</h4>
+            <h4>Contenido</h4>
             <table class="table table-striped table-hover">
             <thead class="bg-primary text-white">
               <tr>
                 <th>#</th>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Tipo</th>
+                <th>Destacado</th>
               </tr>
             </thead>
             <tbody *ngFor="let c of contenidos">
-              <tr>
+              <tr (click)="changeDestacado(c)">
                 <th scope="row">#</th>
                 <td>{{c.id}}</td>
                 <td>{{c.Title}}</td>
-                <td>{{c.tipoContenido}}</td>
+                <ng-container *ngIf="c.esDestacado">
+                <td>Si</td>
+                </ng-container>
+                <ng-container *ngIf="!c.esDestacado">
+                    <td>No</td>
+                </ng-container>
               </tr>
               
             </tbody>

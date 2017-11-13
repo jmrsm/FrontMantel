@@ -10,9 +10,6 @@ export class AdminService {
   constructor(private http:Http) { }
 
   addAdmin(body:String): Observable<any>{
-    console.log(this.url+'/api/superAdmin/admin?'+body);
-    console.log(JSON.stringify(body));
-    
     return  this.http.post(this.url+'api/superAdmin/admin', body, {headers: this.getHeaders()});
     
   }
