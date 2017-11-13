@@ -113,4 +113,8 @@ export class ContenidoComunComponent implements OnInit {
       }
     ); 
   }
+
+  anterior() {
+      this._router.navigate(['/contenido']);
+  }
 }
