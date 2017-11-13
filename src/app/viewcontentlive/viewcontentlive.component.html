@@ -6,7 +6,11 @@
 				<form #enviarMensaje="ngForm" (ngSubmit)="enviar(enviarMensaje)" action="">
 					<div class="form-group" >
 						<label for="formGroupExampleInput">Nombre</label>
-						<input name="nombre" class="form-control" type="text" id="nombre" ngModel> 
+						<input placeholder="{{nick}}" name="nombre" class="form-control disabled" type="text" id="nombre" ngModel> 
+					</div>
+					<div class="form-group" >
+						<label for="formGroupExampleInput">Destinatario</label>
+						<input name="destinatario" class="form-control" type="text" id="destinatario" id="destinatario" ngModel>
 					</div>
 					<div class="form-group">
 						<label for="exampleTextarea">Mensaje</label>
@@ -23,10 +27,25 @@
 				  </thead>
 				  <tbody *ngFor="let item of item | async">
 						<tr>
-						<th scope='row'>
-						<span class='badge badge-pill badge-danger'>{{item.name+': '}}</span><kbd>{{item.message}}</kbd>
+								<th *ngIf="item.addressee==nick" scope='row'>
+								<span class='badge badge-pill badge-danger'>{{item.name+': '}}</span><kbd>{{item.message +'Mensaje de: '+item.name}}</kbd>
+								</th>
+						</tr>
+						<tr>
+						<th *ngIf="item.addressee==nick && item.name==nick " scope='row'>
+						<span class='badge badge-pill badge-danger'>{{item.name+': '}}</span><kbd>{{item.message +'Mensaje de: '}}</kbd>
 						</th>
 						</tr>
+						<tr>
+							<th *ngIf="item.name==nick " scope='row'>
+							<span class='badge badge-pill badge-danger'>{{item.name+': '}}</span><kbd>{{item.message}}</kbd>
+							</th>
+							</tr>
+						<tr>
+							<th *ngIf="item.addressee==todo && item.name!=nick" scope='row'>
+							<span class='badge badge-pill badge-danger'>{{item.name+': '}}</span><kbd>{{item.message}}</kbd>
+							</th>
+							</tr>
 						</tbody>
 				</table>
 			</div>
