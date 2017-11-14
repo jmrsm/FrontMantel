@@ -1,3 +1,67 @@
-<p>
-  content-detail works!
-</p>
+<app-navar-user></app-navar-user>
+
+<div class="container" style="background-color: #455A64;">
+       
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-12 col-md-4">
+               
+            <img src="{{poster}}" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col-12 col-md-8">
+                <h3>{{title}}</h3>
+                <h6 class="modal-title" id="exampleModalLabel">Director:</h6>
+                <ng-container *ngFor="let d of director" >
+                        <p >{{d.nombreCompleto}}</p>
+                </ng-container>
+                
+                <h6 class="modal-title" id="exampleModalLabel">Actores:</h6>
+                <ng-container *ngFor="let a of actor" >
+                    <p >{{a.nombreCompleto}}</p>
+                </ng-container>
+                
+                <h6 class="modal-title" id="exampleModalLabel">Sinapsis:</h6>
+                <p>{{plot}}</p>
+                <h4>Comentarios:</h4>
+                <ng-container *ngFor="let c of comentario" >
+                    <br>
+                        <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+                                <div class="card-block">
+                                  <h6 class="card-title">{{'De: '+ c.usuario.email}}</h6>
+                                  <p class="card-text">{{c.contenidoComentario}}</p>
+                                  <a href="#" class="btn btn-primary">Es Spoiler</a>
+                                </div>
+                        </div>
+                </ng-container>
+                
+                <br>
+        </div>
+        
+    </div>   
+    <div class="row">
+            <div class="col-12">
+            
+            <form #AltaComentario="ngForm" (ngSubmit)="altacomentario(AltaComentario)">
+                <br>
+                <h3 class="text-center">Comentar</h3>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="form-group col-12">
+                        <label for="exampleTextarea">Escribi, pero ojo con los spoiler:</label>
+                        <textarea name="comentario" class="form-control" id="exampleTextarea" rows="3" ngModel></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-9">
+                        </div>  
+                        <div class="col-6">
+                        <input type="submit" class="btn btn-primary" value="Comentar">
+                        </div>
+                    </div>
+            </form>
+        </div>    
+    </div>
+</div>
+    

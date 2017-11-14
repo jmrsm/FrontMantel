@@ -68,6 +68,7 @@ const  appRoutes: Routes = [
   {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
   {path:'categoria/:Id', component:ContenidoCategoriaComponent, canActivate: [LoginGuard]},
   {path:'altacontenidodestacado', component:AltaContentDestacadoComponent, canActivate: [LoginGuard]},
+  {path:'contenidodetalle/:Id', component:ContentDetailComponent, canActivate: [LoginGuard]},
 ];
 
 

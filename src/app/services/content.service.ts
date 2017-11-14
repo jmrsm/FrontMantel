@@ -79,4 +79,12 @@ export class ContentService {
     console.log(this.url+'api/admin/destacado'+body);
     return this.http.post(this.url+'api/admin/destacado',body, {headers: this.getHeaders()});
   }
+  //api para ver dato de un contenido
+  getDatoContenido(body:string){
+    return this.http.get(this.url+'api/usuario/verDatoContenido'+body,{headers: this.getHeaders()});
+  }
+  //api para cometar
+  comentar(body:string){
+    return this.http.post(this.url+'api/usuario/comentarContenido',body, {headers: this.getHeaders()});
+  }
 }
