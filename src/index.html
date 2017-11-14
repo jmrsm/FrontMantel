@@ -129,8 +129,25 @@
          
         }
 
-    }, '#paypal-button-container');
+                    $.ajax({
+                        data : {email : 'lali', importe :'1234', idContenido : '1' },
+                        type : 'POST',
+                        dataType : 'json',
+                        success : function(json) {
+                            window.alert('Pago aprobado con éxito!');
+                
+                        },
+                        error : function(xhr, status) {
+                            alert('Disculpe, existió un problema');
+                        },
+                        complete : function(xhr, status) {
+                            alert('Petición realizada');
+                        }
+                    });
+                }); 
+            }
+        }, '#paypal-button-container');
 
-</script>
-  
-</html>
+    </script>
+      
+    </html>
