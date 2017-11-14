@@ -79,4 +79,9 @@ export class ContentService {
     console.log(this.url+'api/admin/destacado'+body);
     return this.http.post(this.url+'api/admin/destacado',body, {headers: this.getHeaders()});
   }
+
+  addContenidoEnVivo(body:String): Observable<any>{
+    console.log(this.url+'api/admin/contenido');
+    return this.http.post(this.url+'api/admin/contenido',body, {headers: this.getHeaders2()});
+  }
 }

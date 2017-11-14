@@ -1,0 +1,321 @@
+    <app-navar-super-admin></app-navar-super-admin>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-md-3">
+          <div class="card card-inverse">
+            <img class="card-img"  src="http://www.hifreevideos.com/images/preview/Vintage-Movie-Theater-Wallpaper-Movie-theater-vintage-marquee-29469.jpg" alt="Card image" height="200" >
+            <div class="card-img-overlay">
+              <h4 class="card-title text-center">Bienvenido</h4>
+            </div>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item bg-primary text-white">Opciones</li>
+            <li class="list-group-item"><a href="/altacontenidoomdb">Alta Contenido con OMDB</a></li>
+            <li class="list-group-item"><a href="#">Alta Contenido Pay-Per-View</a></li>
+            <li class="list-group-item"><a href="#">Alta Contenido Destacado</a></li>
+            <li class="list-group-item"><a href="#">Reportes</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-8"><br>
+          <div class="container"><br>
+            <h3 class="text-center">Alta Contenido En Vivo</h3><br>
+            <div class="text-center">
+              <div class="row">
+                <div class="col-sm-12 col-lg-3"></div>
+                  <div class="form-group col-6">
+                    <label>Tipo de Evento</label>
+                    <select class="custom-select" (click)="onEventClick($event.target.value)">
+                      <option selected value="1">Evento Deportivo</option>
+                      <option value="2">Espectaculo</option>
+                    </select>
+                  </div>
+              </div><br>
+
+              <div *ngIf="isDeportivo; then deportivo else espectaculo"></div>
+              
+                <ng-template #deportivo>
+                    <form #altaDeporForm="ngForm" (ngSubmit)="alta(altaDeporForm)">
+                  <!-- <div *ngIf="paso; then step1 else step2"></div>
+                    <ng-template #step1> --> 
+                      <div  class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Nombre Evento</label>
+                            <input name="titulo" type="text" class="form-control" id="titulo" aria-describedby="nombreHelp" placeholder="{{ titulo }}" ngModel>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-3"></div>
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Nombre Deporte</label>
+                            <input name="eventoDeportivoNombreDeporte" type="text" class="form-control" id="eventoDeportivoNombreDeporte" aria-describedby="nombreHelp" placeholder="{{ eventoDeportivoNombreDeporte }}" ngModel>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Es Una Competicion entre equipos ?</label>
+                            <div class="text-center">
+                              <input type="radio" [(ngModel)]="equipos" [value]="false" name="equipos" value="NO">  No
+                              <input type="radio" [(ngModel)]="equipos" [value]="true" name="equipos" value="Si">  SI<br>
+                            </div>
+                           </div>
+                      </div>
+                      <div *ngIf="equipos" class="row">
+                        <div class="form-group col-3"></div>
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Equipo Local</label>
+                            <input name="eventoDeportivoNombreEquipoLocal" type="text" class="form-control" id="eventoDeportivoNombreEquipoLocal" aria-describedby="nombreHelp" placeholder="{{ titulo }}" ngModel>
+                          </div>
+                      </div>              
+                      <div *ngIf="equipos" class="row">
+                        <div class="form-group col-3"></div>
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Equipo Visitante</label>
+                            <input name="eventoDeportivoNombreEquipoVisitante" type="text" class="form-control" id="eventoDeportivoNombreEquipoVisitante" aria-describedby="nombreHelp" placeholder="{{ eventoDeportivoNombreEquipoVisitante }}" ngModel>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Fecha de inicio</label>
+                            <input type="date" name="fechaInicioDepo" class="form-control" id="fechaInicioDepo" step="1" min="{{ fechaAux }}" value="{{ fechaAux }}" ngModel>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Hora de inicio</label>
+                            <input type="time" name="horaInicioDepo" class="form-control" id="horaInicioDepo" step="1" value="{{ horaActual }}" ngModel>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Duracion</label>
+                            <input type="time" name="runtimeDepo" class="form-control"  step="1"  id="runtimeDepo" value="{{duracion}}" ngModel>
+                          </div>
+                      </div>
+                      <!-- <div class="row">
+                        <div class="form-group col-3"></div>  
+                        <div class="form-group col-6">
+                          <button type="submit" class="btn btn-success btn-lg btn-block" (click)="siguiente()">Pagina Siguiente</button>
+                        </div>
+                      </div>
+                    </ng-template>
+                    <ng-template #step2> -->
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Descripcion</label>
+                            <input name="Plot" type="text" class="form-control" id="Plot" aria-describedby="nombreHelp" ngModel>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Poster</label>
+                            <div class="text-center">
+                              <img src="{{ img }}" class="rounded" alt="300">
+                            </div>
+                          </div>
+                      </div>
+                      <div>
+                        <label for="exampleInputNombre">Cargar Imagen</label>
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100">{{ progresoImagen }}%</div>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputFile">Imagen</label>
+                          <input (change)="onFileImagenChange($event)" #fileInput type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                        </div>
+                      </div>
+                      <div>
+                        <label for="exampleInputNombre">Cargar Video</label>
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100">{{ progresoVideo }}%
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputFile">Video</label>
+                          <input (change)="onFileVideoChange($event)" #fileInput type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                          <small id="fileHelp" class="form-text text-muted">Asegurese de elegir un formato de video.</small>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Es Payperview ?</label>
+                            <div class="text-center">
+                              <input type="radio" [(ngModel)]="esPago" [value]="false" name="pago" value="NO">No
+                              <input type="radio" [(ngModel)]="esPago" [value]="true"  name="pago" value="Si">SI<br>
+                            </div>
+                          </div>
+                      </div>
+                      <div *ngIf="esPago" class="row">
+                        <div class="form-group col-3"></div>
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Precio</label>
+                            <input type="number" name="precio" min="0" step=".01" id="precio" ngModel> U$S
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12 col-lg-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputEmail1">Contenido destacado</label>
+                            <select class="custom-select" (click)="onEventDestacado($event.target.value)">
+                              <option selected>Seleccionar Si o No</option>
+                              <option value="1">Si</option>
+                              <option value="2">No</option>
+                            </select>
+                          </div>
+                      </div>
+                       <!-- <div class="row">
+                        <div class="form-group col-3"></div>  
+                        <div class="form-group col-6">
+                          <button type="submit" class="btn btn-success btn-lg btn-block" (click)="anterior()">Pagina Anterior</button>
+                          <button *ngIf="isUploadFirebaseVideo" type="submit" class="btn btn-success btn-lg btn-block" (click)="alta()">Dar de alta</button>
+                        </div>
+                      </div>
+                    </ng-template> -->
+                  <div class="row">
+              <div class="col-sm-12 col-lg-3"></div>
+              <div class="form-group">
+                <div class="col-6">
+                  <input *ngIf="isUploadFirebaseVideo" type="submit" class="btn btn-primary" value="Dar de Alta">
+                </div>
+              </div>
+                  </div>
+                </form>
+                  </ng-template>
+                  
+                </div>
+
+                <ng-template #espectaculo>
+                                <form #altaEspecForm="ngForm" (ngSubmit)="alta(altaEspecForm)">
+                  <!-- <div *ngIf="paso; then step1 else step2"></div>
+                    <ng-template #step1> -->
+                      <div class="row">
+                       <div class="form-group col-3"></div>  
+                        <div class="form-group col-6">
+                          <label for="exampleInputNombre">Nombre Evento</label>
+                          <input name="titulo" type="text" class="form-control" id="titulo" aria-describedby="nombreHelp" placeholder="{{ titulo }}" ngModel>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Fecha de inicio</label>
+                            <input type="date" name="fechaInicioEsp" class="form-control" step="1" id="fechaInicioEsp" min="{{ fechaAux }}" value="{{ fechaAux }}" ngModel>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Hora de inicio</label>
+                            <input type="time" name="horaInicioEsp" class="form-control"  step="1" id="horaInicioEsp" value="{{ horaActual }}" ngModel>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Duracion</label>
+                            <input type="time" name="runtimeEsp" class="form-control"  step="1"  id="runtimeEsp" value="00:00:00" ngModel>
+                          </div>
+                      </div>
+                      <!-- <div class="row">
+                        <div class="form-group col-3"></div>  
+                        <div class="form-group col-6">
+                          <button type="submit" class="btn btn-success btn-lg btn-block" (click)="siguiente()">Pagina Siguiente</button>
+                        </div>
+                      </div> -->
+                    <!-- </ng-template>
+                    <ng-template #step2> -->
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Descripcion</label>
+                            <input name="Plot" type="text" class="form-control" id="Plot" aria-describedby="nombreHelp" ngModel>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-3"></div>  
+                          <div class="form-group col-6">
+                            <label for="exampleInputNombre">Poster</label>
+                            <div class="text-center">
+                              <img src="{{ imgEsp }}" class="rounded" alt="300">
+                            </div>
+                          </div>
+                      </div>
+                      <div>
+                        <label for="exampleInputNombre">Cargar Imagen</label>
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100">{{ progresoImagen }}%</div>
+                        </div>
+                      <div class="form-group">
+                        <label for="exampleInputFile">Imagen</label>
+                        <input (change)="onFileImagenChange($event)" #fileInput type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                      </div>
+                    </div>
+                    <div>
+                      <label for="exampleInputNombre">Cargar Video</label>
+                      <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100">{{ progresoVideo }}%</div>
+                      </div>
+                    <div class="form-group">
+                      <label for="exampleInputFile">Video</label>
+                      <input (change)="onFileVideoChange($event)" #fileInput type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                      <small id="fileHelp" class="form-text text-muted">Asegurese de elegir un formato de video.</small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-3"></div>  
+                      <div class="form-group col-6">
+                        <label for="exampleInputNombre">Es Payperview ?</label>
+                        <div class="text-center">
+                          <input type="radio" [(ngModel)]="esPago" [value]="false" name="pago" value="NO">No
+                          <input type="radio" [(ngModel)]="esPago" [value]="true"  name="pago" value="Si">SI<br>
+                        </div>
+                      </div>
+                  </div>
+                  <div *ngIf="esPago" class="row">
+                    <div class="form-group col-3"></div>
+                      <div class="form-group col-6">
+                        <label for="exampleInputNombre">Precio</label>
+                        <input type="number" name="precio" min="0" step=".01" id="precio" ngModel> U$S
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 col-lg-3"></div>  
+                      <div class="form-group col-6">
+                        <label for="exampleInputEmail1">Contenido destacado</label>
+                        <select class="custom-select" (click)="onEventDestacado($event.target.value)">
+                          <option selected>Seleccionar Si o No</option>
+                          <option value="1">Si</option>
+                          <option value="2">No</option>
+                        </select>
+                      </div>
+                  </div>
+                  <!-- <div class="row">
+                    <div class="form-group col-3"></div>  
+                      <div class="form-group col-6">
+                        <button type="submit" class="btn btn-success btn-lg btn-block" (click)="anterior()">Pagina Anterior</button>
+                        <button *ngIf="isUploadFirebaseVideo" type="submit" class="btn btn-success btn-lg btn-block" (click)="alta()">Dar de alta</button>
+                      </div>
+                  </div> -->
+                <!-- </ng-template>  -->
+              <div class="row">
+              <div class="col-sm-12 col-lg-3"></div>
+              <div class="form-group">
+                <div class="col-6">
+                  <input *ngIf="isUploadFirebaseVideo" type="submit" class="btn btn-primary" value="Dar de Alta">
+                </div>
+              </div>
+            </div>
+            </form>
+              </ng-template>
+              
+            </div>
+          </div>
+        </div>
+      </div>

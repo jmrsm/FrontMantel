@@ -48,6 +48,7 @@ import { CeiboShare } from 'ng2-social-share';
 import { ContentCatComponent } from './contenido/categorias/content.catComponent';
 import { ContenidoCategoriaComponent } from './contenido/categorias/contenido-categoria.component';
 import { AltaContentDestacadoComponent } from './admin-tenant/alta-content-destacado/alta-content-destacado.component';
+import { AltaContentVivoComponent } from './admin-tenant/alta-content/alta-content-vivo.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -68,6 +69,7 @@ const  appRoutes: Routes = [
   {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
   {path:'categoria/:Id', component:ContenidoCategoriaComponent, canActivate: [LoginGuard]},
   {path:'altacontenidodestacado', component:AltaContentDestacadoComponent, canActivate: [LoginGuard]},
+   {path:'altaevento',component:AltaContentVivoComponent,canActivate: [LoginGuard]},
 ];
 
 
@@ -116,7 +118,8 @@ export function provideConfig() {
     CeiboShare,
     ContentCatComponent,
     ContenidoCategoriaComponent,
-    AltaContentDestacadoComponent
+    AltaContentDestacadoComponent,
+    AltaContentVivoComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),
