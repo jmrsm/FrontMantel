@@ -64,9 +64,7 @@ export class ContentComponent implements OnInit {
     });
   }
   onSelected(cont:any){
-    console.log(cont.Poster);
-    this.contSelected.Poster=cont.Poster;
-    console.log(this.contSelected.Poster);
+    this.router.navigate(['/contenidodetalle/'+cont.id]);
   }
   play() {
     localStorage.setItem('videoSrc', this.content.path);

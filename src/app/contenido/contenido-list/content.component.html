@@ -5,7 +5,7 @@
     <h4 class="card-title">{{content.Title}}</h4>
     <p class="card-text">{{content.descipcion}}</p>
     
-    <button (click)="onSelected(content)" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Mas info</button>
+    <button (click)="onSelected(content)" class="btn btn-primary" >Mas info</button>
     <button class="btn btn-primary" ceiboShare  [facebook]="{u: repoUrl}">F</button>
     <button class="btn btn-danger" ceiboShare  [googlePlus]="{url:repoUrl}">G+</button>
     <ng-container *ngIf="vacio" >
