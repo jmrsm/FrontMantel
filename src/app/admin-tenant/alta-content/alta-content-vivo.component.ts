@@ -265,9 +265,18 @@ onEventDestacado(selectValue : string){
       runtime = form.value.runtimeEsp;
       poster = this.imgEsp;
     }
-    
+    var auxHora = horaInicio.split(':');
+    if (auxHora.length === 2) {
+      horaInicio = horaInicio + ':00';
+    }
     var duracionaux = runtime.split(':');
-    var duracion = (duracionaux[0] * 3600) + (duracionaux[1] * 60) + duracionaux[2]; 
+    var duracion;
+    if (duracionaux.length === 2) {
+      duracion = (duracionaux[0] * 3600) + (duracionaux[1] * 60); 
+    } 
+    else if (duracionaux.length === 3) {
+      duracion = (duracionaux[0] * 3600) + (duracionaux[1] * 60) + duracionaux[2]; 
+    }
     var titulo = form.value.titulo;
     var esDestacado = this.isDestacado;
     var esPago = this.esPago;
