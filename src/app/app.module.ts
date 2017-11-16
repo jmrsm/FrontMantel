@@ -53,6 +53,9 @@ import { PruebaComponent } from './prueba/prueba.component';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
+//import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
+import { ContentListEventComponent } from './contenido/contenido-list-evento/content-list-evento.component';
+import { ContentEventComponent } from './contenido/contenido-list-evento/content-evento.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -76,6 +79,7 @@ const  appRoutes: Routes = [
    {path:'altaevento',component:AltaContentVivoComponent,canActivate: [LoginGuard]},
   {path:'contenidodetalle/:Id', component:ContentDetailComponent, canActivate: [LoginGuard]},
   {path:'prueba', component:PruebaComponent, canActivate: [LoginGuard]},
+  {path:'eventos', component:ContentListEventComponent, canActivate: [LoginGuard]},
 ];
 
 
@@ -105,6 +109,8 @@ export function provideConfig() {
     ContenidoListComponent,
     ContentComponent,
     ContentDetailComponent,
+    ContentListEventComponent,
+    ContentEventComponent,
     PerfilComponent,
     LoginComponent,
     AdminComponent,

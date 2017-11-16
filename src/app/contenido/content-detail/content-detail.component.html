@@ -8,8 +8,9 @@
         <div class="col-12 col-md-4">
                
             <img src="{{poster}}" class="img-fluid" alt="Responsive image">
+            <div *ngIf="showPaypalBoton()" id="paypal-button-container">{{ monto }}</div>
         </div>
-        <div class="col-12 col-md-8">
+        <div *ngIf="!esEvento()" class="col-12 col-md-8">
                 <h3>{{title}}</h3>
                 <h6 class="modal-title" id="exampleModalLabel">Director:</h6>
                 <ng-container *ngFor="let d of director" >
@@ -39,7 +40,7 @@
         </div>
         
     </div>   
-    <div class="row">
+    <div *ngIf="!esEvento()" class="row">
             <div class="col-12">
             
             <form #AltaComentario="ngForm" (ngSubmit)="altacomentario(AltaComentario)">
