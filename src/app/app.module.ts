@@ -49,6 +49,10 @@ import { ContentCatComponent } from './contenido/categorias/content.catComponent
 import { ContenidoCategoriaComponent } from './contenido/categorias/contenido-categoria.component';
 import { AltaContentDestacadoComponent } from './admin-tenant/alta-content-destacado/alta-content-destacado.component';
 import { AltaContentVivoComponent } from './admin-tenant/alta-content/alta-content-vivo.component';
+import { PruebaComponent } from './prueba/prueba.component';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -71,6 +75,7 @@ const  appRoutes: Routes = [
   {path:'altacontenidodestacado', component:AltaContentDestacadoComponent, canActivate: [LoginGuard]},
    {path:'altaevento',component:AltaContentVivoComponent,canActivate: [LoginGuard]},
   {path:'contenidodetalle/:Id', component:ContentDetailComponent, canActivate: [LoginGuard]},
+  {path:'prueba', component:PruebaComponent, canActivate: [LoginGuard]},
 ];
 
 
@@ -120,13 +125,16 @@ export function provideConfig() {
     ContentCatComponent,
     ContenidoCategoriaComponent,
     AltaContentDestacadoComponent,
-    AltaContentVivoComponent
+    AltaContentVivoComponent,
+    PruebaComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),
     RouterModule.forRoot(appRoutes),
+    ToastModule.forRoot(),
     BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
     HttpModule,
     SocialLoginModule,
     HttpClientModule,
@@ -135,6 +143,7 @@ export function provideConfig() {
     AngularFireDatabaseModule,
     ContenidoComunModule,
     ContenidoVivoModule,
+    //SimpleNotificationsModule.forRoot()
     
   ],
   providers: [ContentService,LoginGuard,NoLoginGuard,[

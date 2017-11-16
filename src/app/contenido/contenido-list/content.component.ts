@@ -18,7 +18,7 @@ import { ContentService } from '../../services/content.service';
 export class ContentComponent implements OnInit {
   u: string;
   vacio:boolean=true;
-  public repoUrl = 'http://23bd428c.ngrok.io/contenido';
+  public repoUrl = 'http://024de642.ngrok.io/contenido';
   public imageUrl = '';  
   favoritos: any;
   @Input() content:Content;

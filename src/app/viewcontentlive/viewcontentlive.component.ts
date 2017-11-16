@@ -23,7 +23,7 @@ export class ViewcontentliveComponent implements OnInit {
     this.itemsRef = db.list('prueba12');
     this.item = db.list('prueba12').valueChanges();
     console.log(this.item);
-    this.nick=localStorage.getItem('email');
+    this.nick='Admin';//localStorage.getItem('email');
   }
 
   ngOnInit() {
