@@ -3,6 +3,7 @@
 <th>
 <div>
 <div style="background-color: white"><h3>La reproduccion de este contenido comenzara en:  {{message}}</h3></div>
+<div *ngIf="terminoTransmision()">Termino</div>>
 <vg-player (onPlayerReady)="onPlayerReady($event)">
 <!--     <vg-overlay-play></vg-overlay-play> -->
     <vg-controls>

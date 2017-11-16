@@ -8,12 +8,13 @@ import {ContentService} from '../../services/content.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import { AngularFireDatabase,AngularFireObject,AngularFireList } from 'angularfire2/database';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-repro-vivo',
   templateUrl: './contenido-vivo.component.html',
   styleUrls: ['./contenido-vivo.component.css'],
-  providers: [ContentService]
+  providers: [ContentService, DatePipe]
 })
 export class ContenidoVivoComponent implements OnInit {
   //------------------------Contador------------------------//
@@ -39,17 +40,24 @@ export class ContenidoVivoComponent implements OnInit {
   public idVideo;
   public idUsuario;
   public timerId: string;
-  fechaComienzo: string = '11/6/2017 23:43:00';
+  fechaInicio:number;
+  fechaInicioString: string;
   cFecheDate: Date;
   fechaServidor: string;
   sFechaDate: Date;
+  duracion:number;
+  duracionString:string;
+  fechaServEnSegundos:number;
+  fechaActualEnSegundos:number;
+  aux:number;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private st: SimpleTimer,
     private contentservice: ContentService,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
+    private datePipe: DatePipe
   ) {
     this.itemsRef = db.list('chat1');
     this.item = db.list('chat1').valueChanges();
@@ -61,8 +69,12 @@ export class ContenidoVivoComponent implements OnInit {
       this.srcVideo = localStorage.getItem('videoSrc');
       this.startTimeVideo = localStorage.getItem('videoTime');
       this.idVideo = localStorage.getItem('videoId');
-
-      this.cFecheDate = new Date(this.fechaComienzo);
+      this.fechaInicioString = localStorage.getItem('fechaComienzo');
+      this.duracionString = localStorage.getItem('duracion');
+      this.duracion = +this.duracionString;
+      this.fechaInicio = +this.fechaInicioString;
+      this.fechaInicioString = this.datePipe.transform(new Date(this.fechaInicio), 'MM/dd/yyyy HH:mm:ss');
+      this.cFecheDate = new Date(this.fechaInicioString);
       this.cargarFechaServidor();
       this.st.newTimer('1sec', 1);
 
@@ -120,7 +132,7 @@ export class ContenidoVivoComponent implements OnInit {
     
     
 //        this.future = new Date(this.futureString);
-        this.future = new Date(this.fechaComienzo);
+        this.future = new Date(this.fechaInicioString);
         this.$counter = Observable.interval(1000).map((x) => {
             this.diff = Math.floor((this.future.getTime() - new Date().getTime()) / 1000);
             return x;
@@ -181,5 +193,34 @@ export class ContenidoVivoComponent implements OnInit {
     console.log(mensaje+' '+nombre);
     this.itemsRef.push({name: nombre,message:mensaje});
   }
+  terminoTransmision() {
+    this.fechaServEnSegundos = this.convertirFechaEnSegundos(this.fechaServidor);
+    this.fechaActualEnSegundos = this.convertirFechaEnSegundos(this.fechaInicioString);
+   if(this.fechaServEnSegundos + this.duracion > this.fechaActualEnSegundos) 
+      console.log('termino');
+   else
+      console.log('no termino');
+  }
 
+  convertirFechaEnSegundos(fecha:string) {
+    console.log('fecha: ' + fecha);
+    var date=fecha.split(" ");
+    
+    var mes=date[0].split('/')[0];
+    console.log(mes);
+    var dia=date[0].split('/')[1];
+    console.log(dia);
+    var anio=date[0].split('/')[2];
+    console.log(anio);
+
+    var hora=date[1].split(':')[0];
+    console.log('h'+hora);
+    var minutos=date[1].split(':')[1];
+    console.log('m'+minutos);
+    var segundos=date[1].split(':')[2];
+    console.log('s'+segundos);
+    this.aux = Date.UTC(+anio, +mes, +dia, +hora, +minutos, +segundos);
+    console.log('mili'+this.aux);
+    return this.aux / 1000; 
+  }
 }

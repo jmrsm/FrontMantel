@@ -4,12 +4,15 @@ import { ContentService } from '../../services/content.service';
 import { UserService } from '../../services/user.service';
 import { NgForm } from '@angular/forms';  
 import { Router , ActivatedRoute, Params} from '@angular/router';
+import { DatePipe } from '@angular/common';
+
+declare let paypal: any;
 
 @Component({
   selector: 'app-content-detail',
   templateUrl: './content-detail.component.html',
   styleUrls: ['./content-detail.component.css'],
-  providers:[UserService]
+  providers:[UserService, DatePipe]
 })
 export class ContentDetailComponent implements OnInit {
   idcontent:number;
@@ -21,15 +24,25 @@ export class ContentDetailComponent implements OnInit {
   actor:string[]=[];
   director:string[]=[];
   comentario:string[]=[];
+  emailUsuario:string;
+  esPayperview:boolean;
+  pagado:boolean;
+  monto:number;
+  tipoContenido:string;
+  fechaInicio:number;
+  fechaInicioString:string;
 
   constructor(private contentservice:ContentService,
     private _route: ActivatedRoute,
-    private _router: Router) { }
+    private _router: Router,
+    private datePipe: DatePipe
+    ) { }
 
   ngOnInit() {
     this._route.params.forEach((params: Params) => {
       this.idcontent = params['Id'];
       this.idUser=localStorage.getItem('idUsuario');
+      this.emailUsuario=localStorage.getItem('email');
       var body='?idContenido='+this.idcontent;
       this.contentservice.getDatoContenido(body).subscribe(data=>{
         this.contendio=JSON.parse(data['_body']);
@@ -39,10 +52,19 @@ export class ContentDetailComponent implements OnInit {
         this.title=this.contendio.Title;
         this.director=this.contendio.Director;
         this.comentario=this.contendio.comentarios;
-        console.log(this.contendio.Poster);
+        this.monto=this.contendio.precio;
+        this.esPayperview=this.contendio.esPago;
+        this.tipoContenido=this.contendio.tipoContenido;
+        this.fechaInicio=this.contendio.fechaInicio;
+        console.log(this.fechaInicio);
+        this.fechaInicioString = this.datePipe.transform(new Date(this.fechaInicio), 'dd/MM/yy HH:mm:ss');
+        console.log(this.fechaInicioString);
+        this.verificarPago(this.idcontent, this.emailUsuario);
       });
     })
     
+  
+        
   }
   altacomentario(comentario:NgForm){
     var body='contenidoId='+this.idcontent+'&usuarioId='+this.idUser+'&comentario='+comentario.value.comentario;
@@ -50,5 +72,107 @@ export class ContentDetailComponent implements OnInit {
       this._router.navigate(['login']);
     });
   }
+
+verificarPago(idcontent, emailUsuario) {
+  this.contentservice.verificarPago(idcontent, emailUsuario).subscribe(
+      result => {
+        this.pagado = result;
+        if (!this.pagado) {
+          this.paypal();  
+        }
+        
+      },
+      error => {
+        console.log(<any>error);
+      }); 
+}
+
+private paypal() {
+    var value = this.monto
+    console.log(value);
+    this.loadExternalScript("https://www.paypalobjects.com/api/checkout.js").then(() => {
+      paypal.Button.render({
+        env: 'sandbox',
+        style: {
+          label: 'pay',
+          size:  'small',
+          shape: 'rect', 
+          color: 'gold'
+        },
+        client: {
+          sandbox:    'ASJBxWW7q7mUFxebpmJYamjkbODQGpVgd3hyyBY7bzTd1R9YyrHcoMvoctSkxSeJCzUtS-JVGnXZ1_go',
+          production: 'https://developer.paypal.com/developer/applications/Mantel'
+        },
+        commit: true,
+        payment: function (data, actions) {
+          return actions.payment.create({
+            payment: {
+              transactions: [
+                {
+                  
+                  amount: { total: value, currency: 'USD' }
+                }
+              ]
+            }
+          })
+        },
+        onAuthorize: function(data, actions) {
+          return actions.payment.execute().then(function(payment) {
+            window.alert('Pago aprobado!');
+            var xhttp = new XMLHttpRequest();
+            var urlAndParams = "http://localhost:8080/api/usuario/comprarEspectaculoPayPerView/"
+
+            urlAndParams += "?idContenido=" + this.idcontent;
+            urlAndParams += "&email=" + this.emailUsuario;
+
+            console.log(urlAndParams)
+            xhttp.open("POST", urlAndParams, true);
+            xhttp.send();
+            return actions.payment.execute().then(function() {
+            window.alert('Pago realizado con exito!');
+            
+            });
+          })
+        }
+      }, '#paypal-button-container');
+    });
+  }
+
+  private showPaypalBoton() {
+    if (this.esPayperview && this.pagado)
+      return false;
+    else
+      return true;
+  }
+
+  private esEvento() {
+    if (this.tipoContenido==='EVENTO_ESPECTACULO' || this.tipoContenido==='EVENTO_DEPORTIVO')
+      return true;
+    else
+      return false; 
+  }
+  private esDeporte() {
+    if (this.tipoContenido==='EVENTO_DEPORTIVO')
+      return true;
+    else
+      return false; 
+  }
+
+  private esEspectaculo() {
+    if (this.tipoContenido==='EVENTO_ESPECTACULO')
+      return true;
+    else
+      return false;
+  }
+
+  private loadExternalScript(scriptUrl: string) {
+    return new Promise((resolve, reject) => {
+      const scriptElement=document.createElement('script')
+      scriptElement.src=scriptUrl
+      scriptElement.onload=resolve
+      document.body.appendChild(scriptElement)
+    })
+  }
+
 
 }
