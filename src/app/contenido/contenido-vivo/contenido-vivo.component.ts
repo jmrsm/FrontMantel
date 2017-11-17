@@ -24,6 +24,7 @@ export class ContenidoVivoComponent implements OnInit {
   private $counter: Observable<number>;
   private subscription: Subscription;
   private message: string;
+  private empieza: boolean=false;
   //-------------------------------------------------------//
   
   //--------------------------Chat--------------------------//
@@ -50,6 +51,7 @@ export class ContenidoVivoComponent implements OnInit {
   fechaServEnSegundos:number;
   fechaActualEnSegundos:number;
   aux:number;
+  cargo:boolean=false;
 
   constructor(
     private _route: ActivatedRoute,
@@ -115,23 +117,20 @@ export class ContenidoVivoComponent implements OnInit {
   // Se comienza la reproduccion  dependiendo de la fecha de comienzo del contenido y la fecha actual en el servidor
 
   comenzarReproduccion() {
-
+    this.cargo=true;
     if (this.sFechaDate < this.cFecheDate) {
       this.iniciarEspera();
     }
     else {
-      this.iniciarReproduccion();
+     // this.iniciarReproduccion();
     }
   }
 
   // Si la fecha del contenido es posterior a la fecha del servidor se inicia un contador paara el inicio
   iniciarEspera() {
-    this.api.getDefaultMedia().canPlay = false;
-    this.api.getDefaultMedia().isLive = true;
-//    this.futureString = 'November 6, 2017 21:40:00';
-    
-    
-//        this.future = new Date(this.futureString);
+    //this.api.getDefaultMedia().canPlay = false;
+    //this.api.getDefaultMedia().isLive = true;
+
         this.future = new Date(this.fechaInicioString);
         this.$counter = Observable.interval(1000).map((x) => {
             this.diff = Math.floor((this.future.getTime() - new Date().getTime()) / 1000);
@@ -155,15 +154,14 @@ export class ContenidoVivoComponent implements OnInit {
 
   onPlayerReady(api: VgAPI) {
     this.api = api;
-//    this.track = this.api.textTracks[0];
     this.fsAPI = this.api.fsAPI;
     this.nativeFs = this.fsAPI.nativeFullscreen;
   }
 
   //Comienza la reproduccion
   play() {
-    this.api.getDefaultMedia().currentTime = this.currentTimeVideo;
-    this.api.getDefaultMedia().play();
+   // this.api.getDefaultMedia().currentTime = this.currentTimeVideo;
+    //this.api.getDefaultMedia().play();
   }
 
   dhms(t) {
@@ -176,7 +174,8 @@ export class ContenidoVivoComponent implements OnInit {
     t -= m * 60;
     s = t % 60;
     if (d === 0 && h === 0 && m === 0 && s === 0)   {
-      this.iniciarReproduccion();
+      this.empieza=true;
+      //this.iniciarReproduccion();
     }
     return [
       d + ' Dias',
@@ -196,31 +195,25 @@ export class ContenidoVivoComponent implements OnInit {
   terminoTransmision() {
     this.fechaServEnSegundos = this.convertirFechaEnSegundos(this.fechaServidor);
     this.fechaActualEnSegundos = this.convertirFechaEnSegundos(this.fechaInicioString);
-   if(this.fechaServEnSegundos + this.duracion > this.fechaActualEnSegundos) 
-      console.log('termino');
-   else
-      console.log('no termino');
+    if(this.fechaServEnSegundos + this.duracion > this.fechaActualEnSegundos) 
+      return true;
+    else
+      this.iniciarReproduccion();
   }
 
+
+//Obtengo tiempo que falta para iniciar la reproduccion
   convertirFechaEnSegundos(fecha:string) {
-    console.log('fecha: ' + fecha);
     var date=fecha.split(" ");
     
     var mes=date[0].split('/')[0];
-    console.log(mes);
     var dia=date[0].split('/')[1];
-    console.log(dia);
     var anio=date[0].split('/')[2];
-    console.log(anio);
 
     var hora=date[1].split(':')[0];
-    console.log('h'+hora);
     var minutos=date[1].split(':')[1];
-    console.log('m'+minutos);
     var segundos=date[1].split(':')[2];
-    console.log('s'+segundos);
     this.aux = Date.UTC(+anio, +mes, +dia, +hora, +minutos, +segundos);
-    console.log('mili'+this.aux);
     return this.aux / 1000; 
   }
 }

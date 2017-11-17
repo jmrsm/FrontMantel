@@ -69,6 +69,7 @@ export class ContentComponent implements OnInit {
   play() {
     localStorage.setItem('videoSrc', this.content.path);
     localStorage.setItem('videoId', this.content.id);
+    localStorage.setItem('titulo', this.content.Title);
     this.router.navigate(['/reproComun']);
   }
   removefav(content:any){

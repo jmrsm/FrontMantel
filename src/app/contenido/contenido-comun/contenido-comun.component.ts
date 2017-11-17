@@ -1,15 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {VgAPI, VgFullscreenAPI} from 'videogular2/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {SimpleTimer} from 'ng2-simple-timer';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { VgAPI, VgFullscreenAPI } from 'videogular2/core';
+import { Poster } from 'videogular-poster';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SimpleTimer } from 'ng2-simple-timer';
 import { Content } from '../../models/content';
 import { ContentService } from '../../services/content.service';
 @Component({
   selector: 'app-repro-comun',
   templateUrl: './contenido-comun.component.html',
   styleUrls: ['./contenido-comun.component.css'],
-  providers: [ContentService]
+  providers: [ContentService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContenidoComunComponent implements OnInit {
   sources: Array<Object>;
@@ -23,12 +25,14 @@ export class ContenidoComunComponent implements OnInit {
   public idVideo;
   public idUsuario;
   public timerId: string;
+  titulo:string;
   pepe:string;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private st: SimpleTimer,
     private contentservice: ContentService
+    
   ) {}
 
   ngOnInit() {
@@ -37,6 +41,7 @@ export class ContenidoComunComponent implements OnInit {
       this.pepe = localStorage.getItem('videoSrc');
       this.idVideo = localStorage.getItem('videoId');
       this.idUsuario = localStorage.getItem('idUsuario');
+      this.titulo = localStorage.getItem('titulo');
       this.startTime();
       this.st.newTimer('5sec', 5);
     });
@@ -68,7 +73,6 @@ export class ContenidoComunComponent implements OnInit {
     } else {
       this.timerId = this.st.subscribe('5sec', () => this.timercallback());
     }
-    console.log(this.st.getSubscription());
   }
   
 
@@ -90,8 +94,13 @@ export class ContenidoComunComponent implements OnInit {
       if (this.currentTimeVideo !== 'undefined' && this.idUsuario !== 'undefined' && this.idVideo !== 'undefined') {
        
         this.contentservice.setTimeCurrent(this.idUsuario, this.idVideo, this.currentTimeVideo).subscribe(p => {
-            console.log(p);
-        });
+
+          },
+          error => {
+            if (error.status !== 200)
+              console.log(<any>error);
+          }
+        );
       }
     }
   }
