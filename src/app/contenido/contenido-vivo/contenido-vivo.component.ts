@@ -24,6 +24,7 @@ export class ContenidoVivoComponent implements OnInit {
   private $counter: Observable<number>;
   private subscription: Subscription;
   private message: string;
+  private empieza: boolean=false;
   //-------------------------------------------------------//
   
   //--------------------------Chat--------------------------//
@@ -173,6 +174,7 @@ export class ContenidoVivoComponent implements OnInit {
     t -= m * 60;
     s = t % 60;
     if (d === 0 && h === 0 && m === 0 && s === 0)   {
+      this.empieza=true;
       //this.iniciarReproduccion();
     }
     return [
@@ -199,6 +201,8 @@ export class ContenidoVivoComponent implements OnInit {
       this.iniciarReproduccion();
   }
 
+
+//Obtengo tiempo que falta para iniciar la reproduccion
   convertirFechaEnSegundos(fecha:string) {
     var date=fecha.split(" ");
     

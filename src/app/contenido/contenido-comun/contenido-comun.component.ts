@@ -16,7 +16,6 @@ import { ContentService } from '../../services/content.service';
 export class ContenidoComunComponent implements OnInit {
   sources: Array<Object>;
   api: VgAPI;
-  poster: Poster;
   fsAPI: VgFullscreenAPI;
   nativeFs: boolean = true;
   public srcVideo;
@@ -26,6 +25,7 @@ export class ContenidoComunComponent implements OnInit {
   public idVideo;
   public idUsuario;
   public timerId: string;
+  titulo:string;
   pepe:string;
   constructor(
     private _route: ActivatedRoute,
@@ -41,6 +41,7 @@ export class ContenidoComunComponent implements OnInit {
       this.pepe = localStorage.getItem('videoSrc');
       this.idVideo = localStorage.getItem('videoId');
       this.idUsuario = localStorage.getItem('idUsuario');
+      this.titulo = localStorage.getItem('titulo');
       this.startTime();
       this.st.newTimer('5sec', 5);
     });
