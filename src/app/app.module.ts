@@ -56,6 +56,7 @@ import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifica
 //import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 import { ContentListEventComponent } from './contenido/contenido-list-evento/content-list-evento.component';
 import { ContentEventComponent } from './contenido/contenido-list-evento/content-evento.component';
+import { ShareComponent } from './share/share.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -132,7 +133,8 @@ export function provideConfig() {
     ContenidoCategoriaComponent,
     AltaContentDestacadoComponent,
     AltaContentVivoComponent,
-    PruebaComponent
+    PruebaComponent,
+    ShareComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),
