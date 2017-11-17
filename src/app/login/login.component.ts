@@ -26,13 +26,13 @@ export class LoginComponent implements OnInit {
 
   //<button (click)="open()">Open</button>
   //<simple-notifications></simple-notifications>
-  /*open() {
+  open() {
     this._notificationsService.success('Contenido Compartido', 'jmrsm@gmail.com a compartido un contenido contigo',{
       timeOut: 6000,
       showProgressBar: true,
       pauseOnHover: true,
       clickToClose: true});
-  }*/
+  }
   ngOnInit() {
     ;
     var tipo= localStorage.getItem('tipo');
