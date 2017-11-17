@@ -1,19 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {VgAPI, VgFullscreenAPI} from 'videogular2/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {SimpleTimer} from 'ng2-simple-timer';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { VgAPI, VgFullscreenAPI } from 'videogular2/core';
+import { Poster } from 'videogular-poster';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SimpleTimer } from 'ng2-simple-timer';
 import { Content } from '../../models/content';
 import { ContentService } from '../../services/content.service';
 @Component({
   selector: 'app-repro-comun',
   templateUrl: './contenido-comun.component.html',
   styleUrls: ['./contenido-comun.component.css'],
-  providers: [ContentService]
+  providers: [ContentService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContenidoComunComponent implements OnInit {
   sources: Array<Object>;
   api: VgAPI;
+  poster: Poster;
   fsAPI: VgFullscreenAPI;
   nativeFs: boolean = true;
   public srcVideo;
@@ -29,6 +32,7 @@ export class ContenidoComunComponent implements OnInit {
     private _router: Router,
     private st: SimpleTimer,
     private contentservice: ContentService
+    
   ) {}
 
   ngOnInit() {

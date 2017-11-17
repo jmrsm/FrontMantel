@@ -121,14 +121,14 @@ export class ContenidoVivoComponent implements OnInit {
       this.iniciarEspera();
     }
     else {
-      this.iniciarReproduccion();
+     // this.iniciarReproduccion();
     }
   }
 
   // Si la fecha del contenido es posterior a la fecha del servidor se inicia un contador paara el inicio
   iniciarEspera() {
-    this.api.getDefaultMedia().canPlay = false;
-    this.api.getDefaultMedia().isLive = true;
+    //this.api.getDefaultMedia().canPlay = false;
+    //this.api.getDefaultMedia().isLive = true;
 
         this.future = new Date(this.fechaInicioString);
         this.$counter = Observable.interval(1000).map((x) => {
@@ -159,8 +159,8 @@ export class ContenidoVivoComponent implements OnInit {
 
   //Comienza la reproduccion
   play() {
-    this.api.getDefaultMedia().currentTime = this.currentTimeVideo;
-    this.api.getDefaultMedia().play();
+   // this.api.getDefaultMedia().currentTime = this.currentTimeVideo;
+    //this.api.getDefaultMedia().play();
   }
 
   dhms(t) {
@@ -173,7 +173,7 @@ export class ContenidoVivoComponent implements OnInit {
     t -= m * 60;
     s = t % 60;
     if (d === 0 && h === 0 && m === 0 && s === 0)   {
-      this.iniciarReproduccion();
+      //this.iniciarReproduccion();
     }
     return [
       d + ' Dias',
@@ -193,10 +193,10 @@ export class ContenidoVivoComponent implements OnInit {
   terminoTransmision() {
     this.fechaServEnSegundos = this.convertirFechaEnSegundos(this.fechaServidor);
     this.fechaActualEnSegundos = this.convertirFechaEnSegundos(this.fechaInicioString);
-   if(this.fechaServEnSegundos + this.duracion > this.fechaActualEnSegundos) 
-      console.log('termino');
-   else
-      console.log('no termino');
+    if(this.fechaServEnSegundos + this.duracion > this.fechaActualEnSegundos) 
+      return true;
+    else
+      this.iniciarReproduccion();
   }
 
   convertirFechaEnSegundos(fecha:string) {
