@@ -18,6 +18,7 @@ export class ContenidoListComponent implements OnInit {
     destacado : any[]=[];
     primero : any[]=[];
     aux:boolean=false;
+    cargo:boolean=false;
   constructor(private contentservice:ContentService, private router:Router) { }
 
   ngOnInit() {
@@ -36,9 +37,8 @@ export class ContenidoListComponent implements OnInit {
           this.destacado.push(entry);
         }
         this.aux=true;
+        this.cargo=true;
      }
-     console.log(this.primero);
-     console.log(this.destacado);
      }); 
   }
   

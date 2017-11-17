@@ -1,28 +1,23 @@
 <table>
 <tr>
 <th>
-<div>
-<div style="background-color: white"><h3>La reproduccion de este contenido comenzara en:  {{message}}</h3></div>
-<div *ngIf="terminoTransmision()">Termino</div>>
-<vg-player (onPlayerReady)="onPlayerReady($event)">
-<!--     <vg-overlay-play></vg-overlay-play> -->
-    <vg-controls>
-<!--         <vg-play-pause></vg-play-pause> -->
-        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-<!--         <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar> -->
-<!--         <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display> -->
-        <vg-mute></vg-mute>
-        <vg-volume></vg-volume>
-        <vg-fullscreen></vg-fullscreen>
-    </vg-controls>
+<div *ngIf="cargo">
+	<div style="background-color: white"><h3>La reproduccion de este contenido comenzara en:  {{ message }}</h3></div>
+		<div *ngIf="terminoTransmision()">Termino</div>>
+			<vg-player (onPlayerReady)="onPlayerReady($event)">
+    			<vg-controls>
+        			<vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+        			<vg-mute></vg-mute>
+        			<vg-volume></vg-volume>
+        			<vg-fullscreen></vg-fullscreen>
+    			</vg-controls>
 
-    <video #media [vgMedia]="media" 
-    id="singleVideo" 
-    preload="auto" crossorigin>
-        <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
-        
-    </video>
-</vg-player>
+    			<video #media [vgMedia]="media" 
+    				id="singleVideo" 
+    				preload="auto" crossorigin>
+        			<source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
+    			</video>
+			</vg-player>
 </div>
 </th>
 <th>
@@ -62,4 +57,4 @@
 	</th>
 	</tr>
 	</tbody>
-</table>
+	</table>

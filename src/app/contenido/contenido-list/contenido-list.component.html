@@ -1,5 +1,6 @@
-<div class="container" style="background-color: #ffff;">
-  <ng-container  *ngIf="destacado">
+<div *ngIf="cargo">
+  <div class="container" style="background-color: #ffff;">
+    <ng-container  *ngIf="destacado">
     <h1 class="text-center">Destacado del Mes</h1>
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
@@ -53,3 +54,4 @@
         <h4>Titulo</h4>  
       </div>
   </ng-template>
+</div>

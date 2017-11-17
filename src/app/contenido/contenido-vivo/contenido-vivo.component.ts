@@ -50,6 +50,7 @@ export class ContenidoVivoComponent implements OnInit {
   fechaServEnSegundos:number;
   fechaActualEnSegundos:number;
   aux:number;
+  cargo:boolean=false;
 
   constructor(
     private _route: ActivatedRoute,
@@ -115,7 +116,7 @@ export class ContenidoVivoComponent implements OnInit {
   // Se comienza la reproduccion  dependiendo de la fecha de comienzo del contenido y la fecha actual en el servidor
 
   comenzarReproduccion() {
-
+    this.cargo=true;
     if (this.sFechaDate < this.cFecheDate) {
       this.iniciarEspera();
     }
@@ -128,10 +129,7 @@ export class ContenidoVivoComponent implements OnInit {
   iniciarEspera() {
     this.api.getDefaultMedia().canPlay = false;
     this.api.getDefaultMedia().isLive = true;
-//    this.futureString = 'November 6, 2017 21:40:00';
-    
-    
-//        this.future = new Date(this.futureString);
+
         this.future = new Date(this.fechaInicioString);
         this.$counter = Observable.interval(1000).map((x) => {
             this.diff = Math.floor((this.future.getTime() - new Date().getTime()) / 1000);
@@ -155,7 +153,6 @@ export class ContenidoVivoComponent implements OnInit {
 
   onPlayerReady(api: VgAPI) {
     this.api = api;
-//    this.track = this.api.textTracks[0];
     this.fsAPI = this.api.fsAPI;
     this.nativeFs = this.fsAPI.nativeFullscreen;
   }
@@ -203,24 +200,16 @@ export class ContenidoVivoComponent implements OnInit {
   }
 
   convertirFechaEnSegundos(fecha:string) {
-    console.log('fecha: ' + fecha);
     var date=fecha.split(" ");
     
     var mes=date[0].split('/')[0];
-    console.log(mes);
     var dia=date[0].split('/')[1];
-    console.log(dia);
     var anio=date[0].split('/')[2];
-    console.log(anio);
 
     var hora=date[1].split(':')[0];
-    console.log('h'+hora);
     var minutos=date[1].split(':')[1];
-    console.log('m'+minutos);
     var segundos=date[1].split(':')[2];
-    console.log('s'+segundos);
     this.aux = Date.UTC(+anio, +mes, +dia, +hora, +minutos, +segundos);
-    console.log('mili'+this.aux);
     return this.aux / 1000; 
   }
 }

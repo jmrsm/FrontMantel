@@ -68,7 +68,6 @@ export class ContenidoComunComponent implements OnInit {
     } else {
       this.timerId = this.st.subscribe('5sec', () => this.timercallback());
     }
-    console.log(this.st.getSubscription());
   }
   
 
@@ -90,8 +89,13 @@ export class ContenidoComunComponent implements OnInit {
       if (this.currentTimeVideo !== 'undefined' && this.idUsuario !== 'undefined' && this.idVideo !== 'undefined') {
        
         this.contentservice.setTimeCurrent(this.idUsuario, this.idVideo, this.currentTimeVideo).subscribe(p => {
-            console.log(p);
-        });
+
+          },
+          error => {
+            if (error.status !== 200)
+              console.log(<any>error);
+          }
+        );
       }
     }
   }
