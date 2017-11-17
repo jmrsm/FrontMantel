@@ -52,6 +52,7 @@ import { AltaContentVivoComponent } from './admin-tenant/alta-content/alta-conte
 import { PruebaComponent } from './prueba/prueba.component';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 //import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 import { ContentListEventComponent } from './contenido/contenido-list-evento/content-list-evento.component';
 import { ContentEventComponent } from './contenido/contenido-list-evento/content-evento.component';
@@ -148,7 +149,7 @@ export function provideConfig() {
     AngularFireDatabaseModule,
     ContenidoComunModule,
     ContenidoVivoModule,
-    //SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot()
     
   ],
   providers: [ContentService,LoginGuard,NoLoginGuard,[

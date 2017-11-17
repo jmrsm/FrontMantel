@@ -23,13 +23,16 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router,private userservice: UserService,public toastr: ToastsManager, vcr: ViewContainerRef,public _notificationsService: NotificationsService) { 
     this.toastr.setRootViewContainerRef(vcr);
   }
-  /*open() {
+
+  //<button (click)="open()">Open</button>
+  //<simple-notifications></simple-notifications>
+  open() {
     this._notificationsService.success('Contenido Compartido', 'jmrsm@gmail.com a compartido un contenido contigo',{
       timeOut: 6000,
       showProgressBar: true,
       pauseOnHover: true,
       clickToClose: true});
-  }*/
+  }
   ngOnInit() {
     ;
     var tipo= localStorage.getItem('tipo');
