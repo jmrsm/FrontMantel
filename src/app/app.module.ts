@@ -81,6 +81,7 @@ const  appRoutes: Routes = [
   {path:'contenidodetalle/:Id', component:ContentDetailComponent, canActivate: [LoginGuard]},
  // {path:'prueba', component:PruebaComponent, canActivate: [LoginGuard]},
   {path:'eventos', component:ContentListEventComponent, canActivate: [LoginGuard]},
+  {path:'share', component:ShareComponent, canActivate: [LoginGuard]},
 ];
 
 
