@@ -180,6 +180,11 @@ private paypal() {
       document.body.appendChild(scriptElement)
     })
   }
-
+  marcarSpoiler(id:any){
+    var body='idComentario='+id+'&idUsuario='+localStorage.getItem('idUsuario');
+    this.contentservice.marcarSpoiler(body).subscribe(data=>{
+      this._router.navigate(['login']);
+    });
+  }
 
 }

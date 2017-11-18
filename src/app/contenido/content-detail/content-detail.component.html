@@ -29,12 +29,20 @@
                 <h4>Comentarios:</h4>
                 <ng-container *ngFor="let c of comentario" >
                     <br>
-                        <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+                        <div *ngIf="!c.esSpoiler" class="card card-inverse" style="background-color: #333; border-color: #333;">
                                 <div class="card-block">
                                   <h6 class="card-title">{{'De: '+ c.usuario.email}}</h6>
                                   <p class="card-text">{{c.contenidoComentario}}</p>
-                                  <a href="#" class="btn btn-primary">Es Spoiler</a>
+                                  <a (click)="marcarSpoiler(c.id)" class="btn btn-primary">Es Spoiler</a>
                                 </div>
+                        </div>
+                        <div *ngIf="c.esSpoiler" class="card card-inverse bg-danger ">
+                            <div class="card-block">
+                                <h4 class="card-title">Este comentario contiene spoiler</h4>
+                              <h6 class="card-title">{{'De: '+ c.usuario.email}}</h6>
+                              <p class="card-text">{{c.contenidoComentario}}</p>
+                              
+                            </div>
                         </div>
                 </ng-container>
                 

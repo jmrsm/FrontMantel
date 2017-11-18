@@ -18,7 +18,7 @@ import { ContentService } from '../../services/content.service';
 export class ContentComponent implements OnInit {
   u: string;
   vacio:boolean=true;
-  public repoUrl = 'http://23bd428c.ngrok.io/contenido';
+  public repoUrl = 'http://d5c0426d.ngrok.io/contenidodetalle/';
   public imageUrl = '';  
   favoritos: any;
   @Input() content:Content;
@@ -46,7 +46,7 @@ export class ContentComponent implements OnInit {
         }
       }
     });
-    
+   this.repoUrl=this.repoUrl+this.content.id;
   }
   openCheckout() {
     var handler = (<any>window).StripeCheckout.configure({

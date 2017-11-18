@@ -106,4 +106,8 @@ export class ContentService {
   calificar(body:string){
     return this.http.put(this.url+'api/usuario/valorarContenido',body,{headers: this.getHeaders()});
   }
+  //api para marcar spoiler
+  marcarSpoiler(body:string){
+    return this.http.put(this.url+'api/usuario/marcarSpoiler',body,{headers: this.getHeaders()})
+  }
 }
