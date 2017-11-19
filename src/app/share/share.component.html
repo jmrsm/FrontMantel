@@ -31,6 +31,7 @@
                     <th class="text-white">De</th>
                     <th class="text-white">Mensajes</th>
                     <th class="text-white">Fecha y Hora</th>
+                    <th class="text-white">Borrar</th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let item of items | async">
@@ -52,6 +53,11 @@
                         </span>
                       </samp>
                     </th>
+                    <th scope='row'>
+                      <button (click)="remove(item)" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </th>
                   </tr>
                   <tr (click)="read(item)" *ngIf="item.addressee==nombre && item.read">
                     <th scope='row'>
@@ -70,6 +76,11 @@
                           {{item.date+' '+item.hours}}
                         </span>
                       </samp>
+                    </th>
+                    <th scope='row'>
+                      <button (click)="remove(item)" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </th>
                   </tr>
                 </tbody>

@@ -27,7 +27,6 @@ export class ShareComponent implements OnInit {
     
   }
   enviar(form:NgForm){
-    console.log(form.value);
     var mensaje=form.value.texto;
     var nombre=localStorage.getItem('email');
     var d=form.value.destinatario;
@@ -43,8 +42,14 @@ export class ShareComponent implements OnInit {
           notified:false,
           addressee: c});  
     }
+    localStorage.setItem('enviado','Si');
   }
   read(item:any){
     this.itemsRef.update(item.key,{read:true});
+    //this.itemsRef.remove(item.key);
+  }
+  remove(item:any){
+    //this.itemsRef.update(item.key,{read:true});
+    this.itemsRef.remove(item.key);
   }
 }

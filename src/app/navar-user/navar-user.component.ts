@@ -28,10 +28,7 @@ export class NavarUserComponent implements OnInit {
     this.nombre=localStorage.getItem('email');
     this.itemsRef = db.list('mail1');
     this.item = db.list('mail1').valueChanges();
-    
-    
-    
-   }
+  }
 
   ngOnInit() {
     var mensaje='';
@@ -47,7 +44,7 @@ export class NavarUserComponent implements OnInit {
             mensaje=item.name+' a compartido un contenido contigo';
             this.noti+=1;
             this._notificationsService.success('Contenido Compartido', mensaje,{
-              timeOut: 6000,
+              timeOut: 3000,
               showProgressBar: true,
               pauseOnHover: true,
               clickToClose: true});
@@ -56,12 +53,25 @@ export class NavarUserComponent implements OnInit {
         
       }
       if(this.aux){
-        this._notificationsService.success('Contenido Compartido', mensaje,{
-          timeOut: 6000,
-          showProgressBar: true,
-          pauseOnHover: true,
-          clickToClose: true});
-        this.noti+=1;
+        for(let item of data){
+          if(item.addressee==this.nombre && item.read==false && localStorage.getItem('enviado')=='Si'){
+            mensaje=item.name+' a compartido un contenido contigo';
+            this._notificationsService.success('Contenido Compartido', mensaje,{
+              timeOut: 3000,
+              showProgressBar: true,
+              pauseOnHover: true,
+              clickToClose: true});
+          }
+        }
+        if(localStorage.getItem('enviado')=='Si'){
+          this.noti+=1;
+        }else{
+          if(this.noti>0){
+            this.noti-=1;
+          }
+          
+        }
+        localStorage.removeItem('enviado');
       }
       this.aux=true;
     });
