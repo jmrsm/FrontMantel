@@ -57,6 +57,13 @@ import { ContentListEventComponent } from './contenido/contenido-list-evento/con
 import { ContentEventComponent } from './contenido/contenido-list-evento/content-evento.component';
 import { ShareComponent } from './share/share.component';
 import { AltaEpisodioComponent } from './admin-tenant/alta-content/alta-episodios.component';
+import { PeliculasComponentUnidad } from './contenido/peliculas/peliculas.component';
+import { PeliculasListComponent } from './contenido/peliculas/peliculas-list.component';
+import { SeriesComponentUnidad } from './contenido/series/series.component';
+import { SeriesListComponent } from './contenido/series/series-list.component';
+import { CategoriasComponent } from './contenido/categorias.component';
+import { SeriesComponent } from './contenido/series.component';
+import { PeliculasComponent } from './contenido/peliculas.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -82,6 +89,8 @@ const  appRoutes: Routes = [
   {path:'eventos', component:ContentListEventComponent, canActivate: [LoginGuard]},
   {path:'share', component:ShareComponent, canActivate: [LoginGuard]},
   {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
+  {path:'peliculas', component:PeliculasComponent, canActivate: [LoginGuard]},
+  {path:'series', component:SeriesComponent, canActivate: [LoginGuard]},
 ];
 
 
@@ -135,6 +144,12 @@ export function provideConfig() {
     AltaContentDestacadoComponent,
     AltaContentVivoComponent,
     ShareComponent,
+    PeliculasListComponent,
+    PeliculasComponent,
+    PeliculasComponentUnidad,
+    SeriesListComponent,
+    SeriesComponentUnidad,
+    SeriesComponent,
     AltaEpisodioComponent
   ],
   imports: [
