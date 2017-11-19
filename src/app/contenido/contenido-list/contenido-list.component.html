@@ -1,7 +1,8 @@
-<div class="container" style="background-color: #ffff;">
-
+<div *ngIf="cargo">
+  <div class="container" style="background-color: #ffff;">
+    <ng-container  *ngIf="destacado">
     <h1 class="text-center">Destacado del Mes</h1>
-    <div *ngIf="destacado" id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
           <div  class="carousel-item active">
             <img style="width:100%;" class="d-block img-fluid" src="{{primero[0].Poster}}" alt="First slide">
@@ -19,6 +20,7 @@
         </a>
       </div>
     </div>
+  </ng-container>
     <br>
     <br>
     <br>
@@ -52,3 +54,4 @@
         <h4>Titulo</h4>  
       </div>
   </ng-template>
+</div>

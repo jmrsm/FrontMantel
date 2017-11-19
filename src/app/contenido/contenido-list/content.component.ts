@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { CeiboShare } from 'ng2-social-share';
 import { UserService } from '../../services/user.service';
 import { ContentService } from '../../services/content.service';
+import {NgForm} from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase,AngularFireObject,AngularFireList } from 'angularfire2/database';
 
 declare let paypal: any;
 
@@ -19,14 +22,18 @@ declare let paypal: any;
   providers: [UserService,ContentService]
 })
 export class ContentComponent implements OnInit {
+  itemsRef: AngularFireList<any>;  
+  item: Observable<any[]>;
+  items: Observable<any[]>;
   u: string;
   vacio:boolean=true;
-  public repoUrl = 'http://23bd428c.ngrok.io/contenido';
+  public repoUrl = 'http://d5c0426d.ngrok.io/contenidodetalle/';
   public imageUrl = '';  
   favoritos: any;
   monto;
   idContenido = 5;
-  email = 'javierp55@gmail.com';
+  email = '';
+  share:boolean=false;
   @Input() content:Content;
   contSelected:any={
     Title:'',
@@ -38,7 +45,10 @@ export class ContentComponent implements OnInit {
     Poster:''
   };
   //https://cdn1.iconfinder.com/data/icons/hawcons/32/698904-icon-23-star-128.png
-  constructor(private router:Router,private userService:UserService,private contentService:ContentService) { }
+  constructor(private db: AngularFireDatabase,private router:Router,private userService:UserService,private contentService:ContentService) { 
+    this.itemsRef = db.list('mail1');
+    this.item = db.list('mail1').valueChanges();
+  }
 
   ngOnInit() {
     this.monto = 100;
@@ -53,6 +63,7 @@ export class ContentComponent implements OnInit {
         }
       }
     });
+   this.repoUrl=this.repoUrl+this.content.id;
   }
   openCheckout() {
     var handler = (<any>window).StripeCheckout.configure({
@@ -120,10 +131,12 @@ export class ContentComponent implements OnInit {
         }
       }, '#paypal-button-container');
     });
+    this.router.navigate(['/contenidodetalle/'+cont.id]);
   }
   play() {
     localStorage.setItem('videoSrc', this.content.path);
     localStorage.setItem('videoId', this.content.id);
+    localStorage.setItem('titulo', this.content.Title);
     this.router.navigate(['/reproComun']);
   }
   removefav(content:any){
@@ -157,7 +170,31 @@ ngAfterViewInit(): void {
   
   }
 
-
+  activeshare(){
+    if(!this.share){
+      this.share=true;
+    }else{
+      this.share=false;
+    }
+      
+  }
+  enviar(form:NgForm){
+    var mensaje=this.repoUrl;
+    var nombre=localStorage.getItem('email');
+    var d=form.value.destinatario;
+    var destinatario= d.split(";");
+    var f=new Date();
+    for(let c of destinatario){
+        this.itemsRef.push({name: nombre,
+          message: mensaje,
+          type:'share',
+          date: f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear(),
+          hours: f.getHours()+":"+f.getMinutes(),
+          read:false,
+          notified:false,
+          addressee: c});  
+    }
+    localStorage.setItem('enviado','Si');
+    this.share=false;
+  }
 }
-                
-                    

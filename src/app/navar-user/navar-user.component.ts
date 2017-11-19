@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../services/user.service';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase,AngularFireObject,AngularFireList } from 'angularfire2/database';
+import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 //import com.mercadopago.MP;
 //import org.codehaus.jettison.json.JSONObject;
 
@@ -8,18 +11,70 @@ import {UserService} from '../services/user.service';
 @Component({
   selector: 'app-navar-user',
   templateUrl: './navar-user.component.html',
-  styleUrls: ['./navar-user.component.css']
+  styleUrls: ['./navar-user.component.css'],
+  providers: [AngularFireDatabase,NotificationsService]
 })
 export class NavarUserComponent implements OnInit {
   categorias:any;
   error: string = '';
   isLoading: boolean = true;
-  constructor(private router:Router,private userService:UserService) { }
+  nombre:string;
+  itemsRef: AngularFireList<any>;  
+  item: Observable<any[]>;
+  noti:number=0;
+  aux:boolean=false;
+
+  constructor(private router:Router,private userService:UserService,private db: AngularFireDatabase,public _notificationsService: NotificationsService) {
+    this.nombre=localStorage.getItem('email');
+    this.itemsRef = db.list('mail1');
+    this.item = db.list('mail1').valueChanges();
+  }
 
   ngOnInit() {
+    var mensaje='';
     this.userService.getCategorias().subscribe(p => {
       this.categorias=JSON.parse(p['_body']);
     },e => this.error = e, () => this.isLoading = false);
+    this.item.subscribe(data=>{
+      //console.log(data);
+      for(let item of data){
+        //console.log(item);
+        if(!this.aux){
+          if(item.addressee==this.nombre && item.read==false){
+            mensaje=item.name+' a compartido un contenido contigo';
+            this.noti+=1;
+            this._notificationsService.success('Contenido Compartido', mensaje,{
+              timeOut: 3000,
+              showProgressBar: true,
+              pauseOnHover: true,
+              clickToClose: true});
+          }
+        }
+        
+      }
+      if(this.aux){
+        for(let item of data){
+          if(item.addressee==this.nombre && item.read==false && localStorage.getItem('enviado')=='Si'){
+            mensaje=item.name+' a compartido un contenido contigo';
+            this._notificationsService.success('Contenido Compartido', mensaje,{
+              timeOut: 3000,
+              showProgressBar: true,
+              pauseOnHover: true,
+              clickToClose: true});
+          }
+        }
+        if(localStorage.getItem('enviado')=='Si'){
+          this.noti+=1;
+        }else{
+          if(this.noti>0){
+            this.noti-=1;
+          }
+          
+        }
+        localStorage.removeItem('enviado');
+      }
+      this.aux=true;
+    });
   }
   logout(){
     localStorage.removeItem('email');
@@ -27,7 +82,7 @@ export class NavarUserComponent implements OnInit {
     this.router.navigate(['login']);
     return false;
   }
-  //esto sería para activar la suscripciòn
+  //esto serï¿½a para activar la suscripciï¿½n
  // sandboxInitPoint(){
    // MP mp = new MP("CLIENT_ID", "CLIENT_SECRET");
 	//String preapprovalData = "...";

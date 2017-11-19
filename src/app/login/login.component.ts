@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {UserService} from '../services/user.service';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [UserService]
+  providers: [UserService,NotificationsService]
 })
 export class LoginComponent implements OnInit {
   options: string[] = [];
@@ -17,10 +20,21 @@ export class LoginComponent implements OnInit {
   isLoading: boolean = true;
   msj: string = '';
   link: string = '';
-  constructor(private router:Router,private userservice: UserService) { 
+  constructor(private router:Router,private userservice: UserService,public toastr: ToastsManager, vcr: ViewContainerRef,public _notificationsService: NotificationsService) { 
+    this.toastr.setRootViewContainerRef(vcr);
   }
 
+  //<button (click)="open()">Open</button>
+  //<simple-notifications></simple-notifications>
+  open() {
+    this._notificationsService.success('Contenido Compartido', 'jmrsm@gmail.com a compartido un contenido contigo',{
+      timeOut: 6000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true});
+  }
   ngOnInit() {
+    ;
     var tipo= localStorage.getItem('tipo');
     if(tipo==='Usuario'){
       this.router.navigate(['/contenido']);
@@ -32,7 +46,8 @@ export class LoginComponent implements OnInit {
     if(tipo==='Super_admin'){
       
       this.router.navigate(['/admin']);
-    }  
+    }
+    
   }
   login(form: NgForm){
     

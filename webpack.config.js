@@ -9,3 +9,4 @@ switch (process.env.NODE_ENV) {
   default:
     module.exports = require('./config/webpack.dev')({env: 'development'});
 }
+import 'angular2-notifications';

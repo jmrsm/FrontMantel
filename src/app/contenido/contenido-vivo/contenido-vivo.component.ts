@@ -8,12 +8,13 @@ import {ContentService} from '../../services/content.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import { AngularFireDatabase,AngularFireObject,AngularFireList } from 'angularfire2/database';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-repro-vivo',
   templateUrl: './contenido-vivo.component.html',
   styleUrls: ['./contenido-vivo.component.css'],
-  providers: [ContentService]
+  providers: [ContentService, DatePipe]
 })
 export class ContenidoVivoComponent implements OnInit {
   //------------------------Contador------------------------//
@@ -23,6 +24,7 @@ export class ContenidoVivoComponent implements OnInit {
   private $counter: Observable<number>;
   private subscription: Subscription;
   private message: string;
+  private empieza: boolean=false;
   //-------------------------------------------------------//
   
   //--------------------------Chat--------------------------//
@@ -39,17 +41,25 @@ export class ContenidoVivoComponent implements OnInit {
   public idVideo;
   public idUsuario;
   public timerId: string;
-  fechaComienzo: string = '11/6/2017 23:43:00';
+  fechaInicio:number;
+  fechaInicioString: string;
   cFecheDate: Date;
   fechaServidor: string;
   sFechaDate: Date;
+  duracion:number;
+  duracionString:string;
+  fechaServEnSegundos:number;
+  fechaActualEnSegundos:number;
+  aux:number;
+  cargo:boolean=false;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private st: SimpleTimer,
     private contentservice: ContentService,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
+    private datePipe: DatePipe
   ) {
     this.itemsRef = db.list('chat1');
     this.item = db.list('chat1').valueChanges();
@@ -61,8 +71,12 @@ export class ContenidoVivoComponent implements OnInit {
       this.srcVideo = localStorage.getItem('videoSrc');
       this.startTimeVideo = localStorage.getItem('videoTime');
       this.idVideo = localStorage.getItem('videoId');
-
-      this.cFecheDate = new Date(this.fechaComienzo);
+      this.fechaInicioString = localStorage.getItem('fechaComienzo');
+      this.duracionString = localStorage.getItem('duracion');
+      this.duracion = +this.duracionString;
+      this.fechaInicio = +this.fechaInicioString;
+      this.fechaInicioString = this.datePipe.transform(new Date(this.fechaInicio), 'MM/dd/yyyy HH:mm:ss');
+      this.cFecheDate = new Date(this.fechaInicioString);
       this.cargarFechaServidor();
       this.st.newTimer('1sec', 1);
 
@@ -103,24 +117,21 @@ export class ContenidoVivoComponent implements OnInit {
   // Se comienza la reproduccion  dependiendo de la fecha de comienzo del contenido y la fecha actual en el servidor
 
   comenzarReproduccion() {
-
+    this.cargo=true;
     if (this.sFechaDate < this.cFecheDate) {
       this.iniciarEspera();
     }
     else {
-      this.iniciarReproduccion();
+     // this.iniciarReproduccion();
     }
   }
 
   // Si la fecha del contenido es posterior a la fecha del servidor se inicia un contador paara el inicio
   iniciarEspera() {
-    this.api.getDefaultMedia().canPlay = false;
-    this.api.getDefaultMedia().isLive = true;
-//    this.futureString = 'November 6, 2017 21:40:00';
-    
-    
-//        this.future = new Date(this.futureString);
-        this.future = new Date(this.fechaComienzo);
+    //this.api.getDefaultMedia().canPlay = false;
+    //this.api.getDefaultMedia().isLive = true;
+
+        this.future = new Date(this.fechaInicioString);
         this.$counter = Observable.interval(1000).map((x) => {
             this.diff = Math.floor((this.future.getTime() - new Date().getTime()) / 1000);
             return x;
@@ -143,15 +154,14 @@ export class ContenidoVivoComponent implements OnInit {
 
   onPlayerReady(api: VgAPI) {
     this.api = api;
-//    this.track = this.api.textTracks[0];
     this.fsAPI = this.api.fsAPI;
     this.nativeFs = this.fsAPI.nativeFullscreen;
   }
 
   //Comienza la reproduccion
   play() {
-    this.api.getDefaultMedia().currentTime = this.currentTimeVideo;
-    this.api.getDefaultMedia().play();
+   // this.api.getDefaultMedia().currentTime = this.currentTimeVideo;
+    //this.api.getDefaultMedia().play();
   }
 
   dhms(t) {
@@ -164,7 +174,8 @@ export class ContenidoVivoComponent implements OnInit {
     t -= m * 60;
     s = t % 60;
     if (d === 0 && h === 0 && m === 0 && s === 0)   {
-      this.iniciarReproduccion();
+      this.empieza=true;
+      //this.iniciarReproduccion();
     }
     return [
       d + ' Dias',
@@ -181,5 +192,28 @@ export class ContenidoVivoComponent implements OnInit {
     console.log(mensaje+' '+nombre);
     this.itemsRef.push({name: nombre,message:mensaje});
   }
+  terminoTransmision() {
+    this.fechaServEnSegundos = this.convertirFechaEnSegundos(this.fechaServidor);
+    this.fechaActualEnSegundos = this.convertirFechaEnSegundos(this.fechaInicioString);
+    if(this.fechaServEnSegundos + this.duracion > this.fechaActualEnSegundos) 
+      return true;
+    else
+      this.iniciarReproduccion();
+  }
 
+
+//Obtengo tiempo que falta para iniciar la reproduccion
+  convertirFechaEnSegundos(fecha:string) {
+    var date=fecha.split(" ");
+    
+    var mes=date[0].split('/')[0];
+    var dia=date[0].split('/')[1];
+    var anio=date[0].split('/')[2];
+
+    var hora=date[1].split(':')[0];
+    var minutos=date[1].split(':')[1];
+    var segundos=date[1].split(':')[2];
+    this.aux = Date.UTC(+anio, +mes, +dia, +hora, +minutos, +segundos);
+    return this.aux / 1000; 
+  }
 }

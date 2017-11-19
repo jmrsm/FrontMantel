@@ -48,7 +48,17 @@ export class ContentService {
     return this.httpc.get(this.url+'api/usuario/listarTodasPeliculas?_start=' + 
       start_index + '&_end=' + end_index).map((res: Response) => res);
   }
-  
+  // comunicacion con la api para obtener todas las peliculas por categoria
+  public getContByCategoria(start_index, end_index, categoria) {
+    return this.httpc.get(this.url+'api/usuario/listarPorGenero?_start=' + 
+      start_index + '&_end=' + end_index + '&sort=titulo' + '&generoId=' + categoria).map((res: Response) => res);
+  }
+
+  // comunicacion con la api para obtener todos los eventos
+  public getTodoContEnVivo(start_index, end_index) {
+    return this.httpc.get(this.url+'api/usuario/listarEventosConBusqueda?_start=' + 
+      start_index + '&_end=' + end_index + '&sort=titulo').map((res: Response) => res);
+  }
   // comunicacion con la api para obtener el tiempo que un usuario lleva viendo u  contenido de tipo pelicula
   public getTimeUserView(usuarioId: string, contenidoId: string): Observable<any> {
     return this.httpc.get(this.url+'api/usuario/verContenido?usuarioID=' + usuarioId + '&contenidoId=' + contenidoId).map((res: Response) => res);
@@ -64,11 +74,6 @@ export class ContentService {
   // comunicacion con la api para obtener la fecha y hora del servidor
   public getServerDate(): Observable<any> {
     return this.http.get(this.url + 'api/usuario/relojSistema').map((res: Response) => res);
-  }
-  
-  public getContByCategoria(start_index, end_index, categoria) {
-    return this.httpc.get(this.url+'api/usuario/listarPorGenero?_start=' + 
-      start_index + '&_end=' + end_index + '&sort=titulo' + '&generoId=' + categoria).map((res: Response) => res);
   }
   // api para dar de alta o baja favorito
   changeFav(body:string){
@@ -98,4 +103,16 @@ export class ContentService {
     return this.httpc.get(this.url + 'api/usuario/listarEventosConBusqueda?_start=' + start_index + '&_end=' + end_index + '&sort=titulo').map((res: Response) => res);
   }
   
+  verificarPago(idContenido, emailUsuario): Observable<any> {
+    return this.httpc.get(this.url + 'api/usuario/verificarPagoEspectaculo?idContenido=' +
+      idContenido + '&email=' + emailUsuario).map((res: Response) => res);
+  }
+  //api para valorar contenido
+  calificar(body:string){
+    return this.http.put(this.url+'api/usuario/valorarContenido',body,{headers: this.getHeaders()});
+  }
+  //api para marcar spoiler
+  marcarSpoiler(body:string){
+    return this.http.put(this.url+'api/usuario/marcarSpoiler',body,{headers: this.getHeaders()})
+  }
 }

@@ -8,8 +8,9 @@
         <div class="col-12 col-md-4">
                
             <img src="{{poster}}" class="img-fluid" alt="Responsive image">
+            <div *ngIf="showPaypalBoton()" id="paypal-button-container">{{ monto }}</div>
         </div>
-        <div class="col-12 col-md-8">
+        <div *ngIf="!esEvento()" class="col-12 col-md-6">
                 <h3>{{title}}</h3>
                 <h6 class="modal-title" id="exampleModalLabel">Director:</h6>
                 <ng-container *ngFor="let d of director" >
@@ -23,23 +24,51 @@
                 
                 <h6 class="modal-title" id="exampleModalLabel">Sinapsis:</h6>
                 <p>{{plot}}</p>
+                <br>
+                <br>
                 <h4>Comentarios:</h4>
                 <ng-container *ngFor="let c of comentario" >
                     <br>
-                        <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+                        <div *ngIf="!c.esSpoiler" class="card card-inverse" style="background-color: #333; border-color: #333;">
                                 <div class="card-block">
                                   <h6 class="card-title">{{'De: '+ c.usuario.email}}</h6>
                                   <p class="card-text">{{c.contenidoComentario}}</p>
-                                  <a href="#" class="btn btn-primary">Es Spoiler</a>
+                                  <a (click)="marcarSpoiler(c.id)" class="btn btn-primary">Es Spoiler</a>
                                 </div>
+                        </div>
+                        <div *ngIf="c.esSpoiler" class="card card-inverse bg-danger ">
+                            <div class="card-block">
+                                <h4 class="card-title">Este comentario contiene spoiler</h4>
+                              <h6 class="card-title">{{'De: '+ c.usuario.email}}</h6>
+                              <p class="card-text">{{c.contenidoComentario}}</p>
+                              
+                            </div>
                         </div>
                 </ng-container>
                 
                 <br>
         </div>
+        <div class="col-2 col-md-2">
+                <h6 class="modal-title " id="exampleModalLabel">Ranking:</h6>
+                <span class="badge badge-warning"><h2>{{ranking}}</h2></span>
+                <form #Ranking="ngForm" (ngSubmit)="setranking(Ranking)">
+                    <div class="form-group">
+                        <label for="exampleSelect1">Calificar</label>
+                        <select name="valor" class="form-control" id="exampleSelect1" ngModel>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        </select>
+                    </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            
+        </div>
         
     </div>   
-    <div class="row">
+    <div *ngIf="!esEvento()" class="row">
             <div class="col-12">
             
             <form #AltaComentario="ngForm" (ngSubmit)="altacomentario(AltaComentario)">

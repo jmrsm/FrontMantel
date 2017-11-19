@@ -263,6 +263,10 @@ onEventDestacado(selectValue : string){
       runtime = form.value.runtimeEsp;
       poster = this.imgEsp;
     }
+    var auxHora = horaInicio.split(':');
+    if (auxHora.length === 2) {
+      horaInicio = horaInicio + ':00';
+    }
     var duracionaux = runtime.split(':');
     var duracion;
     if (duracionaux.length === 2) {
@@ -278,9 +282,10 @@ onEventDestacado(selectValue : string){
     var eventoDeportivoNombreEquipoLocal = form.value.eventoDeportivoNombreEquipoLocal;
     var eventoDeportivoNombreEquipoVisitante = form.value.eventoDeportivoNombreEquipoVisitante;
     var durSec;
-
+    
     
     var comienzo = new Date(fechaInicio + ' ' + horaInicio);
+    console.log('comienzo: '+comienzo+' fechaInicio: '+fechaInicio+' horaInicio: '+horaInicio);
     var id = 0; 
     var precio = form.value.precio;
     url=url.replace('&token','%26token');
@@ -296,7 +301,7 @@ onEventDestacado(selectValue : string){
         ',\"eventoDeportivoNombreDeporte\":\"' + eventoDeportivoNombreDeporte +
         '\",\"eventoDeportivoNombreEquipoLocal\":\"' + eventoDeportivoNombreEquipoLocal +
         '\",\"eventoDeportivoNombreEquipoVisitante\":\"' + eventoDeportivoNombreEquipoVisitante +
-        '\",\"fechaInicio\":\"' + fechaInicio + 'T' + horaInicio + '.374Z\", \"id\":' + 1 + ',\"path\":\"' + this.path + '\",\"precio\":' +
+        '\",\"fechaInicio\":\"' + fechaInicio + 'T' + horaInicio + '-0300\", \"id\":' + 1 + ',\"path\":\"' + this.path + '\",\"precio\":' +
         precio + ',\"proveedorContenido\":{\"id\":' + this.idAdmin + '},\"tipoContenido\":\"EVENTO_DEPORTIVO\"}';
         this.contentService.addContenidoEnVivo(subBody).subscribe(p => {
           this.router.navigate(['/admintenant']);
@@ -306,7 +311,7 @@ onEventDestacado(selectValue : string){
         
         var subBody='{\"Plot\":\"' + plot + '\",\"Poster\":\"' + poster + '\",\"Runtime\":'  + duracion +
         ',\"Title\":\"' + titulo + '\",\"esDestacado\":' + esDestacado + ',\"esPago\":'+ esPago +
-        ',\"fechaInicio\":\"' + fechaInicio + 'T' + horaInicio + '.374Z\", \"id\":' + 1 + ',\"path\":\"' + this.path + '\",\"precio\":' +
+        ',\"fechaInicio\":\"' + fechaInicio + 'T' + horaInicio + '-0300\", \"id\":' + 1 + ',\"path\":\"' + this.path + '\",\"precio\":' +
         precio + ',\"proveedorContenido\":{\"id\":' + this.idAdmin + '},\"tipoContenido\":\"EVENTO_ESPECTACULO\"}';
         
         this.contentService.addContenidoEnVivo(subBody).subscribe(p => {
@@ -315,6 +320,10 @@ onEventDestacado(selectValue : string){
       }
     },e => this.error = e, () => this.isLoading = false); 
   }
+
+
+
+
 }
 
 
