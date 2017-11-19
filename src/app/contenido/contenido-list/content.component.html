@@ -18,13 +18,13 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{contSelected.Title}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{content.Title}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
           <div class="modal-body">
-              <img src="{{contSelected.Poster}}" class="img-fluid" alt="Responsive image">
+              <img src="{{content.Poster}}" class="img-fluid" alt="Responsive image">
               <h6 class="modal-title" id="exampleModalLabel">Director:</h6>
               <p>Jorge Lucas</p>
               <h6 class="modal-title" id="exampleModalLabel">Actores:</h6>
@@ -35,12 +35,9 @@
                   Alec Guinness</p>
               <h6 class="modal-title" id="exampleModalLabel">Sinapsis:</h6>
               <p>{{content.Plot}}</p>
-
-
-
-<div id="paypal-button-container"></div>
             </div>
           <div class="modal-footer">
+      <div id="paypal-button-container"><data id="monto" data-value="{{ monto }}">{{ monto }} U$S</data>      
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="button"  class="btn btn-primary" (click)="play()">Play</button>
             </div>  
@@ -49,4 +46,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

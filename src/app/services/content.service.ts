@@ -82,6 +82,7 @@ export class ContentService {
 
   addContenidoEnVivo(body:String): Observable<any>{
     console.log(this.url+'api/admin/contenido');
+    
     return this.http.post(this.url+'api/admin/contenido',body, {headers: this.getHeaders2()});
   }
   //api para ver dato de un contenido
@@ -92,4 +93,9 @@ export class ContentService {
   comentar(body:string){
     return this.http.post(this.url+'api/usuario/comentarContenido',body, {headers: this.getHeaders()});
   }
+
+  public getEventos(start_index, end_index) {
+    return this.httpc.get(this.url + 'api/usuario/listarEventosConBusqueda?_start=' + start_index + '&_end=' + end_index + '&sort=titulo').map((res: Response) => res);
+  }
+  
 }

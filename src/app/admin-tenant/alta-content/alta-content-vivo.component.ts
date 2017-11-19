@@ -22,8 +22,6 @@ export class AltaContentVivoComponent implements OnInit {
   paso:boolean = true;
   fechaAux:string;
   fechaActual:Date = new Date();
-  //fechaInicio:Date;
-  //horaInicio:Date;
   eventoDeportivoNombreDeporte:string;
   eventoDeportivoNombreEquipoLocal:string;
   eventoDeportivoNombreEquipoVisitante:string;
@@ -265,9 +263,14 @@ onEventDestacado(selectValue : string){
       runtime = form.value.runtimeEsp;
       poster = this.imgEsp;
     }
-    
     var duracionaux = runtime.split(':');
-    var duracion = (duracionaux[0] * 3600) + (duracionaux[1] * 60) + duracionaux[2]; 
+    var duracion;
+    if (duracionaux.length === 2) {
+      duracion = (duracionaux[0] * 3600) + (duracionaux[1] * 60); 
+    } 
+    else if (duracionaux.length === 3) {
+      duracion = (duracionaux[0] * 3600) + (duracionaux[1] * 60) + duracionaux[2]; 
+    }
     var titulo = form.value.titulo;
     var esDestacado = this.isDestacado;
     var esPago = this.esPago;
@@ -286,7 +289,6 @@ onEventDestacado(selectValue : string){
 
     let body='?email='+localStorage.getItem('email');
     this.contentService.findAdminID(body).subscribe(p => {
-      
       this.idAdmin=p['_body'];
       if(this.isDeportivo){ 
         var subBody='{\"Plot\":\"' + plot + '\",\"Poster\":\"' + poster + '\",\"Runtime\":'  + duracion +
@@ -296,7 +298,6 @@ onEventDestacado(selectValue : string){
         '\",\"eventoDeportivoNombreEquipoVisitante\":\"' + eventoDeportivoNombreEquipoVisitante +
         '\",\"fechaInicio\":\"' + fechaInicio + 'T' + horaInicio + '.374Z\", \"id\":' + 1 + ',\"path\":\"' + this.path + '\",\"precio\":' +
         precio + ',\"proveedorContenido\":{\"id\":' + this.idAdmin + '},\"tipoContenido\":\"EVENTO_DEPORTIVO\"}';
-        console.log(subBody);
         this.contentService.addContenidoEnVivo(subBody).subscribe(p => {
           this.router.navigate(['/admintenant']);
         },e => this.error = e, () => this.isLoading = false);  

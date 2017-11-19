@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { CeiboShare } from 'ng2-social-share';
 import { UserService } from '../../services/user.service';
 import { ContentService } from '../../services/content.service';
+
+declare let paypal: any;
+
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -21,6 +24,9 @@ export class ContentComponent implements OnInit {
   public repoUrl = 'http://23bd428c.ngrok.io/contenido';
   public imageUrl = '';  
   favoritos: any;
+  monto;
+  idContenido = 5;
+  email = 'javierp55@gmail.com';
   @Input() content:Content;
   contSelected:any={
     Title:'',
@@ -35,6 +41,7 @@ export class ContentComponent implements OnInit {
   constructor(private router:Router,private userService:UserService,private contentService:ContentService) { }
 
   ngOnInit() {
+    this.monto = 100;
     this.userService.getFavoritos().subscribe(data=>{
       this.favoritos=JSON.parse(data['_body']);
       /*if(this.favoritos.length==0){
@@ -46,7 +53,6 @@ export class ContentComponent implements OnInit {
         }
       }
     });
-    
   }
   openCheckout() {
     var handler = (<any>window).StripeCheckout.configure({
@@ -64,9 +70,56 @@ export class ContentComponent implements OnInit {
     });
   }
   onSelected(cont:any){
-    console.log(cont.Poster);
     this.contSelected.Poster=cont.Poster;
-    console.log(this.contSelected.Poster);
+
+    var value = this.monto
+    this.loadExternalScript("https://www.paypalobjects.com/api/checkout.js").then(() => {
+      paypal.Button.render({
+        env: 'sandbox',
+        style: {
+          label: 'pay',
+          size:  'small',
+          shape: 'rect', 
+          color: 'gold'
+        },
+        client: {
+          sandbox:    'ASJBxWW7q7mUFxebpmJYamjkbODQGpVgd3hyyBY7bzTd1R9YyrHcoMvoctSkxSeJCzUtS-JVGnXZ1_go',
+          production: 'https://developer.paypal.com/developer/applications/Mantel'
+        },
+        commit: true,
+        payment: function (data, actions) {
+          return actions.payment.create({
+            payment: {
+              transactions: [
+                {
+                  
+                  amount: { total: value, currency: 'USD' }
+                }
+              ]
+            }
+          })
+        },
+        onAuthorize: function(data, actions) {
+          return actions.payment.execute().then(function(payment) {
+            window.alert('Pago aprobado con éxito!');
+            var xhttp = new XMLHttpRequest();
+            var urlAndParams = "http://localhost:8080/api/usuario/comprarEspectaculoPayPerView/"
+
+            urlAndParams += "?idContenido=" + this.idContenido ;
+            urlAndParams += "&email=" + this.emailUsuario ;
+
+            console.log(urlAndParams)
+            xhttp.open("POST", urlAndParams, true);
+            xhttp.send();
+            return actions.payment.execute().then(function() {
+            window.alert('Pago realizado con exito!');
+            
+            });
+            // TODO
+          })
+        }
+      }, '#paypal-button-container');
+    });
   }
   play() {
     localStorage.setItem('videoSrc', this.content.path);
@@ -89,6 +142,22 @@ export class ContentComponent implements OnInit {
       //this.vacio=true;
     });
   }
+
+   private loadExternalScript(scriptUrl: string) {
+    return new Promise((resolve, reject) => {
+      const scriptElement = document.createElement('script')
+      scriptElement.src = scriptUrl
+      scriptElement.onload = resolve
+      document.body.appendChild(scriptElement)
+    })
+  }
+
+ngAfterViewInit(): void {
+  
+  
+  }
+
+
 }
-
-
+                
+                    
