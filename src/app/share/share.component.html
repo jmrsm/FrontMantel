@@ -33,8 +33,27 @@
                     <th class="text-white">Fecha y Hora</th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let item of item | async">
-                  <tr *ngIf="item.addressee==nombre ">
+                <tbody *ngFor="let item of items | async">
+                  <tr (click)="read(item)" *ngIf="item.addressee==nombre && !item.read" class="table-active">
+                    <th scope='row'>
+                      <samp>
+                        <span class='badge badge-pill badge-danger'>
+                            {{item.name+': '}}
+                        </span>
+                      </samp>
+                    </th>
+                    <th scope='row'>
+                      <kbd>{{item.message}}</kbd>
+                    </th>
+                    <th scope='row'>
+                      <samp>
+                        <span class='badge badge-pill badge-success'>
+                          {{item.date+' '+item.hours}}
+                        </span>
+                      </samp>
+                    </th>
+                  </tr>
+                  <tr (click)="read(item)" *ngIf="item.addressee==nombre && item.read">
                     <th scope='row'>
                       <samp>
                         <span class='badge badge-pill badge-danger'>

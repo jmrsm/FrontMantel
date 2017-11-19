@@ -13,10 +13,14 @@ export class ShareComponent implements OnInit {
   nombre:string;
   itemsRef: AngularFireList<any>;  
   item: Observable<any[]>;
+  items: Observable<any[]>;
   constructor(private db: AngularFireDatabase) { 
     this.nombre=localStorage.getItem('email');
     this.itemsRef = db.list('mail1');
     this.item = db.list('mail1').valueChanges();
+    this.items = this.itemsRef.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
   }
 
   ngOnInit() {
@@ -39,5 +43,8 @@ export class ShareComponent implements OnInit {
           notified:false,
           addressee: c});  
     }
+  }
+  read(item:any){
+    this.itemsRef.update(item.key,{read:true});
   }
 }
