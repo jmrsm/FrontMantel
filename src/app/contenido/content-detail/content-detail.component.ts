@@ -28,6 +28,7 @@ export class ContentDetailComponent implements OnInit {
   esPayperview:boolean;
   pagado:boolean;
   monto:number;
+  ranking:string;
   tipoContenido:string;
   fechaInicio:number;
   fechaInicioString:string;
@@ -56,6 +57,7 @@ export class ContentDetailComponent implements OnInit {
         this.esPayperview=this.contendio.esPago;
         this.tipoContenido=this.contendio.tipoContenido;
         this.fechaInicio=this.contendio.fechaInicio;
+        this.ranking=this.contendio.imdbRating;
         console.log(this.fechaInicio);
         this.fechaInicioString = this.datePipe.transform(new Date(this.fechaInicio), 'dd/MM/yy HH:mm:ss');
         console.log(this.fechaInicioString);
@@ -66,13 +68,18 @@ export class ContentDetailComponent implements OnInit {
   
         
   }
-  altacomentario(comentario:NgForm){
+altacomentario(comentario:NgForm){
     var body='contenidoId='+this.idcontent+'&usuarioId='+this.idUser+'&comentario='+comentario.value.comentario;
     this.contentservice.comentar(body).subscribe(data=>{
       this._router.navigate(['login']);
     });
   }
-
+setranking(Ranking:NgForm){
+    var body='contenidoId='+this.idcontent+'&usuarioId='+this.idUser+'&puntaje='+Ranking.value.valor;
+    this.contentservice.calificar(body).subscribe(data=>{
+      this._router.navigate(['login']);
+    });
+  }
 verificarPago(idcontent, emailUsuario) {
   this.contentservice.verificarPago(idcontent, emailUsuario).subscribe(
       result => {
@@ -173,6 +180,11 @@ private paypal() {
       document.body.appendChild(scriptElement)
     })
   }
-
+  marcarSpoiler(id:any){
+    var body='idComentario='+id+'&idUsuario='+localStorage.getItem('idUsuario');
+    this.contentservice.marcarSpoiler(body).subscribe(data=>{
+      this._router.navigate(['login']);
+    });
+  }
 
 }

@@ -102,4 +102,12 @@ export class ContentService {
     return this.httpc.get(this.url + 'api/usuario/verificarPagoEspectaculo?idContenido=' +
       idContenido + '&email=' + emailUsuario).map((res: Response) => res);
   }
+  //api para valorar contenido
+  calificar(body:string){
+    return this.http.put(this.url+'api/usuario/valorarContenido',body,{headers: this.getHeaders()});
+  }
+  //api para marcar spoiler
+  marcarSpoiler(body:string){
+    return this.http.put(this.url+'api/usuario/marcarSpoiler',body,{headers: this.getHeaders()})
+  }
 }

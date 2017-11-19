@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { VgAPI, VgFullscreenAPI } from 'videogular2/core';
-import { Poster } from 'videogular-poster';
+//import { Poster } from 'videogular-poster';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SimpleTimer } from 'ng2-simple-timer';
 import { Content } from '../../models/content';

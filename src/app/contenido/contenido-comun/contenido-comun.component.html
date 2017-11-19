@@ -5,19 +5,27 @@
 </nav>
 <div ng-controller="HomeCtrl as controller" class="videogular-container">
     <vg-player (onPlayerReady)="onPlayerReady($event)">
-<!--      <vg-overlay-play></vg-overlay-play>
+    <vg-overlay-play></vg-overlay-play>
         <vg-controls>
             <vg-play-pause></vg-play-pause>
+            <vg-playback-button></vg-playback-button>
+            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+            <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+            <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
             <h3 style="color: white">{{ titulo }}</h3>
             <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
             <vg-mute></vg-mute>
             <vg-volume></vg-volume>
             <vg-fullscreen></vg-fullscreen>
         </vg-controls>
--->
-        <video #media [vgMedia]="media" 
+
+        <!--<video #media [vgMedia]="media" 
             id="singleVideo" 
-            preload="auto" controls="style" width="100%">
+            preload="auto" controls="style" width="100%">-->
+            <video #media [vgMedia]="media" 
+            id="singleVideo" 
+            preload="auto">
             <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
         </video>
     </vg-player>
