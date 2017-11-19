@@ -1,0 +1,94 @@
+<app-navar-super-admin></app-navar-super-admin>
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-12 col-md-3">
+        	<div class="card card-inverse">
+          		<img class="card-img" src="http://www.hifreevideos.com/images/preview/Vintage-Movie-Theater-Wallpaper-Movie-theater-vintage-marquee-29469.jpg" alt="Card image" height="200" >
+          		<div class="card-img-overlay">
+            		<h4 class="card-title text-center">Bienvenido</h4>
+          		</div>
+        	</div>
+        	<ul class="list-group">
+          		<li class="list-group-item bg-primary text-white">Opciones</li>
+          		<li class="list-group-item"><a href="/altacontenidoomdb">Alta Contenido con OMDB</a></li>
+          		<li class="list-group-item"><a href="/altaepisodio">Alta Episodios de Series</a></li>
+          		<li class="list-group-item"><a href="/altaevento">Alta Contenido EnVivo</a></li>
+          		<li class="list-group-item"><a href="#">Alta Contenido Destacado</a></li>
+          		<li class="list-group-item"><a href="#">Reportes</a></li>
+        	</ul>
+      	</div>
+      	<div class="col-12 col-md-8">
+        <br>
+        	<div class="container">
+            <br>
+            	<h3 class="text-center">Alta Episodio</h3>
+            	<br>
+
+            	<div class="text-center">
+            		<div class="row">
+                  		<div class="col-sm-12 col-lg-3"></div>  
+                  			<div class="form-group col-6">
+                    			<label for="exampleInputEmail1">Series:</label>
+                    			<select class="form-control" [ngModel]="idSerie" #e (change)="callType(e.value)">
+									<option *ngFor='let serie of data.content' [value]="serie.id">
+										{{ serie.Title }}
+									</option>
+								</select>
+                  			</div>
+                	</div>
+            		<form #altaForm="ngForm" (ngSubmit)="alta(altaForm)">
+					
+              		<!--<div class="row">
+                		<div class="form-group col-3"></div>  
+                			<div class="form-group col-6">
+                  				<label for="exampleInputNombre">Titulo</label>
+                  				<input name="nombre" type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="{{ titulo }}" ngModel>
+                			</div>
+              		</div>
+              		<div class="row">
+              			<div class="form-group col-3"></div>  
+              				<div class="form-group col-6">
+                				<label for="exampleInputNombre">Poster</label>
+                				<div class="text-center">
+                  					<img src="{{ img }}" class="rounded" alt="300">
+                				</div>
+              				</div>
+              		</div>-->
+              		<div class="row">
+              			<div class="form-group col-3"></div>  
+              				<div class="form-group col-6">
+                				<label for="exampleInputNombre">Temporada</label>
+                				<input name="temporada" type="number" class="form-control" id="temporada" aria-describedby="nombreHelp" ngModel>
+              				</div>
+              		</div>
+              		<div class="row">
+              			<div class="form-group col-3"></div>  
+              				<div class="form-group col-6">
+                				<label for="exampleInputNombre">Episodio</label>
+                				<input name="episodio" type="number" class="form-control" id="episodio" aria-describedby="nombreHelp" ngModel>
+              				</div>
+              		</div>
+              		<label for="exampleInputNombre">Cargar Video</label>
+              		<div class="progress">
+                		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100">{{ progresoVideo }}</div>
+              		</div>
+              		<div class="form-group">
+                		<label for="exampleInputFile">File input</label>
+                		<input (change)="onFileChange($event)" #fileInput type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                		<small id="fileHelp" class="form-text text-muted">Asegurese de elegir un formato de video.</small>
+              		</div>
+              		<br>
+            		<div class="row">
+                		<div class="form-group col-3"></div>  
+              				<div class="form-group col-6">
+                  				<input *ngIf="isUploadFirebaseVideo" type="submit" class="btn btn-primary" value="Dar de Alta">
+              				</div>
+            		</div>
+				</form>
+				</div>
+            
+        	</div>
+      	</div>
+    </div>
+</div>
+

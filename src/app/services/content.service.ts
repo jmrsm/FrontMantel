@@ -115,4 +115,14 @@ export class ContentService {
   marcarSpoiler(body:string){
     return this.http.put(this.url+'api/usuario/marcarSpoiler',body,{headers: this.getHeaders()})
   }
+
+  public getSeries(start_index, end_index) {
+    return this.httpc.get(this.url+'api/usuario/listarTodasSeries?_start=' + 
+      start_index + '&_end=' + end_index).map((res: Response) => res);
+  }
+
+  public altaEpisodio(body:String): Observable<any> {
+    console.log(this.url+'api/admin/episodio'+body);
+    return this.http.post(this.url+'api/admin/episodio', body, {headers: this.getHeaders()});
+  }
 }

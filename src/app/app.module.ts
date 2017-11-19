@@ -52,11 +52,11 @@ import { AltaContentVivoComponent } from './admin-tenant/alta-content/alta-conte
 import { PruebaComponent } from './prueba/prueba.component';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 import { ContentListEventComponent } from './contenido/contenido-list-evento/content-list-evento.component';
 import { ContentEventComponent } from './contenido/contenido-list-evento/content-evento.component';
 import { ShareComponent } from './share/share.component';
+import { AltaEpisodioComponent } from './admin-tenant/alta-content/alta-episodios.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -79,9 +79,9 @@ const  appRoutes: Routes = [
   {path:'altacontenidodestacado', component:AltaContentDestacadoComponent, canActivate: [LoginGuard]},
    {path:'altaevento',component:AltaContentVivoComponent,canActivate: [LoginGuard]},
   {path:'contenidodetalle/:Id', component:ContentDetailComponent, canActivate: [LoginGuard]},
- // {path:'prueba', component:PruebaComponent, canActivate: [LoginGuard]},
   {path:'eventos', component:ContentListEventComponent, canActivate: [LoginGuard]},
   {path:'share', component:ShareComponent, canActivate: [LoginGuard]},
+  {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
 ];
 
 
@@ -134,8 +134,8 @@ export function provideConfig() {
     ContenidoCategoriaComponent,
     AltaContentDestacadoComponent,
     AltaContentVivoComponent,
-    ShareComponent
-  //  PruebaComponent
+    ShareComponent,
+    AltaEpisodioComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),
