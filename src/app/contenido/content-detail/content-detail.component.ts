@@ -148,6 +148,8 @@ private paypal() {
   private showPaypalBoton() {
     if (this.esPayperview && this.pagado)
       return false;
+    else if (!this.esPayperview)
+      return false;
     else
       return true;
   }
