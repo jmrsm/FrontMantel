@@ -25,33 +25,42 @@ export class ContenidoVivoComponent implements OnInit {
   private subscription: Subscription;
   private message: string;
   private empieza: boolean=false;
-  //-------------------------------------------------------//
-  
+  public timerId: string;  
+
+//-------------------------------------------------------//  
   //--------------------------Chat--------------------------//
   itemsRef: AngularFireList<any>;  
   item: Observable<any[]>;
   //--------------------------------------------------------//
+ //-------------------------Datos de reproductor-------------------------//
   sources: Array<Object>;
   api: VgAPI;
   fsAPI: VgFullscreenAPI;
   nativeFs: boolean = true;
   public srcVideo;
-  public currentTimeVideo;
-  public startTimeVideo;
-  public idVideo;
-  public idUsuario;
-  public timerId: string;
+  currentTimeVideo;
+  //----------------------------------------------------------------------//
+ //---------------Datos cargados y calculados para el video---------------//
   fechaInicio:number;
   fechaInicioString: string;
-  cFecheDate: Date;
-  fechaServidor: string;
-  sFechaDate: Date;
+  fechaInicioDate: Date;
+  fechaInicioEnSegundos:number;
+
   duracion:number;
   duracionString:string;
+
+  fechaServidorString: string;
+  fechaServidorDate: Date;
   fechaServEnSegundos:number;
-  fechaActualEnSegundos:number;
-  aux:number;
+
+  aux:number; 
+
+//----------------------------------boolean's es visible 
   cargo:boolean=false;
+  empezo:boolean=false;
+  //termino:boolean=false;
+  cargado:boolean=false;
+//----------------------------------------------------------------------//  
 
   constructor(
     private _route: ActivatedRoute,
@@ -69,20 +78,22 @@ export class ContenidoVivoComponent implements OnInit {
   ngOnInit() {
     this._route.params.forEach((params: Params) => {
       this.srcVideo = localStorage.getItem('videoSrc');
-      this.startTimeVideo = localStorage.getItem('videoTime');
-      this.idVideo = localStorage.getItem('videoId');
-      this.fechaInicioString = localStorage.getItem('fechaComienzo');
+      
       this.duracionString = localStorage.getItem('duracion');
       this.duracion = +this.duracionString;
+      
+      this.fechaInicioString = localStorage.getItem('fechaComienzo');
       this.fechaInicio = +this.fechaInicioString;
       this.fechaInicioString = this.datePipe.transform(new Date(this.fechaInicio), 'MM/dd/yyyy HH:mm:ss');
-      this.cFecheDate = new Date(this.fechaInicioString);
-      this.cargarFechaServidor();
-      this.st.newTimer('1sec', 1);
+      this.fechaInicioDate = new Date(this.fechaInicioString);
 
+      this.st.newTimer('1sec', 1);    
+  
+      this.cargarFechaServidor();
     });
 
-    this.sources = [
+
+  this.sources = [
       {
         src: this.srcVideo,
         type: "video/mp4"
@@ -98,15 +109,15 @@ export class ContenidoVivoComponent implements OnInit {
         type: "video/webm"
       }
     ];
-  }
-
+}
   // Se carga la fecha del servidor
   cargarFechaServidor() {
     this.contentservice.getServerDate().subscribe(
       result => {
-        this.fechaServidor = result._body;
-        this.sFechaDate = new Date(this.fechaServidor);
-        this.comenzarReproduccion();
+        this.fechaServidorString=result._body;
+        this.fechaServidorDate=new Date(this.fechaServidorString);
+        this.cargo=true;
+        this.terminoTransmision();
       },
       error => {
         console.log(<any>error);
@@ -114,22 +125,26 @@ export class ContenidoVivoComponent implements OnInit {
     );
   }
 
-  // Se comienza la reproduccion  dependiendo de la fecha de comienzo del contenido y la fecha actual en el servidor
-
-  comenzarReproduccion() {
-    this.cargo=true;
-    if (this.sFechaDate < this.cFecheDate) {
+   terminoTransmision() {
+    this.fechaServEnSegundos = this.convertirFechaEnSegundos(this.fechaServidorString);
+    this.fechaServEnSegundos = this.fechaServEnSegundos;
+    this.fechaInicioEnSegundos = this.convertirFechaEnSegundos(this.fechaInicioString);
+    //var fechaFinalVideo=+this.fechaInicioEnSegundos + +this.duracion;
+    /*if(fechaFinalVideo < this.fechaServEnSegundos) {     
+      this.termino=true;
+      console.log(3);
+    }
+    else*/ if (this.fechaInicioEnSegundos > this.fechaServEnSegundos) {
       this.iniciarEspera();
     }
     else {
-     // this.iniciarReproduccion();
+      this.empezo=true;
+      this.iniciarReproduccion();
     }
   }
 
-  // Si la fecha del contenido es posterior a la fecha del servidor se inicia un contador paara el inicio
+// Si la fecha del contenido es posterior a la fecha del servidor se inicia un contador paara el inicio
   iniciarEspera() {
-    //this.api.getDefaultMedia().canPlay = false;
-    //this.api.getDefaultMedia().isLive = true;
 
         this.future = new Date(this.fechaInicioString);
         this.$counter = Observable.interval(1000).map((x) => {
@@ -140,29 +155,7 @@ export class ContenidoVivoComponent implements OnInit {
         this.subscription = this.$counter.subscribe((x) => this.message = this.dhms(this.diff));
   }
 
-  // Si la fecha del contenido es igual o anterior a la fecha del servidor se inicia la reproduccion
-  // Mejora a hacer, teniendo la duracion del contenido se podria simular un fin de transmision
-  iniciarReproduccion() {
-    let dserv = this.sFechaDate.getTime() / 1000;
-    let dcont = this.cFecheDate.getTime() / 1000;
-
-    let res = dserv - dcont;
-    this.currentTimeVideo = res;
-    this.play();
-
-  }
-
-  onPlayerReady(api: VgAPI) {
-    this.api = api;
-    this.fsAPI = this.api.fsAPI;
-    this.nativeFs = this.fsAPI.nativeFullscreen;
-  }
-
-  //Comienza la reproduccion
-  play() {
-   // this.api.getDefaultMedia().currentTime = this.currentTimeVideo;
-    //this.api.getDefaultMedia().play();
-  }
+//---------------------------------------------cuenta regresiva
 
   dhms(t) {
     var d, h, m, s;
@@ -174,8 +167,8 @@ export class ContenidoVivoComponent implements OnInit {
     t -= m * 60;
     s = t % 60;
     if (d === 0 && h === 0 && m === 0 && s === 0)   {
-      this.empieza=true;
-      //this.iniciarReproduccion();
+      this.empezo=true;
+      this.iniciarReproduccion();
     }
     return [
       d + ' Dias',
@@ -184,25 +177,36 @@ export class ContenidoVivoComponent implements OnInit {
       s + ' Segundos'
     ].join(' ');
   }
-  
-  
+
+  onPlayerReady(api: VgAPI) {
+    this.api = api;
+    this.fsAPI = this.api.fsAPI;
+    this.nativeFs = this.fsAPI.nativeFullscreen;
+  }
+
+
+//---------------------------------------- Se setea el tiempo de reproduccion
+  iniciarReproduccion() {
+
+    let res = this.fechaServEnSegundos - this.fechaInicioEnSegundos;
+    this.currentTimeVideo = res;
+  if(this.empezo) {
+      this.api.getDefaultMedia().canPlay = false;
+      this.api.getDefaultMedia().isLive = true;
+      this.api.getDefaultMedia().currentTime = this.currentTimeVideo;
+      this.api.getDefaultMedia().play();
+    }
+  }
+
+  //--------------------------------------------------------chat
    enviar(form: NgForm){
     var mensaje=form.value.mensaje;
     var nombre=form.value.nombre;
     console.log(mensaje+' '+nombre);
     this.itemsRef.push({name: nombre,message:mensaje});
   }
-  terminoTransmision() {
-    this.fechaServEnSegundos = this.convertirFechaEnSegundos(this.fechaServidor);
-    this.fechaActualEnSegundos = this.convertirFechaEnSegundos(this.fechaInicioString);
-    if(this.fechaServEnSegundos + this.duracion > this.fechaActualEnSegundos) 
-      return true;
-    else
-      this.iniciarReproduccion();
-  }
 
-
-//Obtengo tiempo que falta para iniciar la reproduccion
+//------------------------Se convierte una fecha(string) con el siguiente formato "MM/dd/yyyy HH:mm:ss" a segundos
   convertirFechaEnSegundos(fecha:string) {
     var date=fecha.split(" ");
     
@@ -216,4 +220,5 @@ export class ContenidoVivoComponent implements OnInit {
     this.aux = Date.UTC(+anio, +mes, +dia, +hora, +minutos, +segundos);
     return this.aux / 1000; 
   }
+
 }

@@ -56,6 +56,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 import { ContentListEventComponent } from './contenido/contenido-list-evento/content-list-evento.component';
 import { ContentEventComponent } from './contenido/contenido-list-evento/content-evento.component';
+<<<<<<< HEAD
+=======
+import { PeliculasComponentUnidad } from './contenido/peliculas/peliculas.component';
+import { PeliculasListComponent } from './contenido/peliculas/peliculas-list.component';
+import { SeriesComponentUnidad } from './contenido/series/series.component';
+import { SeriesListComponent } from './contenido/series/series-list.component';
+import { CategoriasComponent } from './contenido/categorias.component';
+import { SeriesComponent } from './contenido/series.component';
+import { PeliculasComponent } from './contenido/peliculas.component';
+import { AltaEpisodioComponent } from './admin-tenant/alta-content/alta-episodios.component';
+>>>>>>> d56332e92725b8865beedb2d4d0e101734ec61f7
 import { ShareComponent } from './share/share.component';
 
 const  appRoutes: Routes = [
@@ -81,6 +92,12 @@ const  appRoutes: Routes = [
   {path:'contenidodetalle/:Id', component:ContentDetailComponent, canActivate: [LoginGuard]},
  // {path:'prueba', component:PruebaComponent, canActivate: [LoginGuard]},
   {path:'eventos', component:ContentListEventComponent, canActivate: [LoginGuard]},
+<<<<<<< HEAD
+=======
+  {path:'peliculas', component:PeliculasComponent, canActivate: [LoginGuard]},
+  {path:'series', component:SeriesComponent, canActivate: [LoginGuard]},
+  {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
+>>>>>>> d56332e92725b8865beedb2d4d0e101734ec61f7
   {path:'share', component:ShareComponent, canActivate: [LoginGuard]},
 ];
 
@@ -134,6 +151,16 @@ export function provideConfig() {
     ContenidoCategoriaComponent,
     AltaContentDestacadoComponent,
     AltaContentVivoComponent,
+<<<<<<< HEAD
+=======
+    PeliculasListComponent,
+    PeliculasComponent,
+    PeliculasComponentUnidad,
+    SeriesListComponent,
+    SeriesComponentUnidad,
+    SeriesComponent,
+    AltaEpisodioComponent,
+>>>>>>> d56332e92725b8865beedb2d4d0e101734ec61f7
     ShareComponent
   //  PruebaComponent
   ],

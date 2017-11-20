@@ -65,64 +65,7 @@ export class AltaContentVivoComponent implements OnInit {
       this.isEspectaculo=true;
     }
   }
-/*
-   set fechaInicio(e){
-    e = e.split('-');
-    let d = new Date(Date.UTC(e[0], e[1]-1, e[2]));
-    this.fechaInicio.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
-  }
 
-  get fechaInicio(){
-    return this.fechaInicio.toISOString().substring(0, 10);
-  }
-
-   set horaInicio(e){
-    e = e.split('-');
-    let d = new Date(Date.UTC(e[0], e[1]-1, e[2]));
-    this.horaInicio.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
-  }
-
-  get horaInicio(){
-    return this.horaInicio.toISOString().substring(0, 10);
-  }
-
-   set runtime(e){
-    e = e.split('-');
-    let d = new Date(Date.UTC(e[0], e[1]-1, e[2]));
-    this.runtime.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
-  }
-
-  get runtime(){
-    return this.runtime.toISOString().substring(0, 10);
-  }
-*/
- /* anterior(form: NgForm) {
-    this.paso = true;
-    if (this.isDeportivo) {
-
-    }
-    else {
-
-    }
-  }
-
-  siguiente(form: NgForm) {
-    this.paso = false;
-    if (this.isDeportivo) {
-      this.titulo = form.value.titulo;
-      this.fechaInicio = form.value.fechaInicio;
-      this.horaInicio = form.value.horaInicio;
-      this.duracion = form.value.duracion;
-      this.eventoDeportivoNombreDeporte = form.value.eventoDeportivoNombreDeporte;
-      this.eventoDeportivoNombreEquipoLocal = form.value.eventoDeportivoNombreEquipoLocal;
-      this.eventoDeportivoNombreEquipoVisitante = form.value.eventoDeportivoNombreEquipoVisitante;
-
-    }
-    else {
-
-    }
-  }
-*/
   onEventSelected(selectValue : string){
     if(selectValue==='1'){
       this.isDestacado=true;
@@ -320,10 +263,4 @@ onEventDestacado(selectValue : string){
       }
     },e => this.error = e, () => this.isLoading = false); 
   }
-
-
-
-
 }
-
-

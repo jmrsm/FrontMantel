@@ -22,6 +22,12 @@ export class ContentEventComponent implements OnInit {
   public imageUrl = '';  
   favoritos: any;
   esPago: boolean =false;
+  emailUsuario:string;
+  contId:string;
+  pago:boolean=true;
+  contenido:any={};
+  esPayperview:boolean;
+  pagado:boolean;
   @Input() content:Content;
   contSelected:any={
     Title:'',
@@ -33,7 +39,37 @@ export class ContentEventComponent implements OnInit {
   ngOnInit() { 
   }
   onSelected(cont:any){
-    this.router.navigate(['/contenidodetalle/'+cont.id]);
+    this.emailUsuario=localStorage.getItem('email');
+    this.contId = cont.id;
+    localStorage.setItem('intento', 'no');
+    var body='?idContenido='+cont.id;
+      this.contentService.getDatoContenido(body).subscribe(data=>{
+        this.contenido=JSON.parse(data['_body']);
+        this.esPayperview=this.contenido.esPago;
+        this.verificarPago(cont.id, this.emailUsuario);
+      });
+  }
+  noPago() {
+    localStorage.setItem('intento', 'si');
+    this.router.navigate(['/contenidodetalle/'+this.contId]);
+  }
+
+  verificarPago(idcontent, emailUsuario) {
+  this.contentService.verificarPago(idcontent, emailUsuario).subscribe(
+      result => {
+        this.pagado = result;
+        console.log(result);
+        if (!this.pagado) {
+          this.noPago();  
+        }
+        else {
+          this.play();
+        }
+        
+      },
+      error => {
+        console.log(<any>error);
+      }); 
   }
   play() {
     localStorage.setItem('videoSrc', this.content.path);
