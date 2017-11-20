@@ -29,6 +29,7 @@
     "angular4-notify": "^1.2.0",
     "angular4-social-login": "^1.0.13",
     "angularfire2": "^5.0.0-rc.3",
+    "body-parser": "^1.18.2",
     "core-js": "^2.4.1",
     "firebase": "^4.6.0",
     "font-awesome": "^4.7.0",
@@ -38,6 +39,7 @@
     "ng2-webstorage": "^1.8.0",
     "ngx-sharebuttons": "^4.1.2",
     "ngx-swiper-wrapper": "^4.6.5",
+    "paypal-rest-sdk": "^1.7.1",
     "rxjs": "^5.4.2",
     "videogular2": "^5.6.2",
     "zone.js": "^0.8.14"
