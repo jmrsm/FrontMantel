@@ -116,7 +116,10 @@ this.paypal.configure({
   	'client_secret': secret
 });
 
-	app.use(this.bodyParser.json());
+
+/*
+
+app.use(this.bodyParser.json());
 
 
 app.get('/createplan', function(req, res){
@@ -241,7 +244,7 @@ app.get('/processagreement', function(req, res){
     });
 });
 
-
+*/
 
 /*
 
