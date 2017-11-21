@@ -125,4 +125,14 @@ export class ContentService {
     console.log(this.url+'api/admin/episodio'+body);
     return this.http.post(this.url+'api/admin/episodio', body, {headers: this.getHeaders()});
   }
+  //api para buscar pelicula
+  buscarpelicula(body:String){
+    return this.httpc.get(this.url+'api/usuario/listarPeliculasConBusqueda'+body).map((res: Response) => res);
+  }
+  buscarserie(body:String){
+    return this.httpc.get(this.url+'api/usuario/listarSeriesConBusqueda'+body).map((res: Response) => res);
+  }
+  buscarevento(body:String){
+    return this.httpc.get(this.url+'api/usuario/listarEventosConBusqueda'+body).map((res: Response) => res);
+  }
 }

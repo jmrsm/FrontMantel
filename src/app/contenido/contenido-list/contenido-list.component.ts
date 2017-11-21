@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input ,ElementRef,ViewChild,Renderer2} from '@angular/core';
 import { Content } from '../../models/content';
 import { ContentService } from '../../services/content.service';
 import { NgForm } from '@angular/forms';  
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styles: []
 })
 export class ContenidoListComponent implements OnInit {
+  @ViewChild('texto') input;
+  @ViewChild('opcion') option;
     contents:Content[]=[];
     data: any = {};
     start_index;
@@ -19,7 +21,7 @@ export class ContenidoListComponent implements OnInit {
     primero : any[]=[];
     aux:boolean=false;
     cargo:boolean=false;
-  constructor(private contentservice:ContentService, private router:Router) { }
+  constructor(private contentservice:ContentService, private router:Router,private renderer: Renderer2) { }
 
   ngOnInit() {
     this.inicio();
@@ -61,5 +63,31 @@ export class ContenidoListComponent implements OnInit {
       this.getContents(this.start_index, this.end_index);
       this.router.navigate(['/contenido']);
   }
-  
+  search(){
+    var body='';
+    if(this.option.nativeElement.value=="Pelicula"){
+      body='?_start=0&_end=99999&_q='+this.input.nativeElement.value;
+      this.contentservice.buscarpelicula(body).subscribe(data => {
+        this.data = data;
+        
+       }); 
+    }
+    if(this.option.nativeElement.value=="Serie"){
+      body='?_start=0&_end=10&_q='+this.input.nativeElement.value;
+      this.contentservice.buscarevento(body).subscribe(data => {
+        this.data = data;
+       });
+    }
+    if(this.option.nativeElement.value=="Evento"){
+      console.log('hola');
+      body='?_start=0&_end=99999&_q='+this.input.nativeElement.value;
+      this.contentservice.buscarevento(body).subscribe(data => {
+        this.data = data;
+        
+       }); 
+    }
+    /*if(this.input.nativeElement.value==''){
+      this.getContents(0,10);
+    }*/
+  }
 }

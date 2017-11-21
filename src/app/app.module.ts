@@ -92,19 +92,13 @@ const  appRoutes: Routes = [
   {path:'altaempresa',component:AltaempresaComponent,canActivate: [LoginGuard]},
   {path:'categoria/:Id', component:ContenidoCategoriaComponent, canActivate: [LoginGuard]},
   {path:'altacontenidodestacado', component:AltaContentDestacadoComponent, canActivate: [LoginGuard]},
-   {path:'altaevento',component:AltaContentVivoComponent,canActivate: [LoginGuard]},
+  {path:'altaevento',component:AltaContentVivoComponent,canActivate: [LoginGuard]},
   {path:'contenidodetalle/:Id', component:ContentDetailComponent, canActivate: [LoginGuard]},
   {path:'eventos', component:ContentListEventComponent, canActivate: [LoginGuard]},
-<<<<<<< HEAD
-=======
   {path:'peliculas', component:PeliculasComponent, canActivate: [LoginGuard]},
   {path:'series', component:SeriesComponent, canActivate: [LoginGuard]},
   {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
->>>>>>> d56332e92725b8865beedb2d4d0e101734ec61f7
   {path:'share', component:ShareComponent, canActivate: [LoginGuard]},
-  {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
-  {path:'peliculas', component:PeliculasComponent, canActivate: [LoginGuard]},
-  {path:'series', component:SeriesComponent, canActivate: [LoginGuard]},
 ];
 
 
@@ -157,26 +151,17 @@ export function provideConfig() {
     ContenidoCategoriaComponent,
     AltaContentDestacadoComponent,
     AltaContentVivoComponent,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
     ShareComponent,
->>>>>>> 365ca0102f717d2aebfa85b037ff63d95508ffdb
     PeliculasListComponent,
     PeliculasComponent,
     PeliculasComponentUnidad,
     SeriesListComponent,
     SeriesComponentUnidad,
     SeriesComponent,
-<<<<<<< HEAD
     AltaEpisodioComponent,
->>>>>>> d56332e92725b8865beedb2d4d0e101734ec61f7
-    ShareComponent
+    ShareComponent,
   //  PruebaComponent
-=======
     AltaEpisodioComponent
->>>>>>> 365ca0102f717d2aebfa85b037ff63d95508ffdb
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),
