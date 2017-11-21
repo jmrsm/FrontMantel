@@ -8,9 +8,7 @@ import {UserService} from '../services/user.service';
 })
 export class SeriesComponent implements OnInit {
 
-  constructor() { }
+	constructor() {}
 
-  ngOnInit() {
-  }
-
+  	ngOnInit() {}
 }
