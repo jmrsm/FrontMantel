@@ -13,80 +13,33 @@
               <li class="list-group-item bg-primary text-white">Opciones</li>
               <li class="list-group-item"><a href="/altaempresa">Alta Empresa</a></li>
               <li class="list-group-item"><a href="/altaadmin">Alta Admin</a></li>
-              <li class="list-group-item"><a href="#">Alta Tipo Contenido</a></li>
               <li class="list-group-item"><a href="/altaactor">Alta Actor</a></li>
               <li class="list-group-item"><a href="/altadirector">Alta Director</a></li>
               <li class="list-group-item"><a href="/altacategoria">Alta Categoria</a></li>
               <li class="list-group-item"><a href="#">Bloqueo contenido</a></li>
               <li class="list-group-item"><a href="#">Bloqueo Cliente</a></li>
-              <li class="list-group-item"><a href="#">Baja Empresa</a></li>
             </ul>
           </div>
           <div class="col-12 col-md-8">
             <br>
-            <h4>Mi contenido</h4>
+            <h4>Proveedores de contenido</h4>
             <table class="table table-striped table-hover">
             <thead class="bg-primary text-white">
               <tr>
                 <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
+                <th>Empresa</th>
+                <th>Id</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              <tr *ngFor="let item of empresas">
+                    <th scope="row">#</th>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.id}}</td>
+                  </tr>
             </tbody>
           </table>
           <br>
-          <h4>Mis pagos</h4>
-          <table class="table table-striped table-hover ">
-            <thead class="bg-primary text-white">
-              <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
           </div>
         </div>
         </div>
