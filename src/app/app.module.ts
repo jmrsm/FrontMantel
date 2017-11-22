@@ -56,7 +56,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 import { ContentListEventComponent } from './contenido/contenido-list-evento/content-list-evento.component';
 import { ContentEventComponent } from './contenido/contenido-list-evento/content-evento.component';
-//import { PeliculasComponentUnidad } from './contenido/peliculas/peliculas.component';
+import { ShareComponent } from './share/share.component';
+import { AltaEpisodioComponent } from './admin-tenant/alta-content/alta-episodios.component';
+import { PeliculasComponentUnidad } from './contenido/peliculas/peliculas.component';
 import { PeliculasListComponent } from './contenido/peliculas/peliculas-list.component';
 import { SeriesComponentUnidad } from './contenido/series/series.component';
 import { SeriesListComponent } from './contenido/series/series-list.component';
@@ -70,6 +72,9 @@ import { PeliculasComponentUnidad } from './contenido/peliculas/peliculas.compon
 import { SuscribirComponent } from './suscripcion/suscribir.component';
 import { SucceessComponent } from './succeess/succeess.component';
 import { CancelComponent } from './cancel/cancel.component';
+import { BloqueoUsuarioComponent } from './admin/bloqueo-usuario/bloqueo-usuario.component';
+import { BloqueoContenidoComponent } from './admin/bloqueo-contenido/bloqueo-contenido.component';
+
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -93,6 +98,8 @@ const  appRoutes: Routes = [
   {path:'altaevento',component:AltaContentVivoComponent,canActivate: [LoginGuard]},
   {path:'contenidodetalle/:Id', component:ContentDetailComponent, canActivate: [LoginGuard]},
   {path:'eventos', component:ContentListEventComponent, canActivate: [LoginGuard]},
+  {path:'share', component:ShareComponent, canActivate: [LoginGuard]},
+  {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
   {path:'peliculas', component:PeliculasComponent, canActivate: [LoginGuard]},
   {path:'series', component:SeriesComponent, canActivate: [LoginGuard]},
   {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
@@ -101,6 +108,8 @@ const  appRoutes: Routes = [
   {path:'suscribir/:id', component: SuscribirComponent},
   {path:'success', component:SucceessComponent, canActivate: [LoginGuard]},
   {path:'cancel', component:CancelComponent, canActivate: [LoginGuard]},
+  {path:'bloqueo-contenido', component:BloqueoContenidoComponent, canActivate:[LoginGuard]},
+  {path:'bloqueo-usuario', component:BloqueoUsuarioComponent, canActivate:[LoginGuard]},
 ];
 
 
@@ -161,12 +170,17 @@ export function provideConfig() {
     SeriesComponentUnidad,
     SeriesComponent,
     AltaEpisodioComponent,
+
     ShareComponent,
   //  PruebaComponent
     AltaEpisodioComponent,
     SuscribirComponent,
     SucceessComponent,
     CancelComponent
+
+    BloqueoUsuarioComponent,
+    BloqueoContenidoComponent
+
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),

@@ -27,5 +27,11 @@ export class AdminService {
     headers.append('Content-Type', 'application/json');
     return headers;
   }
+
+  bloqUsuario(body:String): Observable<any>{
+    console.log(this.url+'api/superAdmin/bloquearUsuario/?'+body);
+    return this.http.put(this.url+'api/superAdmin/bloquearUsuario', body, {headers: this.getHeaders()});
+ 
+  }
   
 }
