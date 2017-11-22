@@ -64,6 +64,8 @@ import { SeriesListComponent } from './contenido/series/series-list.component';
 import { CategoriasComponent } from './contenido/categorias.component';
 import { SeriesComponent } from './contenido/series.component';
 import { PeliculasComponent } from './contenido/peliculas.component';
+import { BloqueoUsuarioComponent } from './admin/bloqueo-usuario/bloqueo-usuario.component';
+import { BloqueoContenidoComponent } from './admin/bloqueo-contenido/bloqueo-contenido.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -91,6 +93,8 @@ const  appRoutes: Routes = [
   {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
   {path:'peliculas', component:PeliculasComponent, canActivate: [LoginGuard]},
   {path:'series', component:SeriesComponent, canActivate: [LoginGuard]},
+  {path:'bloqueo-contenido', component:BloqueoContenidoComponent, canActivate:[LoginGuard]},
+  {path:'bloqueo-usuario', component:BloqueoUsuarioComponent, canActivate:[LoginGuard]},
 ];
 
 
@@ -150,7 +154,9 @@ export function provideConfig() {
     SeriesListComponent,
     SeriesComponentUnidad,
     SeriesComponent,
-    AltaEpisodioComponent
+    AltaEpisodioComponent,
+    BloqueoUsuarioComponent,
+    BloqueoContenidoComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),
