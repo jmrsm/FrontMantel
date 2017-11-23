@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import {ContentService} from '../../services/content.service';
 import {Observable} from 'rxjs/Observable';
 import {ContentOMBDDTO} from '../../models/content';
@@ -32,7 +32,9 @@ export class AltaContentComponent implements OnInit {
   path:string;
   ref:string;
   idAdmin:string;
-  
+  esPago:boolean=false;
+  precio:string;
+ 
   constructor(private contentService:ContentService,private firebaseApp: FirebaseApp,private router:Router) { }
 
   ngOnInit() {
@@ -61,6 +63,17 @@ export class AltaContentComponent implements OnInit {
     if(selectValue==='2'){
       this.isDestacado=false;
     }
+  }
+  onEventPago(selectValue:string){
+    if(selectValue==='1'){
+      this.esPago=true;
+    }
+    if(selectValue==='2'){
+      this.esPago=false;
+    }
+  }
+  setPrecio(event:string){
+    this.precio=event;
   }
   onEventClick(selectValue : string ) {  
     if(selectValue==='1'){
@@ -147,6 +160,9 @@ export class AltaContentComponent implements OnInit {
    
   }
   sendservicealta(url:any){
+    if(!this.esPago){
+      this.precio='0';
+    }
      url=url.replace('&token','%26token');
       this.path=url;
 //    this.path = this.path.replace('&', '%26');
@@ -159,14 +175,14 @@ export class AltaContentComponent implements OnInit {
       
       this.idAdmin=p['_body'];
       if(this.isPelicula){
-        let subbody='proveedorContenidoId='+this.idAdmin+'&omdbId='+this.omdbID+'&path='+ this.path +'&esSerie=false&esDestacado='+this.isDestacado;
+        let subbody='proveedorContenidoId='+this.idAdmin+'&omdbId='+this.omdbID+'&path='+ this.path +'&esSerie=false'+'&esPago='+this.esPago+'&precio='+this.precio+'&esDestacado='+this.isDestacado;
         this.contentService.addContenido(subbody).subscribe(p => {
           this.router.navigate(['/admintenant']);
         },e => this.error = e, () => this.isLoading = false);  
       }
       if(this.isSerie){
         
-        let subbody='proveedorContenidoId='+this.idAdmin+'&omdbId='+this.omdbID+'&path='+this.path+'&esSerie=true&esDestacado='+this.isDestacado;
+        let subbody='proveedorContenidoId='+this.idAdmin+'&omdbId='+this.omdbID+'&path='+this.path+'&esSerie=true'+'&esPago='+this.esPago+'&precio='+this.precio+'&esDestacado='+this.isDestacado;
         this.contentService.addContenido(subbody).subscribe(p => {
           this.router.navigate(['/admintenant']);
         },e => this.error = e, () => this.isLoading = false);  
