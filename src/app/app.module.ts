@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ContentService } from './services/content.service';
+import { SuscripcionService } from './services/suscripcion.service';
 import { HttpModule } from '@angular/http';
 
 import { SocialLoginModule } from "angular4-social-login";
@@ -62,7 +63,7 @@ import { SeriesListComponent } from './contenido/series/series-list.component';
 import { CategoriasComponent } from './contenido/categorias.component';
 import { SeriesComponent } from './contenido/series.component';
 import { PeliculasComponent } from './contenido/peliculas.component';
-<<<<<<< HEAD
+
 //import { AltaEpisodioComponent } from './admin-tenant/alta-content/alta-episodios.component';
 import { ShareComponent } from './share/share.component';
 import { AltaEpisodioComponent } from './admin-tenant/alta-content/alta-episodios.component';
@@ -73,10 +74,9 @@ import { PeliculasComponentUnidad } from './contenido/peliculas/peliculas.compon
 //import { CategoriasComponent } from './contenido/categorias.component';
 //import { SeriesComponent } from './contenido/series.component';
 //import { PeliculasComponent } from './contenido/peliculas.component';
-=======
-import { BloqueoUsuarioComponent } from './admin/bloqueo-usuario/bloqueo-usuario.component';
-import { BloqueoContenidoComponent } from './admin/bloqueo-contenido/bloqueo-contenido.component';
->>>>>>> c823a6f39b53ff530631586029c30c7815561608
+import { SuscribirComponent } from './suscripcion/suscribir.component';
+import { SucceessComponent } from './succeess/succeess.component';
+import { CancelComponent } from './cancel/cancel.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -102,13 +102,13 @@ const  appRoutes: Routes = [
   {path:'eventos', component:ContentListEventComponent, canActivate: [LoginGuard]},
   {path:'peliculas', component:PeliculasComponent, canActivate: [LoginGuard]},
   {path:'series', component:SeriesComponent, canActivate: [LoginGuard]},
-<<<<<<< HEAD
   {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
   {path:'share', component:ShareComponent, canActivate: [LoginGuard]},
-=======
-  {path:'bloqueo-contenido', component:BloqueoContenidoComponent, canActivate:[LoginGuard]},
-  {path:'bloqueo-usuario', component:BloqueoUsuarioComponent, canActivate:[LoginGuard]},
->>>>>>> c823a6f39b53ff530631586029c30c7815561608
+  {path:'suscribir', component:SuscribirComponent, canActivate: [LoginGuard]},
+  {path:'suscribir/:id', component: SuscribirComponent, canActivate: [LoginGuard]},
+  {path:'success', component:SucceessComponent, canActivate: [LoginGuard]},
+  {path:'cancel', component:CancelComponent, canActivate: [LoginGuard]},
+
 ];
 
 
@@ -171,7 +171,10 @@ export function provideConfig() {
     AltaEpisodioComponent,
     ShareComponent,
   //  PruebaComponent
-    AltaEpisodioComponent
+    AltaEpisodioComponent,
+    SuscribirComponent,
+    SucceessComponent,
+    CancelComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),
@@ -191,7 +194,7 @@ export function provideConfig() {
     SimpleNotificationsModule
     
   ],
-  providers: [ContentService,LoginGuard,NoLoginGuard,[
+  providers: [ContentService,LoginGuard,NoLoginGuard, SuscripcionService, [
       {
         provide: AuthServiceConfig,
         useFactory: provideConfig
