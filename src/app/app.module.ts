@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ContentService } from './services/content.service';
+import { SuscripcionService } from './services/suscripcion.service';
 import { HttpModule } from '@angular/http';
 
 import { SocialLoginModule } from "angular4-social-login";
@@ -66,12 +67,9 @@ import { PeliculasComponent } from './contenido/peliculas.component';
 import { ShareComponent } from './share/share.component';
 import { AltaEpisodioComponent } from './admin-tenant/alta-content/alta-episodios.component';
 import { PeliculasComponentUnidad } from './contenido/peliculas/peliculas.component';
-//import { PeliculasListComponent } from './contenido/peliculas/peliculas-list.component';
-//import { SeriesComponentUnidad } from './contenido/series/series.component';
-//import { SeriesListComponent } from './contenido/series/series-list.component';
-//import { CategoriasComponent } from './contenido/categorias.component';
-//import { SeriesComponent } from './contenido/series.component';
-//import { PeliculasComponent } from './contenido/peliculas.component';
+import { SuscribirComponent } from './suscripcion/suscribir.component';
+import { SucceessComponent } from './succeess/succeess.component';
+import { CancelComponent } from './cancel/cancel.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -99,6 +97,10 @@ const  appRoutes: Routes = [
   {path:'series', component:SeriesComponent, canActivate: [LoginGuard]},
   {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
   {path:'share', component:ShareComponent, canActivate: [LoginGuard]},
+  {path:'suscribir', component:SuscribirComponent, canActivate: [LoginGuard]},
+  {path:'suscribir/:id', component: SuscribirComponent, canActivate: [LoginGuard]},
+  {path:'success', component:SucceessComponent, canActivate: [LoginGuard]},
+  {path:'cancel', component:CancelComponent, canActivate: [LoginGuard]},
 ];
 
 
@@ -161,7 +163,10 @@ export function provideConfig() {
     AltaEpisodioComponent,
     ShareComponent,
   //  PruebaComponent
-    AltaEpisodioComponent
+    AltaEpisodioComponent,
+    SuscribirComponent,
+    SucceessComponent,
+    CancelComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),
@@ -181,7 +186,7 @@ export function provideConfig() {
     SimpleNotificationsModule
     
   ],
-  providers: [ContentService,LoginGuard,NoLoginGuard,[
+  providers: [ContentService,LoginGuard,NoLoginGuard, SuscripcionService, [
       {
         provide: AuthServiceConfig,
         useFactory: provideConfig

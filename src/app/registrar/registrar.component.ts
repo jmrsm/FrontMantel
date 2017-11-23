@@ -47,7 +47,7 @@ export class RegistrarComponent implements OnInit {
     this.userservice.addUser(body).subscribe(p => {
       //console.log("dentro de if por 200");
       this.exito = 'Cliente creado bien';
-      this.router.navigate(['/login']);
+      this.router.navigate(['/suscribir']);
 
     },e => this.error = e, () => this.isLoading = false);
     /*this.userservice.addUser(body).subscribe(p => {
