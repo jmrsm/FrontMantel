@@ -18,6 +18,7 @@ export class SuscribirComponent implements OnInit {
   private urlsResponse:string[]= [];
   private date:string= '';
   private imgBebe:string= './assets/mininos.jpg';
+  private imgPerro:string= './assets/perros.jpg';
   private cfgVentana:string= 'width=800,height=400 menubar=yes,' +
   'location=yes,resizable=yes,scrollbars=yes,status=yes';
   private nombreVentana:string= 'Suscripcion Mantel';
@@ -34,7 +35,6 @@ export class SuscribirComponent implements OnInit {
     console.log(this.fechaActual);
     var aux = this.fechaActual.getTime() + 15000;
     var fecha = new Date(aux);
-    console.log(fecha);
     this.date = fecha.toISOString();  
     this.route.params.forEach((params: Params) => {
         this.idElegido = params['id'];

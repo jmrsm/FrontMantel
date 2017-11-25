@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
-<div class="card">
+<div *ngIf="content.Poster!='N/A'" class="card">
   <button (click)="play()"><img class="card-img-top img-fluid" src="{{content.Poster}}" alt="Card image cap"></button>
   <div class="card-block">
     <h4 class="card-title">{{content.Title}}</h4>

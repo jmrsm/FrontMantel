@@ -97,8 +97,8 @@ const  appRoutes: Routes = [
   {path:'series', component:SeriesComponent, canActivate: [LoginGuard]},
   {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
   {path:'share', component:ShareComponent, canActivate: [LoginGuard]},
-  {path:'suscribir', component:SuscribirComponent, canActivate: [LoginGuard]},
-  {path:'suscribir/:id', component: SuscribirComponent, canActivate: [LoginGuard]},
+  {path:'suscribir', component:SuscribirComponent},
+  {path:'suscribir/:id', component: SuscribirComponent},
   {path:'success', component:SucceessComponent, canActivate: [LoginGuard]},
   {path:'cancel', component:CancelComponent, canActivate: [LoginGuard]},
 ];
