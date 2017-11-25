@@ -56,9 +56,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 import { ContentListEventComponent } from './contenido/contenido-list-evento/content-list-evento.component';
 import { ContentEventComponent } from './contenido/contenido-list-evento/content-evento.component';
-import { ShareComponent } from './share/share.component';
-import { AltaEpisodioComponent } from './admin-tenant/alta-content/alta-episodios.component';
-import { PeliculasComponentUnidad } from './contenido/peliculas/peliculas.component';
 import { PeliculasListComponent } from './contenido/peliculas/peliculas-list.component';
 import { SeriesComponentUnidad } from './contenido/series/series.component';
 import { SeriesListComponent } from './contenido/series/series-list.component';
@@ -176,7 +173,7 @@ export function provideConfig() {
     AltaEpisodioComponent,
     SuscribirComponent,
     SucceessComponent,
-    CancelComponent
+    CancelComponent,
 
     BloqueoUsuarioComponent,
     BloqueoContenidoComponent
