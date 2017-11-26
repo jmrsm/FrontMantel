@@ -28,8 +28,10 @@ private token:string;
     	var aux= p;
     	this.links= JSON.parse(aux['_body']);
       this.token= this.links.id;
+       console.log(this.token);
       if (this.token !== '')
         localStorage.setItem('pago' , 'si');
+        console.log(localStorage.getItem('pago'));
         this.redirect();
     },e => this.error = e, () => this.isLoading= false);  
    // this.suscribirService.habilitar(this.email);
@@ -38,7 +40,7 @@ private token:string;
 
 	redirect() {
 		setTimeout((router: Router) => {
-        	this.router.navigate(['contenido']);
+        	this.router.navigate(['login']);
     	}, 1000);  
 
 	}

@@ -58,10 +58,8 @@ export class ContentDetailComponent implements OnInit {
         this.tipoContenido=this.contendio.tipoContenido;
         this.fechaInicio=this.contendio.fechaInicio;
         this.ranking=this.contendio.imdbRating;
-        console.log(this.fechaInicio);
         this.fechaInicioString = this.datePipe.transform(new Date(this.fechaInicio), 'dd/MM/yy HH:mm:ss');
-        console.log(this.fechaInicioString);
-        this.verificarPago(this.idcontent, this.emailUsuario);
+        
       });
     })
     
@@ -98,9 +96,6 @@ private paypal() {
     var value = this.monto
     var idContenido =  this.idcontent;
     var emailUsuario = this.emailUsuario;
-    console.log(idContenido);
-    console.log(emailUsuario);
-    console.log(value);
     this.loadExternalScript("https://www.paypalobjects.com/api/checkout.js").then(() => {
       paypal.Button.render({
         env: 'sandbox',
@@ -129,14 +124,13 @@ private paypal() {
         },
         onAuthorize: function(data, actions) {
           return actions.payment.execute().then(function(payment) {
-            window.alert("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             var xhttp = new XMLHttpRequest();
             var urlAndParams = "http://localhost:8080/api/usuario/comprarContenidoPayPerView/"
 
             urlAndParams += "?idContenido=" + idContenido;
             urlAndParams += "&email=" + emailUsuario;
 
-            console.log(urlAndParams)
+            console.log(urlAndParams);
             xhttp.open("POST", urlAndParams, true);
             xhttp.send();
             return actions.payment.execute().then(function() {
@@ -150,12 +144,17 @@ private paypal() {
   }
 
   private showPaypalBoton() {
-    if (this.esPayperview && this.pagado)
+    if (this.esPayperview && this.pagado) {
       return false;
-    else if (!this.esPayperview)
+    }
+    else if (!this.esPayperview) {
       return false;
-    else
+    }
+    else {
+      this.verificarPago(this.idcontent, this.emailUsuario);
       return true;
+    }
+    
   }
 
   private esEvento() {

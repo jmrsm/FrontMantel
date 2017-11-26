@@ -70,6 +70,7 @@ import { PeliculasComponentUnidad } from './contenido/peliculas/peliculas.compon
 import { SuscribirComponent } from './suscripcion/suscribir.component';
 import { SucceessComponent } from './succeess/succeess.component';
 import { CancelComponent } from './cancel/cancel.component';
+import { ContenidoVivoComponent } from './contenido/contenido-vivo.component';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -92,15 +93,15 @@ const  appRoutes: Routes = [
   {path:'altacontenidodestacado', component:AltaContentDestacadoComponent, canActivate: [LoginGuard]},
   {path:'altaevento',component:AltaContentVivoComponent,canActivate: [LoginGuard]},
   {path:'contenidodetalle/:Id', component:ContentDetailComponent, canActivate: [LoginGuard]},
-  {path:'eventos', component:ContentListEventComponent, canActivate: [LoginGuard]},
+  {path:'eventos', component:ContenidoVivoComponent, canActivate: [LoginGuard]},
   {path:'peliculas', component:PeliculasComponent, canActivate: [LoginGuard]},
   {path:'series', component:SeriesComponent, canActivate: [LoginGuard]},
   {path:'altaepisodio',component:AltaEpisodioComponent,canActivate: [LoginGuard]},
   {path:'share', component:ShareComponent, canActivate: [LoginGuard]},
   {path:'suscribir', component:SuscribirComponent},
   {path:'suscribir/:id', component: SuscribirComponent},
-  {path:'success', component:SucceessComponent, canActivate: [LoginGuard]},
-  {path:'cancel', component:CancelComponent, canActivate: [LoginGuard]},
+  {path:'success', component:SucceessComponent},
+  {path:'cancel', component:CancelComponent},
 ];
 
 
@@ -166,7 +167,8 @@ export function provideConfig() {
     AltaEpisodioComponent,
     SuscribirComponent,
     SucceessComponent,
-    CancelComponent
+    CancelComponent,
+    ContenidoVivoComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { useHash: true }),

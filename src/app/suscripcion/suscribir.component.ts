@@ -13,7 +13,7 @@ export class SuscribirComponent implements OnInit {
   private fechaActual:Date;
   private idElegido:string= '';
   private error:string= '';
-  private isLoading:boolean= true;
+  private isLoading:boolean= false;
   private links:any;
   private urlsResponse:string[]= [];
   private date:string= '';
@@ -31,22 +31,23 @@ export class SuscribirComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  	this.fechaActual = new Date();
-    console.log(this.fechaActual);
-    var aux = this.fechaActual.getTime() + 15000;
-    var fecha = new Date(aux);
-    this.date = fecha.toISOString();  
-    this.route.params.forEach((params: Params) => {
-        this.idElegido = params['id'];
-    })
-    if (this.idElegido === 'd' || this.idElegido === 's' || this.idElegido === 'm' || this.idElegido === 'y') {
-      this.altaPlan(this.date);
-    }
+  	
   }
 
 
   saltarSuscripcion() {
     this.router.navigate(['contenido']);
+  }
+
+  selectPlan(id:string) {
+    this.isLoading= true;
+    this.fechaActual = new Date();
+    var aux = this.fechaActual.getTime() + 15000;
+    var fecha = new Date(aux);
+    this.date = fecha.toISOString();  
+    if (id === 'd' || id === 's' || id === 'm' || id === 'y') {
+      this.altaPlan(this.date);
+    }
   }
 
   altaPlan(fecha: string){
@@ -88,7 +89,6 @@ export class SuscribirComponent implements OnInit {
       for (let entry of this.links.links) {
         this.urlsResponse.push(entry.href);  
       }
-      console.log(this.links);
       localStorage.setItem( 'urlSuscribe' , this.urlsResponse[1]);
       window.open(this.urlsResponse[0], '_self');
     },e => this.error = e, () => this.isLoading = false);  

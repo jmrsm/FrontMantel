@@ -57,7 +57,8 @@ export class ContentEventComponent implements OnInit {
   verificarPago(idcontent, emailUsuario) {
   this.contentService.verificarPago(idcontent, emailUsuario).subscribe(
       result => {
-        this.pagado = result;
+        if (result !== null) {
+          this.pagado = result;
         console.log(result);
         if (!this.pagado) {
           this.noPago();  
@@ -65,6 +66,8 @@ export class ContentEventComponent implements OnInit {
         else {
           this.play();
         }
+        }
+        
         
       },
       error => {

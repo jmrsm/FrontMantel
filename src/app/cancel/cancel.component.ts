@@ -21,7 +21,7 @@ export class CancelComponent implements OnInit {
 
   redirect() {
     setTimeout((router: Router) => {
-          this.router.navigate(['contenido']);
+          this.router.navigate(['suscribir']);
       }, 1000);  
 
   }

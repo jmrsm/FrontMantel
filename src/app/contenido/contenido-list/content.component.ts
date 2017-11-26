@@ -83,7 +83,7 @@ export class ContentComponent implements OnInit {
   onSelected(cont:any){
     this.contSelected.Poster=cont.Poster;
 
-    var value = this.monto
+   /* var value = this.monto
     this.loadExternalScript("https://www.paypalobjects.com/api/checkout.js").then(() => {
       paypal.Button.render({
         env: 'sandbox',
@@ -130,7 +130,7 @@ export class ContentComponent implements OnInit {
           })
         }
       }, '#paypal-button-container');
-    });
+    });*/
     this.router.navigate(['/contenidodetalle/'+cont.id]);
   }
   play() {

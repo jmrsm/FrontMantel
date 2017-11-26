@@ -1,65 +1,65 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<div class="container">
-<div class="row">
-<div class="col-md-4 col-sm-6">
-<div class="pricingTable">
-<div class="pricingTable-header">
-<img  class="card-img-top" src="{{ imgPerro }}" alt="Card image cap" height="200px" width="100%">
-<h3 class="title">PAGO POR HOY</h3></div>
-<div class="price-value">
-<span class="amount">
-<span class="currency">U$S</span>
-3
-<span class="opcion">/día</span>
-</span>
-</div>
-<ul class="pricing-content">
-<li><B>-Accedés a un sin fin de contenidos!!!!</B></li>
-<li><B>-Ideal si no quierés estar sujeto a una suscripción mensual</B></li>
-<li><B>-Abonas sólo por el día de uso</B></li>
-<li></li>
-</ul>
-<a href="suscribir/d" class="pricingTable-signup">               
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
-</a>
-</div>
-</div>
-<div class="col-md-4 col-sm-6">
-<div class="pricingTable">
-<div class="pricingTable-header">
-<img class="card-img-top" src="{{ imgBebe }}" alt="Card image cap" height="200px" width="100%">
+<div *ngIf="!isLoading" class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <img  class="card-img-top" src="{{ imgPerro }}" alt="Card image cap" height="200px" width="100%">
+                    <h3 class="title">PAGO POR HOY</h3>
+                </div>
+                <div class="price-value">
+                    <span class="amount">
+                        <span class="currency">U$S</span>
+                        3
+                        <span class="opcion">/día</span>
+                    </span>
+                </div>
+                <ul class="pricing-content">
+                    <li><B>-Accedés a un sin fin de contenidos!!!!</B></li>
+                    <li><B>-Ideal si no quierés estar sujeto a una suscripción mensual</B></li>
+                    <li><B>-Abonas sólo por el día de uso</B></li>
+                    <li></li>
+                </ul>
+                <a (click)="selectPlan('d')" class="pricingTable-signup">               
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <img class="card-img-top" src="{{ imgBebe }}" alt="Card image cap" height="200px" width="100%">
                     <h3 class="title">SEMANAL</h3>
                 </div>
                 <div class="price-value">
                     <span class="amount">
                         <span class="currency">U$S</span>
-                            14
+                        14
                         <span class="opcion">/semana</span>
                     </span>
                 </div>
                 <ul class="pricing-content">
                     <li><B>-Todos los días de la semana un sin fin de contenidos!!</B></li>
                     <li><B>-Un plan familiar con contenidos para todos</B></li>
-                 <li><B>-Empezá a disfrutar ya !!!</B></li>
-                   </ul>
-                <a href="suscribir/s" class="pricingTable-signup">
+                    <li><B>-Empezá a disfrutar ya !!!</B></li>
+                </ul>
+                <a (click)="selectPlan('s')" class="pricingTable-signup">
                     <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                        <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1"  height="1">
                 </a>
             </div>
         </div>
-   
-    <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-6">
             <div class="pricingTable">
                 <div class="pricingTable-header">
-                   <img class="card-img-top" src="http://schmoesknow.com/wp-content/uploads/2014/08/2013_movies_wallpaper_by_z_designs-d5u94o3.jpg" alt="Card image cap" height="200px" width="100%">
+                    <img class="card-img-top" src="http://schmoesknow.com/wp-content/uploads/2014/08/2013_movies_wallpaper_by_z_designs-d5u94o3.jpg" alt="Card image cap" height="200px" width="100%">
                     <h3 class="title">MENSUAL</h3>
                 </div>
                 <div class="price-value">
                     <span class="amount">
                         <span class="currency">U$S</span>
-                           56
+                        56
                         <span class="opcion">/mes</span>
                     </span>
                 </div>
@@ -67,21 +67,31 @@
                     <li><B>-Despreocupate con este paquete todo el mes accedés a los mejores contenidos</B></li>
                     <li><B>-Y por una cuota mensual mínima!</B></li>
                     <li><B>No te lo pierdas!!</B></li>
-                  </ul>
-                <a href="suscribir/m" class="pricingTable-signup">
-                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                        <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
-                    </a>
+                </ul>
+                <a (click)="selectPlan('m')" class="pricingTable-signup">
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+                </a>
             </div>
         </div>
         <div class="col-md-4 col-sm-6"></div>
-        <div class="col-md-4 col-sm-6">
-            <div class="pricingTable">
-        <a href="login" class="pricingTable-signup">
-         Mas tarde
-        </a>
+            <div class="col-md-4 col-sm-6">
+                <div class="pricingTable">
+                    <a href="login" class="pricingTable-signup">
+                        Mas tarde
+                    </a>
+                </div>
+            </div>
     </div>
 </div>
-         </div>
+<div *ngIf="isLoading">
+    <div class="row">
+        <div class="col-md-4 col-sm-6"></div>
+            <div class="col-md-4 col-sm-6">
+                <div class="loading" style="background-color: blue">
+                    <img src="http://www.nasa.gov/multimedia/videogallery/ajax-loader.gif" width="50%" height="50%" /><p style="color: orange; font-size: 50px">Cargando...</p>
+                </div>
+            </div>
+    </div>
 </div>
 
