@@ -1,10 +1,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
-<div class="card">
+<div *ngIf="content.Poster!='N/A'" class="card">
+  <div *ngIf="pago === 'si'; then boton else fotito"></div>
+    <div *ngIf="content.path !== ''; then boton else fotito"></div>
+    <ng-template #boton>
   <button (click)="play()"><img class="card-img-top img-fluid" src="{{content.Poster}}" alt="Card image cap"></button>
   <div class="card-block">
     <h4 class="card-title">{{content.Title}}</h4>
     <p class="card-text">{{content.descipcion}}</p>
-    
     <button (click)="onSelected(content)" class="btn btn-primary" >Mas info <i class="ion-information-circled"></i></button>
     <button class="btn btn-primary" ceiboShare  [facebook]="{u: repoUrl}"><i class="ion-social-facebook"></i></button>
     <button class="btn btn-danger" ceiboShare  [googlePlus]="{url:repoUrl}"><i class="ion-social-googleplus-outline"></i></button>
@@ -25,37 +27,35 @@
         <button class="btn btn-primary" type="submit" id="btnEnviar">Enviar</button>
       </form>
     </ng-container>
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{content.Title}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-          <div class="modal-body">
-              <img src="{{content.Poster}}" class="img-fluid" alt="Responsive image">
-              <h6 class="modal-title" id="exampleModalLabel">Director:</h6>
-              <p>Jorge Lucas</p>
-              <h6 class="modal-title" id="exampleModalLabel">Actores:</h6>
-              <p>Mark Hamill,
-                  Harrison Ford,
-                  Carrie Fisher,
-                  Peter Cushing,
-                  Alec Guinness</p>
-              <h6 class="modal-title" id="exampleModalLabel">Sinapsis:</h6>
-              <p>{{content.Plot}}</p>
-            </div>
-          <div class="modal-footer">
-      <div id="paypal-button-container"><data id="monto" data-value="{{ monto }}">{{ monto }} U$S</data>      
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button"  class="btn btn-primary" (click)="play()">Play</button>
-            </div>  
-          
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
+</ng-template>
+<ng-template #fotito>
+      <div>
+        <a href="suscribir"><img class="card-img-top img-fluid"  src="{{content.Poster}}" alt="Card image cap"></a>
+      </div>
+      <div class="card-block">
+    <h4 class="card-title">{{content.Title}}</h4>
+    <p class="card-text">{{content.descipcion}}</p>
+    <button (click)="onSelected(content)" class="btn btn-primary" >Mas info <i class="ion-information-circled"></i></button>
+    <button class="btn btn-primary" ceiboShare  [facebook]="{u: repoUrl}"><i class="ion-social-facebook"></i></button>
+    <button class="btn btn-danger" ceiboShare  [googlePlus]="{url:repoUrl}"><i class="ion-social-googleplus-outline"></i></button>
+    <button (click)="activeshare()" class="btn btn-success" ><i class="ion-share"></i></button>
+    <ng-container *ngIf="vacio" >
+        <img (click)="addfav(content)" id="img-contenedor"  src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698427-icon-23-star-128.png" height="42" width="42" class="img-fluid" alt="Responsive image">
+    </ng-container>
+    <ng-container *ngIf='!vacio'>
+        <img (click)="removefav(content)" id="img-contenedor"  src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698904-icon-23-star-128.png" height="42" width="42" class="img-fluid" alt="Responsive image">
+    </ng-container>
+    <ng-container *ngIf="share" >
+      
+      <form #Enviar="ngForm" (ngSubmit)="enviar(Enviar)">
+        <div class="form-group" >
+            <label for="formGroupExampleInput">Para</label>
+            <input class="form-control" type="text" id="destinatario" name="destinatario" ngModel>
+        </div>
+        <button class="btn btn-primary" type="submit" id="btnEnviar">Enviar</button>
+      </form>
+    </ng-container>
+</div>
+    </ng-template>
 </div>

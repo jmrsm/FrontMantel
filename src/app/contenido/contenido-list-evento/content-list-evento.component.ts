@@ -24,6 +24,7 @@ export class ContentListEventComponent implements OnInit {
   public getContents(start_index, endIndex) {
       this.contentservice.getTodoContEnVivo(start_index, endIndex).subscribe(data => {
       this.data = data;
+      console.log(this.data);
      }); 
   }
   

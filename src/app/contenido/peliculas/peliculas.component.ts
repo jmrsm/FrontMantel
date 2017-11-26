@@ -32,7 +32,8 @@ export class PeliculasComponentUnidad implements OnInit {
   }
 
   onSelected(cont:any){
-    this.contSelected.Poster=this.content.Poster;
+    this.contSelected.Poster=cont.Poster;
+    this.router.navigate(['/contenidodetalle/'+cont.id]);
   }
   play() {
     localStorage.setItem('videoSrc', this.content.path);
