@@ -1,0 +1,110 @@
+<app-navar-super-admin></app-navar-super-admin>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-3">
+        
+        <div class="card card-inverse">
+          <img class="card-img" src="http://www.hifreevideos.com/images/preview/Vintage-Movie-Theater-Wallpaper-Movie-theater-vintage-marquee-29469.jpg" alt="Card image" height="200" >
+          <div class="card-img-overlay">
+            <h4 class="card-title text-center">Bienvenido</h4>
+          </div>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item bg-primary text-white">Opciones</li>
+          <li class="list-group-item"><a href="/altaempresa">Alta Empresa</a></li>
+          <li class="list-group-item"><a href="/altaadmin">Alta Admin</a></li>
+          <li class="list-group-item"><a href="/altaactor">Alta Actor</a></li>
+          <li class="list-group-item"><a href="/altadirector">Alta Director</a></li>
+          <li class="list-group-item"><a href="/altacategoria">Alta Categoria</a></li>
+          <li class="list-group-item"><a href="/bloqueo-contenido">Bloqueo/Desbloqueo contenido</a></li>
+          <li class="list-group-item"><a href="#">Bloqueo/Desbloqueo Cliente</a></li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-8">
+        <br>
+        <div class="container">
+            <br>
+            <h3 class="text-center">Bloquear/Desbloquear Usuario</h3>
+            <form #bloqueoUsuarioForm="ngForm" (ngSubmit)="bloqueoUsuario(bloqueoUsuarioForm)">
+                <br>
+                <br>
+                <div >
+                  <div class="text-center" >
+                      <div class="row">
+                          <div class="col-sm-12 col-lg-3">
+                              
+                          </div>
+                          <div class="form-group col-12">
+                            <label for="exampleInputEmail1">Ingrese e-mail del usuario</label>
+                            <input name="mailUsuario" type="text" class="form-control" id="e-mail"  placeholder="" ngModel>
+                            
+                            </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-12 col-lg-3">
+                              
+                            
+                          </div>
+                                            
+                      </div>  
+                  </div>
+                
+                </div>
+                <br>
+               
+                  <div class="form-group ">
+                      <label for="accion" col-12>Bloquear, o desbloquear? Esa es la cuestión..</label>
+                       <select class="custom-select" (click)="onEventClick($event.target.value)">
+
+                      <option selected>Selecciona una acción</option>
+
+                      <option value="1">Bloquear</option>
+
+                      <option value="2">Desbloquear</option>
+
+                    </select>
+                    </div>
+                  <br>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-3">
+                        
+                    </div>
+                  <div class="form-group">
+                      <div class="col-6">
+                        <input type="submit" class="btn btn-primary" value="Aceptar" data-toggle="modal" data-target="#myModal">
+
+                        <!-- Modal -->
+                        <div id="myModal" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title">Listo!</h4>
+                              </div>
+                              <div class="modal-body">
+                                <p>Sus deseos son órdenes</p>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+                      
+                  </div>
+                </div>
+              </form>
+              <br>
+              <br>
+              <br>
+        </div>  
+        
+
+      
+      </div>
+    </div>
+    </div>
