@@ -25,9 +25,9 @@ export class RegistrarComponent implements OnInit {
   constructor(private authService: AuthService,private userservice: UserService ,private router: Router) { }
 
   ngOnInit() {
-    this.authService.authState.subscribe((user) => {
+    /*this.authService.authState.subscribe((user) => {
       this.user = user;
-    });
+    });*/
   }
   registrar(form: NgForm){
     var email=form.value.email;
