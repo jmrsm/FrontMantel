@@ -42,7 +42,7 @@ export class SuscribirComponent implements OnInit {
   selectPlan(id:string) {
     this.isLoading= true;
     this.fechaActual = new Date();
-    var aux = this.fechaActual.getTime() + 15000;
+    var aux = this.fechaActual.getTime() + 25000;
     var fecha = new Date(aux);
     this.date = fecha.toISOString();  
     if (id === 'd' || id === 's' || id === 'm' || id === 'y') {

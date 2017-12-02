@@ -231,6 +231,9 @@ onEventDestacado(selectValue : string){
     console.log('comienzo: '+comienzo+' fechaInicio: '+fechaInicio+' horaInicio: '+horaInicio);
     var id = 0; 
     var precio = form.value.precio;
+    if (!precio)
+      precio=null;
+    console.log('precio: '+precio);
     url=url.replace('&token','%26token');
     this.path=url;
     poster=poster.replace('&token','%26token');

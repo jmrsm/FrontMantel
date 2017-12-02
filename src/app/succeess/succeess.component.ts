@@ -31,12 +31,19 @@ private token:string;
        console.log(this.token);
       if (this.token !== '')
         localStorage.setItem('pago' , 'si');
-        console.log(localStorage.getItem('pago'));
-        this.redirect();
+        this.suscribir(this.email, this.token);
+        
     },e => this.error = e, () => this.isLoading= false);  
-   // this.suscribirService.habilitar(this.email);
+   
    
   }
+
+suscribir(email:string, token:string) {
+   this.suscripcionService.habilitar(email, token).subscribe(p => {
+      console.log(p);
+      this.redirect();
+    }, e => this.error = e, () => this.isLoading= false);
+}
 
 	redirect() {
 		setTimeout((router: Router) => {
