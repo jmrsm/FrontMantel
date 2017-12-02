@@ -77,7 +77,9 @@ export class LoginComponent implements OnInit {
     if(JSON.parse(p['_body'])['tipoUsuario']==='No_pago') {
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('idUsuario', JSON.parse(p['_body'])['id']);
-      localStorage.setItem('tipo','No_pago');
+      // Por mientras, recordar descomentar esto y comentar la linea siguiente(o borrarla).
+      //localStorage.setItem('tipo','No_pago');
+      localStorage.setItem('tipo','Usuario');
       this.router.navigate(['/suscribir']);
     }
     
