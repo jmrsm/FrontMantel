@@ -33,7 +33,9 @@ export class ContentComponent implements OnInit {
   monto;
   idContenido = 5;
   email = '';
-  share:boolean=false;
+  share:boolean= false;
+  private pago:boolean= false;
+  private tipo:string;
   @Input() content:Content;
   contSelected:any={
     Title:'',
@@ -44,7 +46,6 @@ export class ContentComponent implements OnInit {
     Actors:'',
     Poster:''
   };
-  //https://cdn1.iconfinder.com/data/icons/hawcons/32/698904-icon-23-star-128.png
   constructor(private db: AngularFireDatabase,private router:Router,private userService:UserService,private contentService:ContentService) { 
     this.itemsRef = db.list('mail1');
     this.item = db.list('mail1').valueChanges();
@@ -52,11 +53,16 @@ export class ContentComponent implements OnInit {
 
   ngOnInit() {
     this.monto = 100;
+    this.tipo= localStorage.getItem('tipo');
+    if (this.tipo==='No_pago') {
+      this.pago= false;
+    }
+    else {
+      this.pago= true;
+    }
+    console.log(this.tipo);
     this.userService.getFavoritos().subscribe(data=>{
       this.favoritos=JSON.parse(data['_body']);
-      /*if(this.favoritos.length==0){
-        this.vacio=true;
-      }*/
       for(let item of this.favoritos){
         if(item.id==this.content.id){
           this.vacio=false;
@@ -83,69 +89,25 @@ export class ContentComponent implements OnInit {
   }
   onSelected(cont:any){
     this.contSelected.Poster=cont.Poster;
-
-   /* var value = this.monto
-    this.loadExternalScript("https://www.paypalobjects.com/api/checkout.js").then(() => {
-      paypal.Button.render({
-        env: 'sandbox',
-        style: {
-          label: 'pay',
-          size:  'small',
-          shape: 'rect', 
-          color: 'gold'
-        },
-        client: {
-          sandbox:    'ASJBxWW7q7mUFxebpmJYamjkbODQGpVgd3hyyBY7bzTd1R9YyrHcoMvoctSkxSeJCzUtS-JVGnXZ1_go',
-          production: 'https://developer.paypal.com/developer/applications/Mantel'
-        },
-        commit: true,
-        payment: function (data, actions) {
-          return actions.payment.create({
-            payment: {
-              transactions: [
-                {
-                  
-                  amount: { total: value, currency: 'USD' }
-                }
-              ]
-            }
-          })
-        },
-        onAuthorize: function(data, actions) {
-          return actions.payment.execute().then(function(payment) {
-            window.alert('Pago aprobado con éxito!');
-            var xhttp = new XMLHttpRequest();
-            var urlAndParams = "http://localhost:8080/api/usuario/comprarEspectaculoPayPerView/"
-
-            urlAndParams += "?idContenido=" + this.idContenido ;
-            urlAndParams += "&email=" + this.emailUsuario ;
-
-            console.log(urlAndParams)
-            xhttp.open("POST", urlAndParams, true);
-            xhttp.send();
-            return actions.payment.execute().then(function() {
-            window.alert('Pago realizado con exito!');
-            
-            });
-            // TODO
-          })
-        }
-      }, '#paypal-button-container');
-    });*/
     this.router.navigate(['/contenidodetalle/'+cont.id]);
   }
   play() {
-    localStorage.setItem('videoSrc', this.content.path);
-    localStorage.setItem('videoId', this.content.id);
-    localStorage.setItem('titulo', this.content.Title);
-    this.router.navigate(['/reproComun']);
+    if (this.pago) {
+      localStorage.setItem('videoSrc', this.content.path);
+      localStorage.setItem('videoId', this.content.id);
+      localStorage.setItem('titulo', this.content.Title);
+      this.router.navigate(['/reproComun']);  
+    }
+    else {
+      this.router.navigate(['/suscribir']);  
+    }
+    
   }
   removefav(content:any){
     console.log('remove');
     var body='contenidoId='+content.id+'&usuarioId='+localStorage.getItem('idUsuario')+'&esFavorito=false';
     this.contentService.changeFav(body).subscribe(data=>{
       this.router.navigate(['/login']);
-      //this.vacio=false;
     });
   }
   addfav(content:any){
@@ -153,7 +115,6 @@ export class ContentComponent implements OnInit {
     var body='contenidoId='+content.id+'&usuarioId='+localStorage.getItem('idUsuario')+'&esFavorito=true';
     this.contentService.changeFav(body).subscribe(data=>{
       this.router.navigate(['/login']);
-      //this.vacio=true;
     });
   }
 

@@ -32,7 +32,8 @@ export class ContentEventComponent implements OnInit {
   pagado:boolean;
   share:boolean=false;
   public repoUrl = 'http://d5c0426d.ngrok.io/contenidodetalle/';
-  itemsRef: AngularFireList<any>; 
+  itemsRef: AngularFireList<any>;
+  private tipo:string;
   @Input() content:Content;
   contSelected:any={
     Title:'',
@@ -42,6 +43,7 @@ export class ContentEventComponent implements OnInit {
   constructor(private router:Router,private userService:UserService,private contentService:ContentService) { }
 
   ngOnInit() { 
+    this.tipo= localStorage.getItem('tipo');
   }
   onSelected(cont:any){
     this.emailUsuario=localStorage.getItem('email');
@@ -78,11 +80,16 @@ export class ContentEventComponent implements OnInit {
       }); 
   }
   play() {
-    localStorage.setItem('videoSrc', this.content.path);
-    localStorage.setItem('videoId', this.content.id);
-    localStorage.setItem('fechaComienzo', this.content.fechaInicio);
-    localStorage.setItem('duracion', this.content.Runtime);
-    this.router.navigate(['/reproVivo']);
+    if (this.tipo==='No_pago') {
+      this.router.navigate(['/suscribir']);  
+    }
+    else {
+      localStorage.setItem('videoSrc', this.content.path);
+      localStorage.setItem('videoId', this.content.id);
+      localStorage.setItem('fechaComienzo', this.content.fechaInicio);
+      localStorage.setItem('duracion', this.content.Runtime);
+      this.router.navigate(['/reproVivo']);  
+    }
   }
 
   removefav(content:any){

@@ -16,6 +16,8 @@ export class SeriesComponentUnidad implements OnInit {
   u: string;
   public repoUrl = 'http://localhost';
   public imageUrl = '';  
+  private pago:boolean;
+  private tipo:string;
   @Input() content:Content;
   contSelected:any={
     Title:'',
@@ -29,7 +31,13 @@ export class SeriesComponentUnidad implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {
-
+    this.tipo= localStorage.getItem('tipo');
+    if (this.tipo==='No_pago') {
+      this.pago= false;
+    }
+    else {
+      this.pago= true;
+    }
   }
 
   onSelected(cont:any){
@@ -39,8 +47,13 @@ export class SeriesComponentUnidad implements OnInit {
     this.router.navigate(['/contenidodetalleserie/'+cont.id]);
   }
   play() {
-    localStorage.setItem('videoSrc', this.content.path);
-    localStorage.setItem('videoId', this.content.id);
-    this.router.navigate(['/reproComun']);
+    if (this.pago) {
+      localStorage.setItem('videoSrc', this.content.path);
+      localStorage.setItem('videoId', this.content.id);
+      this.router.navigate(['/reproComun']);
+    }
+    else {
+      this.router.navigate(['/suscribir']); 
+    }
   }
 }

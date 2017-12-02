@@ -27,9 +27,6 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,private router:Router,private userservice: UserService,public toastr: ToastsManager, vcr: ViewContainerRef,public _notificationsService: NotificationsService) { 
     this.toastr.setRootViewContainerRef(vcr);
   }
-
-  //<button (click)="open()">Open</button>
-  //<simple-notifications></simple-notifications>
   open() {
     this._notificationsService.success('Contenido Compartido', 'jmrsm@gmail.com a compartido un contenido contigo',{
       timeOut: 6000,
@@ -51,17 +48,15 @@ export class LoginComponent implements OnInit {
       
       this.router.navigate(['/admin']);
     }
-    
+    if(tipo==='No_pago'){
+      
+      this.router.navigate(['/contenido']);
+    }
   }
   login(form: NgForm){
     
-    //console.log(form.value);
-    //var user = e.target.element[0].value;
-    //var pass = e.target.element[1].value;
-    //console.log(user);
     var body='?email='+form.value.email+'&password='+form.value.password;
     this.userservice.login(body).subscribe(p => {
-      //console.log("dentro de if por 200");
     console.log(JSON.parse(p['_body'])['tipoUsuario']);
     if(JSON.parse(p['_body'])['tipoUsuario']==='Usuario'){
       localStorage.setItem( 'email' , form.value.email);
@@ -79,20 +74,18 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('tipo','Super_admin');
       this.router.navigate(['/admin']);
     }
+    if(JSON.parse(p['_body'])['tipoUsuario']==='No_pago') {
+      localStorage.setItem('tipo','No_pago');
+      this.router.navigate(['/suscribir']);
+    }
     
     },e => this.error = e, () => this.isLoading = false);
-    /*if(form.value.email=='admin@admin'){
-      localStorage.setItem( 'email' , form.value.email);
-      localStorage.setItem('tipo','Super_admin');
-      this.router.navigate(['admin']);
-    }*/
     
   }
   callGoogle(){
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
       this.user = user;
-      //console.log(this.user);
     });
   }
 }

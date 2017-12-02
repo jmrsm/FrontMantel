@@ -83,11 +83,23 @@ export class ContenidoComunComponent implements OnInit {
     
     this.persistirCurrentTime();
   }
-      onPlayerReady(api: VgAPI) {
-        this.api = api;
-        this.fsAPI = this.api.fsAPI;
-        this.nativeFs = this.fsAPI.nativeFullscreen;
-    }
+  onPlayerReady(api: VgAPI) {
+    this.api = api;
+    this.fsAPI = this.api.fsAPI;
+    this.nativeFs = this.fsAPI.nativeFullscreen;
+    this.api.getDefaultMedia().subscriptions.ended.subscribe(this.rebobinar.bind(this));    
+  }
+
+  rebobinar() {
+    this.api.getDefaultMedia().currentTime= 0;
+    this.currentTimeVideo= '1';
+    this.contentservice.setTimeCurrent(this.idUsuario, this.idVideo, this.currentTimeVideo).subscribe(p => {},
+        error => {
+          if (error.status !== 200)
+            console.log(<any>error);
+        }
+      );
+  }
   
   persistirCurrentTime() {
     if (this.currentTimeVideo !== null && this.idUsuario !== null && this.idVideo !== null) {

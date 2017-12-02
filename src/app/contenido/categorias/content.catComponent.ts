@@ -17,6 +17,7 @@ export class ContentCatComponent implements OnInit {
   public repoUrl = 'http://localhost';
   public imageUrl = '';  
   public pago:string;
+  private tipo:string;
   @Input() content:Content;
   contSelected:any={
     Title:'',
@@ -31,6 +32,7 @@ export class ContentCatComponent implements OnInit {
 
   ngOnInit() {
     this.pago = localStorage.getItem('pago');
+    this.tipo= localStorage.getItem('tipo');
     console.log(this.pago);
   }
 
@@ -40,9 +42,14 @@ export class ContentCatComponent implements OnInit {
     this.router.navigate(['/contenidodetalle/'+cont.id]);
   }
   play() {
-    localStorage.setItem('videoSrc', this.content.path);
-    localStorage.setItem('videoId', this.content.id);
-    this.router.navigate(['/reproComun']);
+    if (this.tipo==='No_pago') {
+      this.router.navigate(['/suscribir']);  
+    }
+    else {
+      localStorage.setItem('videoSrc', this.content.path);
+      localStorage.setItem('videoId', this.content.id);
+      this.router.navigate(['/reproComun']);
+    }
   }
 }
 

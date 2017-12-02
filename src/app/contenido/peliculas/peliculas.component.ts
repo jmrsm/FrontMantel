@@ -16,6 +16,8 @@ export class PeliculasComponentUnidad implements OnInit {
   u: string;
   public repoUrl = 'http://localhost';
   public imageUrl = '';  
+  private pago:boolean= false;
+  private tipo:string;
   @Input() content:Content;
   contSelected:any={
     Title:'',
@@ -30,6 +32,13 @@ export class PeliculasComponentUnidad implements OnInit {
 
   ngOnInit() {
     localStorage.setItem('origen','p');
+    this.tipo= localStorage.getItem('tipo');
+    if (this.tipo==='No_pago') {
+      this.pago= false;
+    }
+    else {
+      this.pago= true;
+    }
   }
 
   onSelected(cont:any){
@@ -37,8 +46,13 @@ export class PeliculasComponentUnidad implements OnInit {
     this.router.navigate(['/contenidodetalle/'+cont.id]);
   }
   play() {
-    localStorage.setItem('videoSrc', this.content.path);
-    localStorage.setItem('videoId', this.content.id);
-    this.router.navigate(['/reproComun']);
+    if (this.pago) {
+      localStorage.setItem('videoSrc', this.content.path);
+      localStorage.setItem('videoId', this.content.id);
+      this.router.navigate(['/reproComun']);
+    }
+    else {
+      this.router.navigate(['/reproComun']); 
+    }
   }
 }
