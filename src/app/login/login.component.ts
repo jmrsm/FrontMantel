@@ -5,6 +5,9 @@ import {UserService} from '../services/user.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
+import { AuthService } from 'angular4-social-login';
+import { SocialUser } from 'angular4-social-login';
+import { GoogleLoginProvider } from 'angular4-social-login';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,7 +23,8 @@ export class LoginComponent implements OnInit {
   isLoading: boolean = true;
   msj: string = '';
   link: string = '';
-  constructor(private router:Router,private userservice: UserService,public toastr: ToastsManager, vcr: ViewContainerRef,public _notificationsService: NotificationsService) { 
+  user: SocialUser;
+  constructor(private authService: AuthService,private router:Router,private userservice: UserService,public toastr: ToastsManager, vcr: ViewContainerRef,public _notificationsService: NotificationsService) { 
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -34,7 +38,7 @@ export class LoginComponent implements OnInit {
       clickToClose: true});
   }
   ngOnInit() {
-    ;
+    
     var tipo= localStorage.getItem('tipo');
     if(tipo==='Usuario'){
       this.router.navigate(['/contenido']);
@@ -84,5 +88,11 @@ export class LoginComponent implements OnInit {
     }*/
     
   }
-
+  callGoogle(){
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      //console.log(this.user);
+    });
+  }
 }

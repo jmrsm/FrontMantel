@@ -21,6 +21,7 @@ export class ContenidoListComponent implements OnInit {
     primero : any[]=[];
     aux:boolean=false;
     cargo:boolean=false;
+    posterprimero:string='';
   constructor(private contentservice:ContentService, private router:Router,private renderer: Renderer2) { }
 
   ngOnInit() {
@@ -34,6 +35,7 @@ export class ContenidoListComponent implements OnInit {
         //el primer contenido
         if(entry.esDestacado==true && this.aux==false){
           this.primero.push(entry);
+          this.posterprimero=entry.Poster;
         }
         if(entry.esDestacado==true && this.aux==true){
           this.destacado.push(entry);
