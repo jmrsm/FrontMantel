@@ -83,8 +83,7 @@ setranking(Ranking:NgForm){
 verificarPago(idcontent, emailUsuario) {
   this.contentservice.verificarPago(idcontent, emailUsuario).subscribe(
       result => {
-        this.pagado = result;
-        if (!this.pagado) {
+        if (!result) {
           this.paypal();  
         }
         
@@ -147,13 +146,17 @@ private paypal() {
 
   private showPaypalBoton() {
     if (this.esPayperview && this.pagado) {
+      console.log('1');
       return false;
+      
     }
     else if (!this.esPayperview) {
+     console.log('2');
       return false;
     }
     else {
       this.verificarPago(this.idcontent, this.emailUsuario);
+      console.log('3');
       return true;
     }
     

@@ -1,12 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {VgAPI, VgFullscreenAPI} from 'videogular2/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {SimpleTimer} from 'ng2-simple-timer';
-import {Content} from '../../models/content';
-import {ContentService} from '../../services/content.service';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { VgAPI, VgFullscreenAPI } from 'videogular2/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SimpleTimer } from 'ng2-simple-timer';
+import { Content } from '../../models/content';
+import { ContentService } from '../../services/content.service';
+import { UserService } from '../../services/user.service';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { AngularFireDatabase,AngularFireObject,AngularFireList } from 'angularfire2/database';
 import { DatePipe } from '@angular/common';
 
@@ -14,7 +15,12 @@ import { DatePipe } from '@angular/common';
   selector: 'app-repro-vivo',
   templateUrl: './contenido-vivo.component.html',
   styleUrls: ['./contenido-vivo.component.css'],
-  providers: [ContentService, DatePipe]
+  providers: [
+    ContentService, 
+    DatePipe,
+    AngularFireDatabase,
+    UserService
+  ]
 })
 export class ContenidoVivoComponent implements OnInit {
   //------------------------Contador------------------------//
@@ -31,6 +37,9 @@ export class ContenidoVivoComponent implements OnInit {
   //--------------------------Chat--------------------------//
   itemsRef: AngularFireList<any>;  
   item: Observable<any[]>;
+  nick:string;
+  todo:string='Todos';
+  destinatario:string;
   //--------------------------------------------------------//
  //-------------------------Datos de reproductor-------------------------//
   sources: Array<Object>;
@@ -70,9 +79,10 @@ export class ContenidoVivoComponent implements OnInit {
     private db: AngularFireDatabase,
     private datePipe: DatePipe
   ) {
-    this.itemsRef = db.list('chat1');
-    this.item = db.list('chat1').valueChanges();
-  
+    this.itemsRef = db.list('prueba12');
+    this.item = db.list('prueba12').valueChanges();
+    console.log(this.item);
+    this.nick=localStorage.getItem('email');
   }
 
   ngOnInit() {
@@ -86,9 +96,8 @@ export class ContenidoVivoComponent implements OnInit {
       this.fechaInicio = +this.fechaInicioString;
       this.fechaInicioString = this.datePipe.transform(new Date(this.fechaInicio), 'MM/dd/yyyy HH:mm:ss');
       this.fechaInicioDate = new Date(this.fechaInicioString);
-
+      console.log(this.fechaInicioDate);
       this.st.newTimer('1sec', 1);    
-  
       this.cargarFechaServidor();
     });
 
@@ -129,12 +138,7 @@ export class ContenidoVivoComponent implements OnInit {
     this.fechaServEnSegundos = this.convertirFechaEnSegundos(this.fechaServidorString);
     this.fechaServEnSegundos = this.fechaServEnSegundos;
     this.fechaInicioEnSegundos = this.convertirFechaEnSegundos(this.fechaInicioString);
-    //var fechaFinalVideo=+this.fechaInicioEnSegundos + +this.duracion;
-    /*if(fechaFinalVideo < this.fechaServEnSegundos) {     
-      this.termino=true;
-      console.log(3);
-    }
-    else*/ if (this.fechaInicioEnSegundos > this.fechaServEnSegundos) {
+    if (this.fechaInicioEnSegundos > this.fechaServEnSegundos) {
       this.iniciarEspera();
     }
     else {
@@ -202,8 +206,16 @@ export class ContenidoVivoComponent implements OnInit {
    enviar(form: NgForm){
     var mensaje=form.value.mensaje;
     var nombre=form.value.nombre;
-    console.log(mensaje+' '+nombre);
-    this.itemsRef.push({name: nombre,message:mensaje});
+    var d=form.value.destinatario;
+    var destinatario= d.split(";");
+    if(destinatario==''){
+      this.itemsRef.push({name: this.nick,message:mensaje,addressee: this.todo});    
+    }else{
+      for(let c of destinatario){
+        
+          this.itemsRef.push({name: this.nick,message:mensaje,addressee: c});  
+      }  
+    }
   }
 
 //------------------------Se convierte una fecha(string) con el siguiente formato "MM/dd/yyyy HH:mm:ss" a segundos
