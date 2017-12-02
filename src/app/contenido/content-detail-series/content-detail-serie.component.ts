@@ -9,12 +9,12 @@ import { DatePipe } from '@angular/common';
 declare let paypal: any;
 
 @Component({
-  selector: 'app-content-detail',
-  templateUrl: './content-detail.component.html',
-  styleUrls: ['./content-detail.component.css'],
+  selector: 'app-content-detail-serie',
+  templateUrl: './content-detail-serie.component.html',
+  styleUrls: ['./content-detail-serie.component.css'],
   providers:[UserService, DatePipe]
 })
-export class ContentDetailComponent implements OnInit {
+export class ContentDetailSerieComponent implements OnInit {
   idcontent:number;
   idUser:string;
   contendio:any={};
@@ -33,6 +33,10 @@ export class ContentDetailComponent implements OnInit {
   fechaInicio:number;
   fechaInicioString:string;
   origen:string;
+  values:Array<any>;
+  temporadas:Array<any>;
+  dataVal:any;
+  temporadaElegida;
 
   constructor(private contentservice:ContentService,
     private _route: ActivatedRoute,
@@ -62,6 +66,23 @@ export class ContentDetailComponent implements OnInit {
         this.ranking=this.contendio.imdbRating;
         this.fechaInicioString = this.datePipe.transform(new Date(this.fechaInicio), 'dd/MM/yy HH:mm:ss');
         
+      });
+      this.contentservice.buscarEpisodiosSerie(this.idcontent).subscribe(data=>{
+        this.dataVal= data;
+        let valuesAux= new Array<any>();
+        for (let ep of this.dataVal) {
+          valuesAux.push(ep);
+        }
+        this.values= valuesAux;
+
+        let aux= new Array<any>();
+        for (let temp of this.dataVal) {
+          let tempa= temp.temporadaN;
+          if (aux.indexOf(tempa) == -1){
+            aux.push(tempa);
+          }
+        }
+        this.temporadas= aux;
       });
     })
     
@@ -200,5 +221,10 @@ private paypal() {
   atras() {
     var popup = document.getElementById("myPopup");
     popup.classList.toggle("show");
+  }
+
+  elegirT(value: any){
+    this.temporadaElegida= +value;
+    console.log(this.temporadaElegida);
   }
 }

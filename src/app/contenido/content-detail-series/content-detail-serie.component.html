@@ -1,0 +1,114 @@
+<app-navar-user></app-navar-user>
+<div class="container" style="margin:20px;">
+    <div class=" col-sm-12 row">
+        <div class="col-sm-8">
+            <div class="col-sm-12 thumbnail text-left-top" >
+                <div class="carousel slide" data-ride="carousel">
+                    <div class="carousel-item active">
+                        <img style="width: 100%" class="img-fluid" alt="Responsive image" src="{{poster}}" >
+                    </div>
+                </div>
+                <div class="caption">
+                    <h4><strong>{{title}}</strong></h4>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h6 class="modal-title" id="exampleModalLabel">Actores:</h6>
+                            <ng-container *ngFor="let a of actor" >
+                                <p >{{a.nombreCompleto}}</p>
+                            </ng-container>
+                            <br>
+                            <br>
+                            <br>
+                            <h6 class="modal-title" id="exampleModalLabel">Descripcion:</h6>
+                            <h6>{{plot}}</h6>
+                        </div>
+                        <div class="col-sm-8"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4" style="color: white">
+            <h6 class="modal-title " id="exampleModalLabel">Ranking:</h6>
+            <span class="badge badge-warning"><h2>{{ranking}}</h2></span>
+            <form #Ranking="ngForm" (ngSubmit)="setranking(Ranking)">
+                <div class="form-group">
+                    <label for="exampleSelect1">Calificar</label>
+                    <select name="valor" class="form-control" id="exampleSelect1" ngModel>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="form-group">
+            <label for="exampleSelect1" style="color: white;">Temporadas</label>
+            <select class="form-control" [ngModel]="temporadaN" #e (change)="elegirT(e.value)">
+                <option *ngFor='let temp of temporadas' [value]="temp">
+                    {{ temp }}
+                </option>
+            </select>
+        </div>       
+    </div>
+    <div class="col-3"></div>
+</div>
+<div class="container-fluid" id="episodios">
+    <div id="carouselExample" class="carousel slide" data-ride="carousel" style="background-color: #263238" data-interval="900000">
+        <div class="carousel-inner row w-100 mx-auto" role="listbox">
+            <div class="carousel-item col-md-2 active">
+                <div class="col-sm-12 thumbnail text-center" >
+                    <img class="img-fluid mx-auto d-block" src="./assets/fondo2.png" alt="slide 2">
+                </div>
+            </div>
+            <div *ngFor='let val of values; let i= index' class="carousel-item col-md-2">
+                <div *ngIf="val.temporadaN === temporadaElegida" class="col-sm-12 thumbnail text-center" >
+                    <a href='reproSeries/{{idcontent}}@{{i}}'>
+                        <img class="img-fluid mx-auto d-block" src="{{poster}}" alt="slide 2">
+                        <div class="caption">
+                            <h1>{{val.capitulo}}</h1>
+                            <h1>{{i}}</h1>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+            <i class="fa fa-chevron-left fa-lg text-muted"></i>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+            <i class="fa fa-chevron-right fa-lg text-muted"></i>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<div class="row"> 
+    <div class="col-12">
+        <form #AltaComentario="ngForm" (ngSubmit)="altacomentario(AltaComentario)">
+            <br>
+            <h3 class="text-center">Comentar</h3>
+            <br>
+            <br>
+            <div class="row">
+                <div class="form-group col-12">
+                    <label for="exampleTextarea">Escribi, pero ojo con los spoiler:</label>
+                    <textarea name="comentario" class="form-control" id="exampleTextarea" rows="3" ngModel></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="form-group col-9"></div>  
+                <div class="col-6">
+                    <input type="submit" class="btn btn-primary" value="Comentar">
+                </div>
+            </div>
+        </form>
+    </div> 
+</div>

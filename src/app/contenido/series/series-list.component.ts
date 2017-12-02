@@ -7,14 +7,16 @@ import { Router , ActivatedRoute, Params} from '@angular/router';
 @Component({
   selector: 'app-list-series',
   templateUrl: './series-list.component.html',
-  styles: []
+  styleUrls: ['./series-list.component.css']
 })
 export class SeriesListComponent implements OnInit {
-    contents:Content[]=[];
-    data: any = {};
-    start_index;
-    end_index;
-    size_page = 10;
+    private contents:Content[]=[];
+    private data: any = {};
+    private start_index;
+    private end_index;
+    private size_page = 10;
+    private links:any;
+    private iniciob:boolean;
    
   constructor(
     private contentservice:ContentService,
@@ -25,36 +27,56 @@ export class SeriesListComponent implements OnInit {
 
   ngOnInit() {
     this.inicio();
+    this.iniciob=true;
   }
 
   public getContents(start_index, endIndex) {
       this.contentservice.getSeries(start_index, endIndex).subscribe(data => {
-      this.data = data;
-      console.log(data);
+      var aux= data;
+      this.links=aux;
+      this.contents = this.links.content;
+      console.log(this.links.content);
     });
   }
   
   anterior() {
       this.end_index = this.end_index - this.size_page;
       this.start_index = this.start_index - this.size_page;
+      if (this.start_index===0) {
+        this.iniciob=true;
+      }
+      else {
+        this.iniciob=false;
+      }
       this.getContents(this.start_index, this.end_index);
-      this._router.navigate(['/series']);
   }
   
   inicio() {
     this.start_index = 0;
     this.end_index = this.size_page;
+    this.iniciob=true;
     this.getContents(this.start_index, this.end_index);
   }
   
   siguiente() {
       this.start_index = this.start_index + this.size_page;
+      if (this.start_index===0) {
+        this.iniciob=true;
+      }
+      else {
+        this.iniciob=false;
+      }
       this.end_index = this.end_index + this.size_page;
       this.getContents(this.start_index, this.end_index);
-      this._router.navigate(['/series']);
+      console.log(this.start_index);
   }
 
   pagAnterior() {
       this._router.navigate(['/contenido']);
+  }
+
+  atras() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
   }
 }

@@ -1,6 +1,5 @@
 <div *ngIf="content.Poster !== 'N/A'">
   <div class="card">
-    <div *ngIf="pago === 'si'; then boton else fotito"></div>
     <div *ngIf="content.path !== ''; then boton else fotito"></div>
     <ng-template #boton>
       <button (click)="play()"><img class="card-img-top img-fluid"  src="{{content.Poster}}" alt="Card image cap"></button>

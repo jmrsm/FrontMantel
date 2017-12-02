@@ -29,6 +29,7 @@ export class PeliculasComponentUnidad implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {
+    localStorage.setItem('origen','p');
   }
 
   onSelected(cont:any){

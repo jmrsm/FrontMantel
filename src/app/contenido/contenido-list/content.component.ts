@@ -64,6 +64,7 @@ export class ContentComponent implements OnInit {
       }
     });
    this.repoUrl=this.repoUrl+this.content.id;
+   localStorage.setItem('origen','cont');
   }
   openCheckout() {
     var handler = (<any>window).StripeCheckout.configure({

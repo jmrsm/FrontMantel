@@ -36,6 +36,7 @@ export class ContentCatComponent implements OnInit {
 
   onSelected(cont:any){
     this.contSelected.Poster=cont.Poster;
+    localStorage.setItem('origen','cat');
     this.router.navigate(['/contenidodetalle/'+cont.id]);
   }
   play() {

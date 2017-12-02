@@ -134,4 +134,8 @@ export class ContentService {
   buscarevento(body:String){
     return this.httpc.get(this.url+'api/usuario/listarEventosConBusqueda'+body).map((res: Response) => res);
   }
+
+  buscarEpisodiosSerie(idSerie){
+    return this.httpc.get(this.url+'api/usuario/obtenerEpisodios?serieId='+idSerie).map((res: Response) => res);
+  }
 }

@@ -7,7 +7,7 @@ import { Router , ActivatedRoute, Params} from '@angular/router';
 @Component({
   selector: 'app-contenido-categoria',
   templateUrl: './contenido-categoria.component.html',
-  styles: []
+  styleUrls: ['./contenido-categoria.component.css']
 })
 export class ContenidoCategoriaComponent implements OnInit {
     contents:Content[]=[];
@@ -60,5 +60,10 @@ export class ContenidoCategoriaComponent implements OnInit {
 
   pagAnterior() {
       this._router.navigate(['/contenido']);
+  }
+
+  atras() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
   }
 }

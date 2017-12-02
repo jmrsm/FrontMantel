@@ -7,7 +7,7 @@ import { Router , ActivatedRoute, Params} from '@angular/router';
 @Component({
   selector: 'app-list-peliculas',
   templateUrl: './peliculas-list.component.html',
-  styles: []
+  styleUrls: ['./peliculas-list.component.css']
 })
 export class PeliculasListComponent implements OnInit {
     contents:Content[]=[];
@@ -15,6 +15,7 @@ export class PeliculasListComponent implements OnInit {
     start_index;
     end_index;
     size_page = 10;
+    private iniciob:boolean;
    
   constructor(
     private contentservice:ContentService,
@@ -25,30 +26,43 @@ export class PeliculasListComponent implements OnInit {
 
   ngOnInit() {
     this.inicio();
+    this.iniciob=true;
   }
 
   public getContents(start_index, endIndex) {
       this.contentservice.getData(start_index, endIndex).subscribe(data => {
       this.data = data;
-      console.log(data);
     });
   }
   
   anterior() {
       this.end_index = this.end_index - this.size_page;
       this.start_index = this.start_index - this.size_page;
+      if (this.start_index===0) {
+        this.iniciob=true;
+      }
+      else {
+        this.iniciob=false;
+      }
       this.getContents(this.start_index, this.end_index);
       this._router.navigate(['/peliculas']);
   }
   
   inicio() {
     this.start_index = 0;
+    this.iniciob=true;
     this.end_index = this.size_page;
     this.getContents(this.start_index, this.end_index);
   }
   
   siguiente() {
       this.start_index = this.start_index + this.size_page;
+      if (this.start_index===0) {
+        this.iniciob=true;
+      }
+      else {
+        this.iniciob=false;
+      }
       this.end_index = this.end_index + this.size_page;
       this.getContents(this.start_index, this.end_index);
       this._router.navigate(['/peliculas']);
@@ -56,5 +70,10 @@ export class PeliculasListComponent implements OnInit {
 
   pagAnterior() {
       this._router.navigate(['/contenido']);
+  }
+
+  atras() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
   }
 }

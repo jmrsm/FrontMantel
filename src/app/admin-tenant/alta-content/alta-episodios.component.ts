@@ -101,7 +101,6 @@ export class AltaEpisodioComponent implements OnInit {
 
   callType(value: any){
     this.idSerie= +value;
-    console.log(this.idSerie);
   }
 
   sendservicealta(url:any, form: NgForm){

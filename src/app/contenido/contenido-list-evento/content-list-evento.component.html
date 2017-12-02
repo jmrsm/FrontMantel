@@ -1,3 +1,13 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination" >
+        <li (click)="pagAnterior()" class="page-item">
+          <a class="popup" (mouseover)="atras()" style="margin: 15px;padding-right: 25px">
+            <span class="popuptext" id="myPopup" style="color: white">Regresar a contenido</span>
+            <img src="./assets/flecha2.jpg">
+          </a>
+        </li>
+    </ul>
+</nav>
 <div class="container" style="background-color: #ffff;">
     <div class="card-columns">
       <app-content-evento *ngFor="let content of data.content" [content]="content"></app-content-evento>
@@ -8,9 +18,9 @@
         <div class="form-group col-6">
         <nav aria-label="Page navigation example">
           <ul class="pagination">
-            <li (click)="anterior()" class="page-item"><a class="page-link">Pagina Anterior</a></li>
-            <li (click)="inicio()" class="page-item"><a class="page-link">Pagina Inicio</a></li>
-            <li (click)="siguiente()" class="page-item"><a class="page-link">Pagina Siguiente</a></li>
+            <li *ngIf="!iniciob" (click)="anterior()" class="page-item"><a><img src="./assets/leftArrow.png"></a></li>
+            <li *ngIf="!iniciob" (click)="inicio()" class="page-item"><a><img src="./assets/Inicio.png"></a></li>
+            <li (click)="siguiente()" class="page-item"><a><img src="./assets/rightArrow.png"></a></li>
           </ul>
         </nav>
       </div>

@@ -29,11 +29,14 @@ export class SeriesComponentUnidad implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {
+
   }
 
   onSelected(cont:any){
     this.contSelected.Poster=cont.Poster;
-    this.router.navigate(['/contenidodetalle/'+cont.id]);
+    localStorage.removeItem('origen');
+    localStorage.setItem('origen','s');
+    this.router.navigate(['/contenidodetalleserie/'+cont.id]);
   }
   play() {
     localStorage.setItem('videoSrc', this.content.path);
