@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class ActorService {
-  //private url:string= 'http://localhost:8080/';
+  //private url:string= 'http://174.138.54.167:8080/';
   private url:string= '174.138.54.167:8080/';
   constructor(private http:Http) { }
 

@@ -14,6 +14,7 @@ import { CeiboShare } from 'ng2-social-share';
 })
 export class SeriesComponentUnidad implements OnInit {
   u: string;
+  public repoUrl = 'http://174.138.54.167';
   public imageUrl = '';  
   private pago:boolean;
   private tipo:string;
@@ -46,13 +47,13 @@ export class SeriesComponentUnidad implements OnInit {
     this.router.navigate(['/contenidodetalleserie/'+cont.id]);
   }
   play() {
-    /*if (this.pago) {*/
+    if (this.pago) {
       localStorage.setItem('videoSrc', this.content.path);
       localStorage.setItem('videoId', this.content.id);
       this.router.navigate(['/reproComun']);
-    /*}
+    }
     else {
       this.router.navigate(['/suscribir']); 
-    }*/
+    }
   }
 }

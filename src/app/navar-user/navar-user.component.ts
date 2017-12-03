@@ -143,8 +143,8 @@ app.get('/createplan', function(req, res){
                 "currency": "USD",
                 "value": "1"
             },
-            "cancel_url": "http://localhost:3000/cancel",
-            "return_url": "http://localhost:3000/processagreement",
+            "cancel_url": "http://174.138.54.167:3000/cancel",
+            "return_url": "http://174.138.54.167:3000/processagreement",
             "max_fail_attempts": "0",
             "auto_bill_amount": "YES",
             "initial_fail_amount_action": "CONTINUE"
@@ -282,7 +282,7 @@ app.get('/processagreement', function(req, res){
         onAuthorize: function(data, actions) {
           return actions.payment.execute().then(function(payment) {
             var xhttp = new XMLHttpRequest();
-            var urlAndParams = "http://localhost:8080/api/usuario/comprarContenidoPayPerView/"
+            var urlAndParams = "http://174.138.54.167:8080/api/usuario/comprarContenidoPayPerView/"
 
             urlAndParams += "?idContenido=" + idContenido;
             urlAndParams += "&email=" + emailUsuario;

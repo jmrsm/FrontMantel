@@ -14,6 +14,7 @@ import { CeiboShare } from 'ng2-social-share';
 })
 export class ContentCatComponent implements OnInit {
   u: string;
+  public repoUrl = 'http://http://174.138.54.167';
   public imageUrl = '';  
   public pago:string;
   private tipo:string;
