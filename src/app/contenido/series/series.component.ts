@@ -6,10 +6,9 @@ import { CeiboShare } from 'ng2-social-share';
   selector: 'app-serie',
   templateUrl: './series.component.html',
   styles: [ ` 
-  
   .card-img-top{
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    height: 200px;
 }`],
 })
 export class SeriesComponentUnidad implements OnInit {

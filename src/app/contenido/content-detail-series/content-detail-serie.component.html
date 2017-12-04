@@ -1,5 +1,5 @@
 <app-navar-user></app-navar-user>
-<div class="container" style="margin:20px;">
+<div class="container">
     <div class=" col-sm-12 row">
         <div class="col-sm-8">
             <div class="col-sm-12 thumbnail text-left-top" >
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4" style="color: white">
+        <div class="col-sm-4">
             <h6 class="modal-title " id="exampleModalLabel">Ranking:</h6>
             <span class="badge badge-warning"><h2>{{ranking}}</h2></span>
             <form #Ranking="ngForm" (ngSubmit)="setranking(Ranking)">
@@ -45,12 +45,13 @@
             </form>
         </div>
     </div>
-</div>
+    <br>
+    <br>
 <div class="row">
     <div class="col-3"></div>
     <div class="col-6">
         <div class="form-group">
-            <label for="exampleSelect1" style="color: white;">Temporadas</label>
+            <h4 for="exampleSelect1">Temporadas</h4>
             <select class="form-control" [ngModel]="temporadaN" #e (change)="elegirT(e.value)">
                 <option *ngFor='let temp of temporadas' [value]="temp">
                     {{ temp }}
@@ -60,36 +61,25 @@
     </div>
     <div class="col-3"></div>
 </div>
-<div class="container-fluid" id="episodios">
-    <div id="carouselExample" class="carousel slide" data-ride="carousel" style="background-color: #263238" data-interval="900000">
-        <div class="carousel-inner row w-100 mx-auto" role="listbox">
-            <div class="carousel-item col-md-2 active">
-                <div class="col-sm-12 thumbnail text-center" >
-                    <img class="img-fluid mx-auto d-block" src="./assets/fondo2.png" alt="slide 2">
-                </div>
-            </div>
-            <div *ngFor='let val of values; let i= index' class="carousel-item col-md-2">
-                <div *ngIf="val.temporadaN === temporadaElegida" class="col-sm-12 thumbnail text-center" >
-                    <a href='reproSeries/{{idcontent}}@{{i}}'>
+<h2>Episodios</h2>
+    <ngx-carousel [inputs]="carouselTileTwo" (carouselLoad)="carouselTileTwoLoad()">
+        <ngx-tile NgxCarouselItem *ngFor="let tm of temporadasMostrar; let i = index;">
+            <div class="wBg">
+                <div class="tile" >
+                    <div class="col-sm-12 thumbnail text-center" >
+                    <a href='reproSeries/{{idcontent}}@{{tm.id}}'>
                         <img class="img-fluid mx-auto d-block" src="{{poster}}" alt="slide 2">
                         <div class="caption">
-                            <h1>{{val.capitulo}}</h1>
-                            <h1>{{i}}</h1>
+                            <h1>{{tm.capitulo}}</h1>
                         </div>
                     </a>
                 </div>
+                </div>
             </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-            <i class="fa fa-chevron-left fa-lg text-muted"></i>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
-            <i class="fa fa-chevron-right fa-lg text-muted"></i>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-</div>
+        </ngx-tile>
+        <button NgxCarouselPrev class="leftRs">&lt;</button>
+        <button NgxCarouselNext class="rightRs">&gt;</button>
+    </ngx-carousel>
 <div class="row"> 
     <div class="col-12">
         <form #AltaComentario="ngForm" (ngSubmit)="altacomentario(AltaComentario)">
@@ -111,4 +101,5 @@
             </div>
         </form>
     </div> 
+</div>
 </div>

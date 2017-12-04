@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { NgForm } from '@angular/forms';  
 import { Router , ActivatedRoute, Params} from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { NgxCarousel } from 'ngx-carousel';
 
 declare let paypal: any;
 
@@ -35,8 +36,13 @@ export class ContentDetailSerieComponent implements OnInit {
   origen:string;
   values:Array<any>;
   temporadas:Array<any>;
+  temporadasMostrar:Array<any>;
   dataVal:any;
   temporadaElegida;
+  public carouselTileTwoItems: Array<any> = [];
+  public carouselTileTwo: NgxCarousel;
+  private indexT:number= -1;
+
 
   constructor(private contentservice:ContentService,
     private _route: ActivatedRoute,
@@ -86,7 +92,17 @@ export class ContentDetailSerieComponent implements OnInit {
       });
     })
     
-  
+  this.carouselTileTwo = {
+      grid: { xs: 1, sm: 3, md: 4, lg: 6, all: 230 },
+      speed: 600,
+      interval: 3000,
+      point: {
+        visible: true
+      },
+      load: 2,
+      touch: true
+    };
+
         
   }
 altacomentario(comentario:NgForm){
@@ -225,6 +241,13 @@ private paypal() {
 
   elegirT(value: any){
     this.temporadaElegida= +value;
-    console.log(this.temporadaElegida);
+    this.temporadasMostrar= [];
+    for (let t of this.values) {
+      this.indexT++;
+      if (t.temporadaN===this.temporadaElegida) {
+        t.id= this.indexT;
+        this.temporadasMostrar.push(t);
+      }
+    }
   }
 }
