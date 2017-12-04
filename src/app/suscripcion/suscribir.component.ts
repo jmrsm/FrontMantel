@@ -56,15 +56,15 @@ export class SuscribirComponent implements OnInit {
 
     	var bodyDiario='{\"name\":\"Contrato Diario\",\"description\": \"Acuerdo de pago para el servicio' +
 	    ' Mantel por un dia, esta suscripcion se renovara automaticamente.\", \"start_date\": \"' + fecha + '\",' +
- 	    '\"payer\": {\"payment_method\": \"paypal\"}, \"plan\": {\"id\":\"P-8AC4097338430293A4XFZCGQ\" } }';
+ 	    '\"payer\": {\"payment_method\": \"paypal\"}, \"plan\": {\"id\":\"P-7PB07288KJ530770TD33LEVA\" } }';
 
 	    var bodySemanal='{\"name\":\"Contrato Semanal\",\"description\": \"Acuerdo de pago para el servicio' +
  	    ' Mantel por una semana, esta suscripcion se renovara automaticamente.\", \"start_date\": \"' + fecha + '\",' +
- 	    '\"payer\": {\"payment_method\": \"paypal\"}, \"plan\": {\"id\":\"P-68661879MW807161T4XTGNUY\" } }';
+ 	    '\"payer\": {\"payment_method\": \"paypal\"}, \"plan\": {\"id\":\"P-6SN54481EE2189130D32PETI\" } }';
 
  	    var bodyMensual='{\"name\":\"Contrato Mensual\",\"description\": \"Acuerdo de pago para el servicio' +
  	    ' Mantel por un mes, esta suscripcion se renovara automaticamente.\", \"start_date\": \"' + fecha + '\",' +
- 	    '\"payer\": {\"payment_method\": \"paypal\"}, \"plan\": {\"id\":\"P-289098362032840104YRNYBY\" } }';
+ 	    '\"payer\": {\"payment_method\": \"paypal\"}, \"plan\": {\"id\":\"P-3V715811JT3940004D3WYPQQ\" } }';
 
 	    var bodyAnual='{\"name\":\"Contrato Anual\",\"description\": \"Acuerdo de pago para el servicio' +
  	    ' Mantel por un año, esta suscripcion se renovara automaticamente.\", \"start_date\": \"' + fecha + '\",' +
