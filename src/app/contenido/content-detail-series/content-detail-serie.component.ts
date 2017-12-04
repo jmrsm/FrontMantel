@@ -148,7 +148,7 @@ private paypal() {
         onAuthorize: function(data, actions) {
           return actions.payment.execute().then(function(payment) {
             var xhttp = new XMLHttpRequest();
-            var urlAndParams = "http://localhost:8080/api/usuario/comprarContenidoPayPerView/"
+            var urlAndParams = "http://174.138.54.167:8080/api/usuario/comprarContenidoPayPerView/"
 
             urlAndParams += "?idContenido=" + idContenido;
             urlAndParams += "&email=" + emailUsuario;
