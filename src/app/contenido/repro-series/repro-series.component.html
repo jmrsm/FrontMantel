@@ -26,11 +26,22 @@
         </video>
     </vg-player>
 
-    <ul>
+    <!--<ul>
         <li *ngFor="let item of playlist; let $index = index"
             (click)="onClickPlaylistItem(item, $index)"
             [class.selected]="item === currentItem">
             <strong style="color: white">{{ item.title }}</strong>
         </li>
-    </ul>
+    </ul>-->
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <label for="exampleInputEmail1">Episodios:</label>
+        <select class="form-control" [ngModel]="episodios" #e (change)="onClickPlaylistItem(e.value)">
+            <option *ngFor='let episodio of playlist; let i = index' [value]="episodio.index">
+                {{ episodio.title }}
+        </option>
+        </select>
+    </div>
+    <div class="col-4"></div>
 </div>

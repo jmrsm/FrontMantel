@@ -4,9 +4,10 @@ import { Router , ActivatedRoute, Params} from '@angular/router';
 import { ContentService } from '../../services/content.service';
 
 export interface IMedia {
-    title: string;
-    src: string;
-    type: string;
+    index:number,
+    title:string;
+    src:string;
+    type:string;
 }
 
 @Component({
@@ -23,6 +24,7 @@ export class ReproSeriesComponent {
     dataVal:any;
     playlist: Array<IMedia> = [
         {
+            index: 0,
             title: '',
             src: './assets/cargando.mp4',
             type: 'video/mp4'
@@ -33,6 +35,7 @@ export class ReproSeriesComponent {
     currentIndex = 0;
     currentItem: IMedia = this.playlist[ this.currentIndex ];
     api: VgAPI;
+    private auxIndex:number= 0;
 
     constructor(private contentservice:ContentService,
     private _route: ActivatedRoute,
@@ -50,10 +53,12 @@ export class ReproSeriesComponent {
         this.dataVal= data;
         let valuesAux= new Array<any>();
         for (let ep of this.dataVal) {
+          this.auxIndex++;
           let titleValue= 'Temporada: ' + ep.temporadaN + ' Ep: ' + ep.capitulo;
           let srcValue= ep.path;
           let typeValue= 'video/mp4';
           var epi = {
+            index: this.auxIndex,
             title: titleValue,
             src: srcValue,
             type: typeValue
@@ -96,8 +101,8 @@ export class ReproSeriesComponent {
         this.api.play();
     }
 
-    onClickPlaylistItem(item: IMedia, index: number) {
+    onClickPlaylistItem(index: number) {
         this.currentIndex = index;
-        this.currentItem = item;
+        this.currentItem = this.playlist[ this.currentIndex ];
     }
 }
