@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReportesService } from '../../../services/reportes.service';
 
 @Component({
   selector: 'app-horas-vitasxanio',
@@ -6,10 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./horas-vitasxanio.component.css']
 })
 export class HorasVitasxanioComponent implements OnInit {
+  horasVistas: number[];
+  fecha: string[];
+  data:any={};
+  public barChartLabels:string[]=[];
+  public barChartData:any[]=[];
+  public barChartType:string = 'bar';
+  public barChartLegend:boolean = true;
 
-  constructor() { }
+  constructor(private reportesservice: ReportesService) { }
 
   ngOnInit() {
+    this.reportesservice.getReporteSuperAdmin().subscribe(data => {
+      this.data=data;
+      for(let entry of this.data.horasVistasPorAnio){
+        this.barChartData.push(entry.horasVistas);
+        this.barChartLabels.push(entry.fecha);
+      }
+    });
   }
 
   public barChartOptions:any = {
@@ -17,14 +32,14 @@ export class HorasVitasxanioComponent implements OnInit {
     responsive: true
   };
 
-  public barChartLabels:string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  /*public barChartLabels:string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
 
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
  
   public barChartData:any[] = [
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Horas'}
-  ];
+  ];*/
 
   // events
   public chartClicked(e:any):void {

@@ -12,10 +12,10 @@
       </div>
       <ul class="list-group">
         <li class="list-group-item bg-primary text-white">Opciones</li>
-        <li class="list-group-item"><a href="#">Horas totales perdidas</a></li>
-        <li class="list-group-item"><a href="#">Horas por categoria</a></li>
-        <li class="list-group-item"><a href="#">Contenido favorito no visto</a></li>
-        <li class="list-group-item"><a href="#">Contenido mejor puntuado no visto</a></li>
+        <li class="list-group-item"><a href="/ruhorastot">Horas totales perdidas</a></li>
+        <li class="list-group-item"><a href="/ruhorascat">Horas por categoria</a></li>
+        <li class="list-group-item"><a href="/rucontfavnvisto">Contenido favorito no visto</a></li>
+        <li class="list-group-item"><a href="/rucontmpnvisto">Contenido mejor puntuado no visto</a></li>
       </ul>
     </div>
     <div class="col-12 col-md-8">
@@ -23,9 +23,6 @@
       <div class="container">
           <br>
           <h3 class="text-center">Reportes Usuarios</h3>
-          <!--Div that will hold the pie chart-->
-          <!--div id="chart_div"></div-->
-
           <div style="display: block">
             <canvas baseChart
                     [data]="pieChartData"
