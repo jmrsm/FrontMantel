@@ -92,7 +92,7 @@ export class ContentComponent implements OnInit {
     this.router.navigate(['/contenidodetalle/'+cont.id]);
   }
   play() {
-    if (this.pago) {
+    /*if (this.pago) {
       localStorage.setItem('videoSrc', this.content.path);
       localStorage.setItem('videoId', this.content.id);
       localStorage.setItem('titulo', this.content.Title);
@@ -100,7 +100,12 @@ export class ContentComponent implements OnInit {
     }
     else {
       this.router.navigate(['/suscribir']);  
-    }
+    }*/
+
+    localStorage.setItem('videoSrc', this.content.path);
+    localStorage.setItem('videoId', this.content.id);
+    localStorage.setItem('titulo', this.content.Title);
+    this.router.navigate(['/reproComun']); 
     
   }
   removefav(content:any){

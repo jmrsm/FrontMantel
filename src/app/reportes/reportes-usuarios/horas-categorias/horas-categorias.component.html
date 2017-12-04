@@ -1,0 +1,47 @@
+<app-navar-admin></app-navar-admin>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-3">
+      <div class="card card-inverse">
+        <img class="card-img" src="http://www.hifreevideos.com/images/preview/Vintage-Movie-Theater-Wallpaper-Movie-theater-vintage-marquee-29469.jpg" alt="Card image" height="200" >
+        <div class="card-img-overlay">
+          <h4 class="card-title text-center">Bienvenido</h4>
+        </div>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item bg-primary text-white">Opciones</li>
+        <li class="list-group-item"><a href="#">Horas totales perdidas</a></li>
+        <li class="list-group-item"><a href="#">Horas por categoria</a></li>
+        <li class="list-group-item"><a href="#">Contenido favorito no visto</a></li>
+        <li class="list-group-item"><a href="#">Contenido mejor puntuado no visto</a></li>
+      </ul>
+    </div>
+    <div class="col-12 col-md-8">
+      <br>
+      <div class="container">
+          <br>
+          <h3 class="text-center">Reportes Usuarios</h3>
+          <!--Div that will hold the pie chart-->
+          <!--div id="chart_div"></div-->
+
+          <div style="display: block">
+            <canvas baseChart
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+            <br>
+            <br>
+            <br>
+      </div>      
+    </div>
+  </div>
+</div>
+
+    
+    
+ 
