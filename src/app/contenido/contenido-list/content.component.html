@@ -4,7 +4,7 @@
     <ng-template #boton>
   <button (click)="play()"><img class="card-img-top img-fluid" src="{{content.Poster}}" alt="Card image cap"></button>
   <div class="card-block">
-    <h4 class="card-title">{{content.Title}}</h4>
+    <h6 class="card-title">{{content.Title}}</h6>
     <p class="card-text">{{content.descipcion}}</p>
     <button (click)="onSelected(content)" class="btn btn-primary" >Mas info <i class="ion-information-circled"></i></button>
     <button class="btn btn-primary" ceiboShare  [facebook]="{u: repoUrl}"><i class="ion-social-facebook"></i></button>
@@ -33,14 +33,14 @@
         <a href="suscribir"><img class="card-img-top img-fluid"  src="{{content.Poster}}" alt="Card image cap"></a>
       </div>
       <div class="card-block">
-    <h4 class="card-title">{{content.Title}}</h4>
+    <h6 class="card-title">{{content.Title}}</h6>
     <p class="card-text">{{content.descipcion}}</p>
-    <button (click)="onSelected(content)" class="btn btn-primary" >Mas info <i class="ion-information-circled"></i></button>
+    <button (click)="onSelected(content)" class="btn btn-primary" >Mas info <i class="ion-information-circled" ></i></button>
     <button class="btn btn-primary" ceiboShare  [facebook]="{u: repoUrl}"><i class="ion-social-facebook"></i></button>
     <button class="btn btn-danger" ceiboShare  [googlePlus]="{url:repoUrl}"><i class="ion-social-googleplus-outline"></i></button>
     <button (click)="activeshare()" class="btn btn-success" ><i class="ion-share"></i></button>
     <ng-container *ngIf="vacio" >
-        <img (click)="addfav(content)" id="img-contenedor"  src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698427-icon-23-star-128.png" height="42" width="42" class="img-fluid" alt="Responsive image">
+        <img (click)="addfav(content)" id="img-contenedor"  src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698427-icon-23-star-128.png" height="42" width="42" class="img-fluid" border="none" alt="Responsive image">
     </ng-container>
     <ng-container *ngIf='!vacio'>
         <img (click)="removefav(content)" id="img-contenedor"  src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698904-icon-23-star-128.png" height="42" width="42" class="img-fluid" alt="Responsive image">

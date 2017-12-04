@@ -11,9 +11,24 @@
     <button NgxCarouselPrev class="leftRs">&lt;</button>
     <button NgxCarouselNext class="rightRs">&gt;</button>
 </ngx-carousel>
-
-    <br>
-    <br>
+<br>
+<br>
+<div class="row">
+    <div class="col-2">
+        <select #opcion class="form-control form-control-lg">
+            <option>Pelicula</option>
+            <option>Serie</option>
+            <option>Evento</option>
+        </select>       
+    </div>
+    <div class="col-10 input-group">
+        <input #texto placeholder="Buscar" type="texte" class="form-control form-control-lg" aria-label="Text input with dropdown button">
+        <span class="input-group-btn">
+            <button (click)="search()" class="btn btn-primary" type="button">Buscar<i class="ion-search"></i>
+            </button>
+        </span>
+    </div>
+</div>
     <br>
     <h2>Recomendados</h2>
     <ngx-carousel [inputs]="carouselTileTwo" (carouselLoad)="carouselTileTwoLoad()">

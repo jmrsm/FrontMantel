@@ -16,8 +16,9 @@ declare let paypal: any;
   styles: [ ` 
   
   .card-img-top{
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    height: 200px;
+    }
 }`],
   providers: [UserService,ContentService]
 })

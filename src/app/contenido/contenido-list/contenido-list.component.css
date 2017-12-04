@@ -26,8 +26,8 @@
 }
 
 .tile {
-    min-height: 200px;
-    background-color: #ccc;
+    height: 380px;
+    background-color: white;
     background-size: cover !important;
 }
 
