@@ -99,7 +99,8 @@ import { HorasTotalesComponent } from './reportes/reportes-usuarios/horas-totale
 import { HorasCategoriasComponent } from './reportes/reportes-usuarios/horas-categorias/horas-categorias.component';
 import { ContenidoFavnvistoComponent } from './reportes/reportes-usuarios/contenido-favnvisto/contenido-favnvisto.component';
 import { ContenidoMpnvistoComponent } from './reportes/reportes-usuarios/contenido-mpnvisto/contenido-mpnvisto.component';
-
+import { NgxCarouselModule } from 'ngx-carousel';
+import 'hammerjs';
 
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -252,6 +253,7 @@ export function provideConfig() {
     RouterModule.forRoot(ROUTES, { useHash: true }),
     RouterModule.forRoot(appRoutes),
     ToastModule.forRoot(),
+    NgxCarouselModule,
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,

@@ -1,78 +1,91 @@
- 
-  <div class="row">
-    <div class="col-9">
-       <div *ngIf="!empezo">
-	  <div style="background-color: white"><h6>La reproduccion de este contenido comenzara en:  {{ message }}</h6></div>
+<div *ngIf="termino; then terminado else nTerminado"></div>   
+    <div class="row">
+      <div class="col-9">
+        <ng-template #nTerminado>
+          <div *ngIf="!empezo">
+    	       <div style="background-color: white">
+                <h6>La reproduccion de este contenido comenzara en:  {{ message }}</h6>
+             </div>
+          </div>
+        </ng-template>
+        <ng-template #terminado>
+          <div style="color: white">
+            <strong>
+              <h1>
+                Transmision Terminada, vuelvas pronto!!!    
+              </h1>
+            </strong>
+          </div>
+        </ng-template>  
+          <div ng-controller="HomeCtrl as controller" class="videogular-container">
+    	     <vg-player (onPlayerReady)="onPlayerReady($event)">
+        	    <vg-controls>
+                  <vg-mute></vg-mute>
+                  <vg-volume></vg-volume>
+                  <vg-fullscreen></vg-fullscreen>
+        	    </vg-controls>
+              <video #media [vgMedia]="media" 
+        	      id="singleVideo" 
+        	      preload="auto" crossorigin>
+                <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
+        	    </video>
+    	       </vg-player>
+            </div>
         </div>
-        <div ng-controller="HomeCtrl as controller" class="videogular-container">
-	  <vg-player (onPlayerReady)="onPlayerReady($event)">
-    	    <vg-controls>
-              <vg-mute></vg-mute>
-              <vg-volume></vg-volume>
-              <vg-fullscreen></vg-fullscreen>
-    	    </vg-controls>
-            <video #media [vgMedia]="media" 
-    	      id="singleVideo" 
-    	      preload="auto" crossorigin>
-              <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
-    	    </video>
-	  </vg-player>
-        </div>
-    </div>
-    <div class="col-3" style="background-color: white">
-      <h1 class="display-4">Chat Mantel en Vivo</h1>
-      <form #enviarMensaje="ngForm" (ngSubmit)="enviar(enviarMensaje)" action="">
-        <div class="form-group" >
-          <label for="formGroupExampleInput">Nombre</label>
-          <input name="nombre" class="form-control" type="text" id="nombre" ngModel> 
-        </div>
-        <div class="form-group" >
-            <label for="formGroupExampleInput">Nombre</label>
-            <input placeholder="{{nick}}" name="nombre" class="form-control disabled" type="text" id="nombre" ngModel> 
-        </div>
-        <div class="form-group" >
-            <label for="formGroupExampleInput">Destinatario</label>
-            <input name="destinatario" class="form-control" type="text" id="destinatario" id="destinatario" ngModel>
-        </div>
-        <div class="form-group">
-          <label for="exampleTextarea">Mensaje</label>
-          <textarea name="mensaje" class="form-control" id="mensaje" ngModel></textarea>
-        </div>
-        <button class="btn btn-primary" type="submit" id="btnEnviar">Enviar</button>
-      </form>
-      <br>
-      <table id="chatUL" class="table table-sm ">
-        <thead class="bg-info">
-          <tr>
-	           <th class="text-white">Mensajes</th>
-	        </tr>
-        </thead>
-        <tbody *ngFor="let item of item | async">
-          <tr>
-  	       <th *ngIf="item.addressee==nick" scope='row'>
-              <span class='badge badge-pill badge-danger'>{{item.name+': '}}</span>
-              <kbd>{{item.message +'Mensaje de: '+item.name}}</kbd>
-            </th>
-          </tr>
-          <tr>
-            <th *ngIf="item.addressee==nick && item.name==nick " scope='row'>
-            <span class='badge badge-pill badge-danger'>{{item.name+': '}}</span>
-            <kbd>{{item.message +'Mensaje de: '}}</kbd>
-            </th>
-          </tr>
-          <tr>
-              <th *ngIf="item.name==nick " scope='row'>
+        <div class="col-3" style="background-color: white">
+          <h1 class="display-4">Chat Mantel en Vivo</h1>
+          <form #enviarMensaje="ngForm" (ngSubmit)="enviar(enviarMensaje)" action="">
+            <div class="form-group" >
+              <label for="formGroupExampleInput">Nombre</label>
+              <input name="nombre" class="form-control" type="text" id="nombre" ngModel> 
+            </div>
+            <div class="form-group" >
+                <label for="formGroupExampleInput">Nombre</label>
+                <input placeholder="{{nick}}" name="nombre" class="form-control disabled" type="text" id="nombre" ngModel> 
+            </div>
+            <div class="form-group" >
+                <label for="formGroupExampleInput">Destinatario</label>
+                <input name="destinatario" class="form-control" type="text" id="destinatario" id="destinatario" ngModel>
+            </div>
+            <div class="form-group">
+              <label for="exampleTextarea">Mensaje</label>
+              <textarea name="mensaje" class="form-control" id="mensaje" ngModel></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit" id="btnEnviar">Enviar</button>
+          </form>
+          <br>
+          <table id="chatUL" class="table table-sm ">
+            <thead class="bg-info">
+              <tr>
+    	           <th class="text-white">Mensajes</th>
+    	        </tr>
+            </thead>
+            <tbody *ngFor="let item of item | async">
+              <tr>
+      	       <th *ngIf="item.addressee==nick" scope='row'>
+                  <span class='badge badge-pill badge-danger'>{{item.name+': '}}</span>
+                  <kbd>{{item.message +'Mensaje de: '+item.name}}</kbd>
+                </th>
+              </tr>
+              <tr>
+                <th *ngIf="item.addressee==nick && item.name==nick " scope='row'>
                 <span class='badge badge-pill badge-danger'>{{item.name+': '}}</span>
-                <kbd>{{item.message}}</kbd>
-              </th>
-          </tr>
-          <tr>
-            <th *ngIf="item.addressee==todo && item.name!=nick" scope='row'>
-              <span class='badge badge-pill badge-danger'>{{item.name+': '}}</span>
-              <kbd>{{item.message}}</kbd>
-            </th>
-          </tr>
-        </tbody>
-      </table>
+                <kbd>{{item.message +'Mensaje de: '}}</kbd>
+                </th>
+              </tr>
+              <tr>
+                <th *ngIf="item.name==nick " scope='row'>
+                  <span class='badge badge-pill badge-danger'>{{item.name+': '}}</span>
+                  <kbd>{{item.message}}</kbd>
+                </th>
+              </tr>
+              <tr>
+                <th *ngIf="item.addressee==todo && item.name!=nick" scope='row'>
+                  <span class='badge badge-pill badge-danger'>{{item.name+': '}}</span>
+                  <kbd>{{item.message}}</kbd>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+      </div>
     </div>
-  </div>

@@ -1,12 +1,17 @@
 <nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li (click)="anterior()" class="page-item"><a class="page-link" >Pagina Anterior</a></li>
+    <ul class="pagination" >
+        <li (click)="anterior()" class="page-item">
+          <a class="popup" (mouseover)="atras()" style="margin: 15px;padding-right: 25px">
+            <span class="popuptext" id="myPopup" style="color: white">Regresar a contenido</span>
+            <img src="./assets/flecha2.jpg">
+          </a>
+        </li>
     </ul>
 </nav>
 <div ng-controller="HomeCtrl as controller" class="videogular-container">
     <vg-player (onPlayerReady)="onPlayerReady($event)">
     <vg-overlay-play></vg-overlay-play>
-        <vg-controls>
+        <vg-controls [vgAutohide]="true" [vgAutohideTime]="1.5">
             <vg-play-pause></vg-play-pause>
             <vg-playback-button></vg-playback-button>
             <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
@@ -19,11 +24,7 @@
             <vg-volume></vg-volume>
             <vg-fullscreen></vg-fullscreen>
         </vg-controls>
-
-        <!--<video #media [vgMedia]="media" 
-            id="singleVideo" 
-            preload="auto" controls="style" width="100%">-->
-            <video #media [vgMedia]="media" 
+        <video #media [vgMedia]="media" 
             id="singleVideo" 
             preload="auto">
             <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">

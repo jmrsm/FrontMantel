@@ -1,75 +1,80 @@
 <div *ngIf="cargo">
-  <div class="container" style="background-color: #ffff;">
-    <ng-container *ngIf="destacado">
-    <h1 class="text-center">Destacado del Mes</h1>
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner" role="listbox">
-          <div  class="carousel-item active">
-            <img style="width:100%;" class="d-block img-fluid" src="{{posterprimero}}" alt="First slide">
-        </div>
-        <div *ngFor="let d of destacado"  class="carousel-item ">
-            <img style="width:100%;" class="d-block img-fluid" src="{{d.Poster}}" alt="First slide">
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-  </ng-container>
-    <br>
-    <br>
-    <br>
-    <div class="row">
-        <div class="col-2">
-        <select #opcion class="form-control form-control-lg">
-            <option>Pelicula</option>
-            <option>Serie</option>
-            <option>Evento</option>
-          </select>
-        </div>
-        <div class="col-10 input-group">
-            <input #texto placeholder="Buscar" type="text" class="form-control form-control-lg" aria-label="Text input with dropdown button">
-            <span class="input-group-btn">
-                <button (click)="search()" class="btn btn-primary" type="button">Buscar <i class="ion-search"></i></button>
-            </span>
-        </div>
-      </div>
-    <div class="row">
-    <br>
-    <br>
-    <div class="card-columns">
-      <app-content *ngFor="let content of data.content" [content]="content"></app-content>
-    </div>
-    <div class="row"> 
-        <div class="col-sm-12 col-lg-4">
+    <div class="container">
+    <h1 *ngIf="destacadoIndex > 0">Destacado del mes</h1>
+  <ngx-carousel class="banner" [inputs]="carouselBanner" (carouselLoad)="carouselBannerLoad()">
+    <ngx-item NgxCarouselItem *ngFor="let d of destacado; let i = index;">
+        <div class="bannerStyle">
+            <img src="{{d.Poster}}">
             
-        </div>  
-        <div class="form-group col-6">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li (click)="anterior()" class="page-item"><a class="page-link">Pagina Anterior</a></li>
-            <li (click)="inicio()" class="page-item"><a class="page-link">Pagina Inicio</a></li>
-            <li (click)="siguiente()" class="page-item"><a class="page-link">Pagina Siguiente</a></li>
-          </ul>
-        </nav>
-      </div>
-      </div>
-  </div>
+        </div>
+    </ngx-item>
+    <button NgxCarouselPrev class="leftRs">&lt;</button>
+    <button NgxCarouselNext class="rightRs">&gt;</button>
+</ngx-carousel>
 
-  <ng-template #contentModal>
-    <div class="modal-header">
-      <h4>Titulo</h4>  
-    </div>
-    <div class="modal-body">
-        <h4>Titulo</h4>  
-    </div>
-    <div class="modal-footer">
-        <h4>Titulo</h4>  
-      </div>
-  </ng-template>
+    <br>
+    <br>
+    <br>
+    <h2>Recomendados</h2>
+    <ngx-carousel [inputs]="carouselTileTwo" (carouselLoad)="carouselTileTwoLoad()">
+        <ngx-tile NgxCarouselItem *ngFor="let content of data.content; let i = index;">
+            <div class="wBg" *ngIf="content">
+                <div class="tile">
+                    <app-content  [content]="content" ></app-content>
+                </div>
+            </div>
+        </ngx-tile>
+        <button NgxCarouselPrev class="leftRs">&lt;</button>
+        <button NgxCarouselNext class="rightRs">&gt;</button>
+    </ngx-carousel>
+    <h2 *ngIf="favoritosIndex > 0">Mi Lista</h2>
+    <ngx-carousel [inputs]="carouselTileTwo" (carouselLoad)="carouselTileTwoLoad()">
+        <ngx-tile NgxCarouselItem *ngFor="let favorito of favoritos.content; let i = index;">
+            <div class="wBg" *ngIf="content">
+                <div class="tile">
+                    <app-content  [content]="favorito" ></app-content>
+                </div>
+            </div>
+        </ngx-tile>
+        <button NgxCarouselPrev class="leftRs">&lt;</button>
+        <button NgxCarouselNext class="rightRs">&gt;</button>
+    </ngx-carousel>
+    <h2>Peliculas</h2>
+    <ngx-carousel [inputs]="carouselTileTwo" (carouselLoad)="carouselTileTwoLoad()">
+        <ngx-tile NgxCarouselItem *ngFor="let content of data.content; let i = index;">
+            <div class="wBg" *ngIf="content">
+                <div class="tile">
+                    <app-content  [content]="content" ></app-content>
+                </div>
+            </div>
+        </ngx-tile>
+        <button NgxCarouselPrev class="leftRs">&lt;</button>
+        <button NgxCarouselNext class="rightRs">&gt;</button>
+    </ngx-carousel>
+
+    <h2>Series</h2>
+    <ngx-carousel [inputs]="carouselTileTwo" (carouselLoad)="carouselTileTwoLoad()">
+        <ngx-tile NgxCarouselItem *ngFor="let serie of series; let i = index;">
+            <div class="wBg">
+                <div class="tile">
+                    <app-serie  [content]="serie" ></app-serie>
+                </div>
+            </div>
+        </ngx-tile>
+        <button NgxCarouselPrev class="leftRs">&lt;</button>
+        <button NgxCarouselNext class="rightRs">&gt;</button>
+    </ngx-carousel>
+
+    <h2>Eventos</h2>
+    <ngx-carousel [inputs]="carouselTileTwo" (carouselLoad)="carouselTileTwoLoad()">
+        <ngx-tile NgxCarouselItem *ngFor="let evento of eventos.content; let i = index;">
+            <div class="wBg">
+                <div class="tile">
+                    <app-content  [content]="evento" ></app-content>
+                </div>
+            </div>
+        </ngx-tile>
+        <button NgxCarouselPrev class="leftRs">&lt;</button>
+        <button NgxCarouselNext class="rightRs">&gt;</button>
+    </ngx-carousel>
 </div>

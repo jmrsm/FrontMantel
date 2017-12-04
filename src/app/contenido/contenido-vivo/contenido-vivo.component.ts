@@ -65,10 +65,13 @@ export class ContenidoVivoComponent implements OnInit {
   aux:number; 
 
 //----------------------------------boolean's es visible 
-  cargo:boolean=false;
-  empezo:boolean=false;
-  //termino:boolean=false;
-  cargado:boolean=false;
+  private cargo:boolean= false;
+  private empezo:boolean= false;
+  private termino:boolean= false;
+  private cargado:boolean= false;
+  private autoHide:boolean= true;
+  private autoHideTime:number= 5000;
+  private controls:boolean= false;
 //----------------------------------------------------------------------//  
 
   constructor(
@@ -81,7 +84,6 @@ export class ContenidoVivoComponent implements OnInit {
   ) {
     this.itemsRef = db.list('prueba12');
     this.item = db.list('prueba12').valueChanges();
-    console.log(this.item);
     this.nick=localStorage.getItem('email');
   }
 
@@ -96,7 +98,6 @@ export class ContenidoVivoComponent implements OnInit {
       this.fechaInicio = +this.fechaInicioString;
       this.fechaInicioString = this.datePipe.transform(new Date(this.fechaInicio), 'MM/dd/yyyy HH:mm:ss');
       this.fechaInicioDate = new Date(this.fechaInicioString);
-      console.log(this.fechaInicioDate);
       this.st.newTimer('1sec', 1);    
       this.cargarFechaServidor();
     });
@@ -186,8 +187,12 @@ export class ContenidoVivoComponent implements OnInit {
     this.api = api;
     this.fsAPI = this.api.fsAPI;
     this.nativeFs = this.fsAPI.nativeFullscreen;
+    this.api.getDefaultMedia().subscriptions.ended.subscribe(this.terminoF.bind(this));    
   }
 
+  terminoF() {
+    this.termino= true;
+  }
 
 //---------------------------------------- Se setea el tiempo de reproduccion
   iniciarReproduccion() {

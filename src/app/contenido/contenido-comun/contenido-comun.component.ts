@@ -138,4 +138,9 @@ export class ContenidoComunComponent implements OnInit {
   anterior() {
       this._router.navigate(['/contenido']);
   }
+
+  atras() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }
 }
