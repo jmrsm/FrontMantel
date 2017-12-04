@@ -2,7 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ContentService } from './services/content.service';
 import { SuscripcionService } from './services/suscripcion.service';
+import { ReportesService } from './services/reportes.service';
 import { HttpModule } from '@angular/http';
+
+//Graficos
+import { ChartsModule } from 'ng2-charts';
 
 import { SocialLoginModule } from "angular4-social-login";
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
@@ -75,6 +79,28 @@ import { BloqueoUsuarioComponent } from './admin/bloqueo-usuario/bloqueo-usuario
 import { BloqueoContenidoComponent } from './admin/bloqueo-contenido/bloqueo-contenido.component';
 import { ContentDetailSerieComponent } from './contenido/content-detail-series/content-detail-serie.component';
 
+import { ReportesAdminComponent } from './reportes/reportes-admin/reportes-admin.component';
+import { HorasVistasxanioComponent} from './reportes/reportes-admin/horas-vistasxanio/horas-vistasxanio.component';
+import { HorasVistasxdiaComponent} from './reportes/reportes-admin/horas-vistasxdia/horas-vistasxdia.component';
+import { HorasVistasxmesComponent} from './reportes/reportes-admin/horas-vistasxmes/horas-vistasxmes.component';
+import { HorasVistasxsemanaComponent} from './reportes/reportes-admin/horas-vistasxsemana/horas-vistasxsemana.component';
+import { ReportesSuperadminComponent } from './reportes/reportes-superadmin/reportes-superadmin.component';
+import { HorasVitasxdiaComponent } from './reportes/reportes-superadmin/horas-vitasxdia/horas-vitasxdia.component';
+import { HorasVitasxsemanaComponent } from './reportes/reportes-superadmin/horas-vitasxsemana/horas-vitasxsemana.component';
+import { HorasVitasxmesComponent } from './reportes/reportes-superadmin/horas-vitasxmes/horas-vitasxmes.component';
+import { HorasVitasxanioComponent } from './reportes/reportes-superadmin/horas-vitasxanio/horas-vitasxanio.component';
+import { ReportesUsuariosComponent } from './reportes/reportes-usuarios/reportes-usuarios.component';
+import { UsuariosTotalesComponent } from './reportes/reportes-superadmin/usuarios-totales/usuarios-totales.component';
+import { UsuariosHabilitComponent } from './reportes/reportes-superadmin/usuarios-habilit/usuarios-habilit.component';
+import { HorasVisualizadasComponent } from './reportes/reportes-superadmin/horas-visualizadas/horas-visualizadas.component';
+import { ProvCantidadComponent } from './reportes/reportes-superadmin/prov-cantidad/prov-cantidad.component';
+import { ProvCanthorasComponent } from './reportes/reportes-superadmin/prov-canthoras/prov-canthoras.component';
+import { HorasTotalesComponent } from './reportes/reportes-usuarios/horas-totales/horas-totales.component';
+import { HorasCategoriasComponent } from './reportes/reportes-usuarios/horas-categorias/horas-categorias.component';
+import { ContenidoFavnvistoComponent } from './reportes/reportes-usuarios/contenido-favnvisto/contenido-favnvisto.component';
+import { ContenidoMpnvistoComponent } from './reportes/reportes-usuarios/contenido-mpnvisto/contenido-mpnvisto.component';
+
+
 const  appRoutes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
   {path:'contenido',component:ContenidoComponent, canActivate: [LoginGuard]},
@@ -108,6 +134,29 @@ const  appRoutes: Routes = [
   {path:'bloqueo-usuario', component:BloqueoUsuarioComponent, canActivate:[LoginGuard]},
   {path:'eventos', component:ContenidoVivoComponent, canActivate: [LoginGuard]},
   {path:'contenidodetalleserie/:Id', component:ContentDetailSerieComponent, canActivate: [LoginGuard]},
+  {path:'reportesadmin',component:ReportesAdminComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rahorastotvis',component:HorasVisualizadasComponent/*,canActivate: [LoginGuard]*/},
+  {path:'racantvis',component:ProvCantidadComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rahorasxdia',component:HorasVistasxdiaComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rahorasxsemana',component:HorasVistasxsemanaComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rahorasxmes',component:HorasVistasxmesComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rahorasxanio',component:HorasVistasxanioComponent/*,canActivate: [LoginGuard]*/},
+  {path:'reportessuperadmin',component:ReportesSuperadminComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rsausutotales',component:UsuariosTotalesComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rsausuhabilit',component:UsuariosHabilitComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rsahorastotvis',component:HorasVisualizadasComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rsaprovcant',component:ProvCantidadComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rsaprovcanthoras',component:ProvCanthorasComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rsahorasxdia',component:HorasVitasxdiaComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rsahorasxsemana',component:HorasVitasxsemanaComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rsahorasxmes',component:HorasVitasxmesComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rsahorasxanio',component:HorasVitasxanioComponent/*,canActivate: [LoginGuard]*/},
+  {path:'reportesusuarios',component:ReportesUsuariosComponent/*,canActivate: [LoginGuard]*/},
+  {path:'ruhorastot',component:ReportesUsuariosComponent/*,canActivate: [LoginGuard]*/},
+  {path:'ruhorascat',component:HorasCategoriasComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rucontfavnvisto',component:ReportesUsuariosComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rucontmpnvisto',component:ReportesUsuariosComponent/*,canActivate: [LoginGuard]*/},
+  
 ];
 
 
@@ -176,7 +225,27 @@ export function provideConfig() {
     ContenidoVivoComponent,
     BloqueoUsuarioComponent,
     BloqueoContenidoComponent,
-    ContentDetailSerieComponent
+    ContentDetailSerieComponent,
+    ReportesAdminComponent,
+    HorasVistasxsemanaComponent,
+    HorasVistasxmesComponent,
+    HorasVistasxdiaComponent,
+    HorasVistasxanioComponent,
+    ReportesSuperadminComponent,
+    HorasVitasxdiaComponent,
+    HorasVitasxsemanaComponent,
+    HorasVitasxmesComponent,
+    HorasVitasxanioComponent,
+    ReportesUsuariosComponent,
+    UsuariosTotalesComponent,
+    UsuariosHabilitComponent,
+    HorasVisualizadasComponent,
+    ProvCantidadComponent,
+    ProvCanthorasComponent,
+    HorasTotalesComponent,
+    HorasCategoriasComponent,
+    ContenidoFavnvistoComponent,
+    ContenidoMpnvistoComponent
 
   ],
   imports: [
@@ -195,10 +264,11 @@ export function provideConfig() {
     ContenidoComunModule,
     ContenidoVivoModule,
     ReproSeriesModule,
-    SimpleNotificationsModule
+    SimpleNotificationsModule,
+    ChartsModule
     
   ],
-  providers: [ContentService,LoginGuard,NoLoginGuard, SuscripcionService, [
+  providers: [ReportesService, ContentService,LoginGuard,NoLoginGuard, SuscripcionService, [
       {
         provide: AuthServiceConfig,
         useFactory: provideConfig
