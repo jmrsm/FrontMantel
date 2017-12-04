@@ -153,10 +153,10 @@ const  appRoutes: Routes = [
   {path:'rsahorasxmes',component:HorasVitasxmesComponent/*,canActivate: [LoginGuard]*/},
   {path:'rsahorasxanio',component:HorasVitasxanioComponent/*,canActivate: [LoginGuard]*/},
   {path:'reportesusuarios',component:ReportesUsuariosComponent/*,canActivate: [LoginGuard]*/},
-  {path:'ruhorastot',component:ReportesUsuariosComponent/*,canActivate: [LoginGuard]*/},
+  {path:'ruhorastot',component:HorasTotalesComponent/*,canActivate: [LoginGuard]*/},
   {path:'ruhorascat',component:HorasCategoriasComponent/*,canActivate: [LoginGuard]*/},
-  {path:'rucontfavnvisto',component:ReportesUsuariosComponent/*,canActivate: [LoginGuard]*/},
-  {path:'rucontmpnvisto',component:ReportesUsuariosComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rucontfavnvisto',component:ContenidoFavnvistoComponent/*,canActivate: [LoginGuard]*/},
+  {path:'rucontmpnvisto',component:ContenidoMpnvistoComponent/*,canActivate: [LoginGuard]*/},
   
 ];
 

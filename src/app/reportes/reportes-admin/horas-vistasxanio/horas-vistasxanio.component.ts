@@ -23,7 +23,7 @@ export class HorasVistasxanioComponent implements OnInit {
     var body=this.emailUsuario;
     this.reportesservice.getReporteAdmin(body).subscribe(data => {
       this.data=data;
-      for(let entry of this.data.horasVistasPorDia){
+      for(let entry of this.data.horasVistasPorAnio){
         this.barChartData.push(entry.horasVistas);
         this.barChartLabels.push(entry.fecha);
       }
