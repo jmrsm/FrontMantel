@@ -1,0 +1,48 @@
+<app-navar-admin></app-navar-admin>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-3">
+      <div class="card card-inverse">
+        <img class="card-img" src="http://www.hifreevideos.com/images/preview/Vintage-Movie-Theater-Wallpaper-Movie-theater-vintage-marquee-29469.jpg" alt="Card image" height="200" >
+        <div class="card-img-overlay">
+          <h4 class="card-title text-center">Bienvenido</h4>
+        </div>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item bg-primary text-white">Opciones</li>
+        <li class="list-group-item"><a href="/rahorastotvis">Horas totales visualizadas</a></li>
+        <li class="list-group-item"><a href="/racantvistot">Cantidad Visualizaciones totales</a></li>
+        <li class="list-group-item"><a href="/rahorasxdia">Horas vistas por día</a></li>
+        <li class="list-group-item"><a href="/rahorasxsemana">Horas vistas por semana</a></li>
+        <li class="list-group-item"><a href="/rahorasxmes">Horas vistas por mes</a></li>
+        <li class="list-group-item"><a href="/rahorasxanio">Horas vistas por anio</a></li>
+      </ul>
+    </div>
+    <div class="col-12 col-md-8">
+      <br>
+      <div class="container">
+          <br>
+          <h3 class="text-center">Reportes Super Admin</h3>
+          <div style="display: block">
+            <canvas baseChart
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+            <br>
+            <br>
+            <br>
+      </div>      
+    </div>
+  </div>
+</div>
+
+    
+    
+ 
