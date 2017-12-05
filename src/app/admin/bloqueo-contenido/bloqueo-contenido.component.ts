@@ -79,7 +79,7 @@ export class BloqueoContenidoComponent implements OnInit {
    		console.log(body);
 								this.adminService.bloqContenido(body).subscribe(p => {
 						      this.exito = 'Contenido bloqueado con éxito';
-						      this.router.navigate(['/bloqueo-usuario']);
+						      this.router.navigate(['/bloqueo-contenido']);
 
 						    },e => this.error = e, () => this.isLoading = false);
 						   
