@@ -32,7 +32,7 @@ Altaempresa(form: NgForm){
      this.empresaservice.addEmpresa(body).subscribe(p => {
       //console.log("dentro de if por 200");
       this.exito = 'Empresa creada con �xito';
-      this.router.navigate(['/admin']);
+      this.router.navigate(['/altaempresa']);
 
     },e => this.error = e, () => this.isLoading = false);
     /*this.Empresaservice.addEmpresa(body).subscribe(p => {
