@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportesService } from '../../../services/reportes.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-contenido-favnvisto',
   templateUrl: './contenido-favnvisto.component.html',
-  styleUrls: ['./contenido-favnvisto.component.css']
+  styleUrls: ['./contenido-favnvisto.component.css'],
+  providers: [ReportesService, UserService]
 })
 export class ContenidoFavnvistoComponent implements OnInit {
   id: number[];

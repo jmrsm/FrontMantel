@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Reportes} from '../../../models/reportes';
 import { ReportesService} from '../../../services/reportes.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-horas-totales',
   templateUrl: './horas-totales.component.html',
   styleUrls: ['./horas-totales.component.css'],
-  providers:[ReportesService]
+  providers:[ReportesService, UserService]
 })
 export class HorasTotalesComponent implements OnInit {
   horasTot: number;

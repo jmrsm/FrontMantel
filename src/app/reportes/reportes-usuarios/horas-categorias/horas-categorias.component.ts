@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportesService } from '../../../services/reportes.service';
 import { _ } from 'core-js/library/web/timers';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-horas-categorias',
   templateUrl: './horas-categorias.component.html',
-  styleUrls: ['./horas-categorias.component.css']
+  styleUrls: ['./horas-categorias.component.css'],
+  providers: [UserService, ReportesService]
 })
 export class HorasCategoriasComponent implements OnInit {
   horasVistas: number[];
