@@ -11,14 +11,10 @@
     <button class="btn btn-danger" ceiboShare  [googlePlus]="{url:repoUrl}"><i class="ion-social-googleplus-outline"></i></button>
     <button (click)="activeshare()" class="btn btn-success" ><i class="ion-share"></i></button>
     <ng-container *ngIf="vacio" >
-        <span>
         <img (click)="addfav(content)" id="img-contenedor"  src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698427-icon-23-star-128.png" height="42" width="42" class="img-fluid" alt="Responsive image">
-        </span>
     </ng-container>
     <ng-container *ngIf='!vacio'>
-        <span>
         <img (click)="removefav(content)" id="img-contenedor"  src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698904-icon-23-star-128.png" height="42" width="42" class="img-fluid" alt="Responsive image">
-        </span>
     </ng-container>
     <ng-container *ngIf="share" >
       
