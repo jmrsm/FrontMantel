@@ -1,4 +1,4 @@
-import { Component, OnInit, Input ,ElementRef,ViewChild,Renderer2} from '@angular/core';
+import { Component, OnInit, Input ,ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { Content } from '../../models/content';
 import { ContentService } from '../../services/content.service';
 import { UserService } from '../../services/user.service';
@@ -35,6 +35,7 @@ export class ContenidoListComponent implements OnInit {
     private eventos: any= {};
     private links:any;
     private series:any= {};
+    private peliculas:any[]= [];
     private favoritosIndex:number= 0;
     private destacadoIndex:number= 0;
   constructor(
@@ -137,6 +138,12 @@ export class ContenidoListComponent implements OnInit {
         this.aux=true;
         this.cargo=true;
      }
+     for (let peli of this.data.content) {
+      if (peli.Poster!=='N/A') {
+        this.peliculas.push(peli);
+      }
+     }
+
      }); 
   }
   

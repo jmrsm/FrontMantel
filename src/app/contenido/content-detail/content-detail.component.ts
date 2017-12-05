@@ -126,7 +126,7 @@ private paypal() {
         onAuthorize: function(data, actions) {
           return actions.payment.execute().then(function(payment) {
             var xhttp = new XMLHttpRequest();
-            var urlAndParams = "http://174.138.54.167:8080/api/usuario/comprarContenidoPayPerView/"
+            var urlAndParams = "http://localhost:8080/api/usuario/comprarContenidoPayPerView/"
 
             urlAndParams += "?idContenido=" + idContenido;
             urlAndParams += "&email=" + emailUsuario;
@@ -146,18 +146,14 @@ private paypal() {
 
   private showPaypalBoton() {
     if (this.esPayperview && this.pagado) {
-      console.log('1');
       return false;
       
     }
     else if (!this.esPayperview) {
-     console.log('2');
       return false;
     }
     else {
       this.verificarPago(this.idcontent, this.emailUsuario);
-      console.log('3');
-      return true;
     }
     
   }

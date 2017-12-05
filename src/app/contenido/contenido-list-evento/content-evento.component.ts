@@ -13,8 +13,8 @@ import { AngularFireDatabase,AngularFireObject,AngularFireList } from 'angularfi
   styles: [ ` 
   
   .card-img-top{
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    height: 200px;
 }`],
   providers: [UserService,ContentService]
 })
@@ -88,6 +88,7 @@ export class ContentEventComponent implements OnInit {
       localStorage.setItem('videoId', this.content.id);
       localStorage.setItem('fechaComienzo', this.content.fechaInicio);
       localStorage.setItem('duracion', this.content.Runtime);
+      localStorage.setItem('nombreEvento', this.content.Title);
       this.router.navigate(['/reproVivo']);  
     }
   }

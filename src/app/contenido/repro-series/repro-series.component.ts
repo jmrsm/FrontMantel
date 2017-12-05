@@ -105,4 +105,9 @@ export class ReproSeriesComponent {
         this.currentIndex = index;
         this.currentItem = this.playlist[ this.currentIndex ];
     }
+
+    atras() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }
 }

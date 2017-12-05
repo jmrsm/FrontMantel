@@ -7,6 +7,7 @@ import { FirebaseApp } from 'angularfire2';
 import 'firebase/storage';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
 
 
 @Component({
@@ -46,9 +47,16 @@ export class AltaContentVivoComponent implements OnInit {
   path:string;
   ref:string;
   idAdmin:string;
-  private runtime = new Date().toLocaleDateString();;
+  private runtime = new Date().toLocaleDateString();
+  private itemsRef: AngularFireList<any>;
+  todo:string= 'Todos';
   
-  constructor(private contentService:ContentService,private firebaseApp: FirebaseApp,private router:Router) { }
+  constructor(
+    private contentService:ContentService,
+    private firebaseApp: FirebaseApp,
+    private router:Router,
+    private db: AngularFireDatabase
+    ) { }
 
   ngOnInit() {
     this.fechaAux = this.fechaActual.getFullYear() + '-' + this.fechaActual.getMonth() + 
@@ -250,6 +258,7 @@ onEventDestacado(selectValue : string){
         '\",\"fechaInicio\":\"' + fechaInicio + 'T' + horaInicio + '-0300\", \"id\":' + 1 + ',\"path\":\"' + this.path + '\",\"precio\":' +
         precio + ',\"proveedorContenido\":{\"id\":' + this.idAdmin + '},\"tipoContenido\":\"EVENTO_DEPORTIVO\"}';
         this.contentService.addContenidoEnVivo(subBody).subscribe(p => {
+          this.db.list(titulo).push({name: 'Admin', message: 'Chat Creado', addressee:this.todo});
           this.router.navigate(['/admintenant']);
         },e => this.error = e, () => this.isLoading = false);  
       }
@@ -261,6 +270,7 @@ onEventDestacado(selectValue : string){
         precio + ',\"proveedorContenido\":{\"id\":' + this.idAdmin + '},\"tipoContenido\":\"EVENTO_ESPECTACULO\"}';
         
         this.contentService.addContenidoEnVivo(subBody).subscribe(p => {
+          this.db.list(titulo).push({name: 'Admin', message: 'Chat Creado', addressee:this.todo});
           this.router.navigate(['/admintenant']);
         },e => this.error = e, () => this.isLoading = false);  
       }
