@@ -28,7 +28,7 @@ export class ContentComponent implements OnInit {
   items: Observable<any[]>;
   u: string;
   vacio:boolean=true;
-  public repoUrl = 'http://d5c0426d.ngrok.io/contenidodetalle/';
+  public repoUrl = 'http://3912ee76.ngrok.io/contenidodetalle/';
   public imageUrl = '';  
   favoritos: any;
   monto;
