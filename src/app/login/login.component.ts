@@ -54,11 +54,12 @@ export class LoginComponent implements OnInit {
     }
   }
   login(form: NgForm){
-    
     var body='?email='+form.value.email+'&password='+form.value.password;
+console.log(body);
     this.userservice.login(body).subscribe(p => {
     console.log(JSON.parse(p['_body'])['tipoUsuario']);
     if(JSON.parse(p['_body'])['tipoUsuario']==='Usuario'){
+
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('tipo','Usuario');
       localStorage.setItem('idUsuario', JSON.parse(p['_body'])['id']);
