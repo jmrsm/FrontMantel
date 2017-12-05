@@ -1,20 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportesService } from '../../../services/reportes.service';
-<<<<<<< HEAD
 import { UserService } from '../../../services/user.service';
-=======
-import { UserService} from '../../../services/user.service';
->>>>>>> branch 'merged' of https://github.com/jmrsm/FrontMantel.git
 
 @Component({
   selector: 'app-contenido-mpnvisto',
   templateUrl: './contenido-mpnvisto.component.html',
   styleUrls: ['./contenido-mpnvisto.component.css'],
-<<<<<<< HEAD
   providers: [UserService, ReportesService]
-=======
-  providers: [UserService]
->>>>>>> branch 'merged' of https://github.com/jmrsm/FrontMantel.git
 
 })
 export class ContenidoMpnvistoComponent implements OnInit {

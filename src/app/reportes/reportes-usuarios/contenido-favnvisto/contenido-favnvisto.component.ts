@@ -1,20 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportesService } from '../../../services/reportes.service';
-<<<<<<< HEAD
 import { UserService } from '../../../services/user.service';
-=======
-import { UserService} from '../../../services/user.service';
->>>>>>> branch 'merged' of https://github.com/jmrsm/FrontMantel.git
 
 @Component({
   selector: 'app-contenido-favnvisto',
   templateUrl: './contenido-favnvisto.component.html',
   styleUrls: ['./contenido-favnvisto.component.css'],
-<<<<<<< HEAD
   providers: [ReportesService, UserService]
-=======
-  providers: [UserService]
->>>>>>> branch 'merged' of https://github.com/jmrsm/FrontMantel.git
 })
 export class ContenidoFavnvistoComponent implements OnInit {
   id: number[];

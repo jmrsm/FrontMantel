@@ -1,22 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportesService } from '../../../services/reportes.service';
 import { _ } from 'core-js/library/web/timers';
-<<<<<<< HEAD
 import { UserService } from '../../../services/user.service';
-=======
-import { UserService} from '../../../services/user.service';
->>>>>>> branch 'merged' of https://github.com/jmrsm/FrontMantel.git
 
 @Component({
   selector: 'app-horas-categorias',
   templateUrl: './horas-categorias.component.html',
   styleUrls: ['./horas-categorias.component.css'],
-<<<<<<< HEAD
-  providers: [UserService, ReportesService]
-=======
-  providers: [UserService]
->>>>>>> branch 'merged' of https://github.com/jmrsm/FrontMantel.git
+  providers: [UserService, ReportesService],
 })
+
 export class HorasCategoriasComponent implements OnInit {
   horasVistas: number[];
   nombreCategoria: string[];
