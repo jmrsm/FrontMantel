@@ -10,8 +10,8 @@ import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from
 
 @Injectable()
 export class ContentService {
-  private url:string= 'http://localhost:8080/';
-  //private url:string= '174.138.54.167:8080/';
+  //private url:string= 'http://localhost:8080/';
+  private url:string= '104.131.119.199:8080/';
   constructor(
       private http:Http,
       private httpc:HttpClient) { }

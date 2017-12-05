@@ -10,7 +10,7 @@ export class SuscripcionService {
   private clientId:string= 'AZLd59EEDCSAKB0XEEFx0EedYoNOJrNRb3anFHdpiuyMcJdYXymDE2GPm9C6O01xJ-vqOrT3rES7pFAT';
   private secret:string= 'EHdx9CNQvyZsD13vOJiHDEbvVRgPhadRLyDh41mRctwK0l1mZATpEXGR-R_ZEmeqFEPAdKiVaxMtjyic';
   //private localUrl:string= 'http://localhost:8080/';
-  private localUrl:string= '174.138.54.167:8080/';
+  private localUrl:string= '104.131.119.199:8080/';
 
   constructor(
       private http:Http,
