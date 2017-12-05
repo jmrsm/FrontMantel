@@ -104,7 +104,7 @@ export class ContentService {
   }
   
   verificarPago(idContenido, emailUsuario): Observable<any> {
-    return this.httpc.get(this.url + 'api/usuario/verificarPagoEspectaculo?idContenido=' +
+    return this.http.get(this.url + 'api/usuario/verificarPagoEspectaculo?idContenido=' +
       idContenido + '&email=' + emailUsuario).map((res: Response) => res);
   }
   //api para valorar contenido
