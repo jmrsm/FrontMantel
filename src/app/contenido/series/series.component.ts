@@ -14,7 +14,7 @@ import { CeiboShare } from 'ng2-social-share';
 })
 export class SeriesComponentUnidad implements OnInit {
   u: string;
-  public repoUrl = 'http://174.138.54.167';
+  public repoUrl = 'http://localhost';
   public imageUrl = '';  
   private pago:boolean;
   private tipo:string;
