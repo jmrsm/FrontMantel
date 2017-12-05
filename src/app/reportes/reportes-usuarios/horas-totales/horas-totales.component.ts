@@ -10,12 +10,15 @@ import { ReportesService} from '../../../services/reportes.service';
 })
 export class HorasTotalesComponent implements OnInit {
   horasTot: number;
+  emailUsuario: string;
   data:any={};
 
   constructor(private reportesservice: ReportesService) { }
 
   ngOnInit() {
-    this.reportesservice.getReporteSuperAdmin().subscribe(data => {
+    this.emailUsuario=localStorage.getItem('email');
+    var body=this.emailUsuario;
+    this.reportesservice.getReporteUsuario(body).subscribe(data => {
       //this.data=data;
       this.data=JSON.parse(data['_body']);
       console.log(this.data);

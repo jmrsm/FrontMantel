@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportesService } from '../../../services/reportes.service';
+import { _ } from 'core-js/library/web/timers';
 
 @Component({
   selector: 'app-horas-categorias',
@@ -25,6 +26,7 @@ export class HorasCategoriasComponent implements OnInit {
       for(let entry of this.data.horasPorCategoria){
         this.pieChartData.push(entry.horasVistas);
         this.pieChartLabels.push(entry.nombreCategoria);
+        console.log(this.pieChartData);
       }
     });
   }
