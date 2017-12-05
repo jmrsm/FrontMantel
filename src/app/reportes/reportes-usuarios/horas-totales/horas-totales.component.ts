@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Reportes} from '../../../models/reportes';
 import { ReportesService} from '../../../services/reportes.service';
+<<<<<<< HEAD
 import { UserService } from '../../../services/user.service';
+=======
+import { UserService} from '../../../services/user.service';
+>>>>>>> branch 'merged' of https://github.com/jmrsm/FrontMantel.git
 
 @Component({
   selector: 'app-horas-totales',

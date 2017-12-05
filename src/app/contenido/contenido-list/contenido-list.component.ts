@@ -170,7 +170,7 @@ export class ContenidoListComponent implements OnInit {
        }); 
     }
     if(this.option.nativeElement.value=="Serie"){
-      body='?_start=0&_end=10&_q='+this.input.nativeElement.value;
+      body='?_start=0&_end=99999&_q='+this.input.nativeElement.value;
       this.contentservice.buscarevento(body).subscribe(data => {
         this.data = data;
        });
