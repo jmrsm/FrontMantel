@@ -22,7 +22,7 @@ export class HorasVistasxsemanaComponent implements OnInit {
     this.emailUsuario=localStorage.getItem('email');
     var body=this.emailUsuario;
     this.reportesservice.getReporteAdmin(body).subscribe(data => {
-      this.data=data;
+      this.data=JSON.parse(data['_body']);
       for(let entry of this.data.horasVistasPorSemana){
         this.barChartData.push(entry.horasVistas);
         this.barChartLabels.push(entry.fecha);

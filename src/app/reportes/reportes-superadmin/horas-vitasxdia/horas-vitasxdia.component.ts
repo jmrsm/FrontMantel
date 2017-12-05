@@ -19,10 +19,15 @@ export class HorasVitasxdiaComponent implements OnInit {
   
     ngOnInit() {
       this.reportesservice.getReporteSuperAdmin().subscribe(data => {
-        this.data=data;
+        //this.data=data;
+        this.data=JSON.parse(data['_body']);
+        console.log(this.data);
+        console.log(this.data);
         for(let entry of this.data.horasVistasPorDia){
           this.barChartData.push(entry.horasVistas);
           this.barChartLabels.push(entry.fecha);
+          console.log(this.barChartData);
+          console.log(this.barChartLabels);
         }
       });
       
@@ -32,13 +37,6 @@ export class HorasVitasxdiaComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   };
-
-  //public barChartLabels:string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-
- 
-  /*public barChartData:any[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Horas'}
-  ];*/
 
   // events
   public chartClicked(e:any):void {

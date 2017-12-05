@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Reportes} from '../../../models/reportes';
+import { ReportesService} from '../../../services/reportes.service';
 
 @Component({
   selector: 'app-usuarios-habilit',
@@ -6,24 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./usuarios-habilit.component.css']
 })
 export class UsuariosHabilitComponent implements OnInit {
+  usuariosHabil: number;
+  data:any={};
 
-  constructor() { }
+  constructor(private reportesservice: ReportesService) { }
 
   ngOnInit() {
-  }
-
-  // Pie
-  public pieChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
-  public pieChartData:number[] = [300, 500, 100];
-  public pieChartType:string = 'pie';
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
+    this.reportesservice.getReporteSuperAdmin().subscribe(data => {
+      this.data=JSON.parse(data['_body']);
+      console.log(this.data);
+      this.usuariosHabil = this.data.cantuUsuarioHabilitados;
+      console.log(this.usuariosHabil);
+    });
   }
 
 }

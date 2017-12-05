@@ -21,7 +21,7 @@ export class HorasCategoriasComponent implements OnInit {
     this.emailUsuario=localStorage.getItem('email');
     var body=this.emailUsuario;
     this.reportesservice.getReporteUsuario(body).subscribe(data => {
-      this.data=data;
+      this.data=JSON.parse(data['_body']);
       for(let entry of this.data.horasPorCategoria){
         this.pieChartData.push(entry.horasVistas);
         this.pieChartLabels.push(entry.nombreCategoria);

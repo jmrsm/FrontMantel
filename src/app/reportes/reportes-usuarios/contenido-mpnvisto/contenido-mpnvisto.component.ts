@@ -22,7 +22,7 @@ export class ContenidoMpnvistoComponent implements OnInit {
     this.emailUsuario=localStorage.getItem('email');
     var body=this.emailUsuario;
     this.reportesservice.getReporteUsuario(body).subscribe(data => {
-      this.data=data;
+      this.data=JSON.parse(data['_body']);
       for(let entry of this.data.contenidoMejorPuntuadoNoVisto){
         this.pieChartData.push(entry.id);
         this.pieChartLabels.push(entry.titulo);

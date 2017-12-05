@@ -9,24 +9,20 @@ import { ReportesService} from '../../../services/reportes.service';
   providers:[ReportesService]
 })
 export class HorasVisualizadasComponent implements OnInit {
+  horasTot: number;
+  data:any={};
 
-  constructor() { }
+  constructor(private reportesservice: ReportesService) { }
 
   ngOnInit() {
+    this.reportesservice.getReporteSuperAdmin().subscribe(data => {
+    //this.data=data;
+    this.data=JSON.parse(data['_body']);
+    console.log(this.data);
+    this.horasTot = this.data.horasTotalesVisualizadas;
+    console.log(this.horasTot);
+  });
   }
 
-  // Pie
-  public pieChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
-  public pieChartData:number[] = [300, 500, 100];
-  public pieChartType:string = 'pie';
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
 
 }

@@ -4,6 +4,7 @@ import { CategoriaService } from '../services/categoria.service';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+
 @Component({
   selector: 'app-suscribir',
   templateUrl: './suscribir.component.html',
@@ -41,6 +42,7 @@ export class SuscribirComponent implements OnInit {
 
   selectPlan(id:string) {
     this.isLoading= true;
+    //this.loading = true;
     this.fechaActual = new Date();
     var aux = this.fechaActual.getTime() + 25000;
     var fecha = new Date(aux);

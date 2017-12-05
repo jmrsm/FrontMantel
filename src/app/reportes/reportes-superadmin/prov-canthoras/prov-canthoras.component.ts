@@ -7,37 +7,27 @@ import { ReportesService} from '../../../services/reportes.service';
   styleUrls: ['./prov-canthoras.component.css']
 })
 export class ProvCanthorasComponent implements OnInit {
-  cantidadHoras: number[];
+  cantidadHoras: any[];
   nombreProveedor: string[];
   data:any={};
   public pieChartLabels:string[]=[];
-  public pieChartData:number[]=[];
+  public pieChartData:any[]=[];
   public pieChartType:string='pie';
 
   constructor(private reportesservice: ReportesService) { }
 
   ngOnInit() {
     this.reportesservice.getReporteSuperAdmin().subscribe(data => {
-      this.data=data;
+      //this.data=data;
+      this.data=JSON.parse(data['_body']);
+      console.log(this.data);
       for(let entry of this.data.proveedorCantidadHoras){
         this.pieChartData.push(entry.cantidadHoras);
         this.pieChartLabels.push(entry.nombreProveedor);
+        console.log(this.pieChartData);
+        console.log(this.pieChartLabels);
       }
     });
-  }
-
-  // Pie
-  //public pieChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
-  //public pieChartData:number[] = [300, 500, 100];
-  //public pieChartType:string = 'pie';
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
   }
 
 }

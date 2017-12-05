@@ -28,16 +28,9 @@
       <div class="container">
           <br>
           <h3 class="text-center">Reportes Super Admin</h3>
-          <!--Div that will hold the pie chart-->
-          <!--div id="chart_div"></div-->
 
-          <div style="display: block">
-            <canvas baseChart
-                    [data]="pieChartData"
-                    [labels]="pieChartLabels"
-                    [chartType]="pieChartType"
-                    (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
+          <div>
+            <canvas data="horasTot"></canvas>
           </div>
             <br>
             <br>

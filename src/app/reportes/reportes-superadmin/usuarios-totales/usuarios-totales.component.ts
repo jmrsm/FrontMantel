@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Reportes} from '../../../models/reportes';
+import { ReportesService} from '../../../services/reportes.service';
 
 @Component({
   selector: 'app-usuarios-totales',
@@ -6,23 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./usuarios-totales.component.css']
 })
 export class UsuariosTotalesComponent implements OnInit {
+  usuariosTot: number;
+  data:any={};
 
-  constructor() { }
+  constructor(private reportesservice: ReportesService) { }
 
   ngOnInit() {
+    this.reportesservice.getReporteSuperAdmin().subscribe(data => {
+      this.data=JSON.parse(data['_body']);
+      console.log(this.data);
+      this.usuariosTot = this.data.cantuUsuarioTotales;
+      console.log(this.usuariosTot);
+    });
   }
 
-  // Pie
-  public pieChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
-  public pieChartData:number[] = [300, 500, 100];
-  public pieChartType:string = 'pie';
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
 }

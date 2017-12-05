@@ -19,7 +19,7 @@ export class HorasVitasxanioComponent implements OnInit {
 
   ngOnInit() {
     this.reportesservice.getReporteSuperAdmin().subscribe(data => {
-      this.data=data;
+      this.data=JSON.parse(data['_body']);
       for(let entry of this.data.horasVistasPorAnio){
         this.barChartData.push(entry.horasVistas);
         this.barChartLabels.push(entry.fecha);
