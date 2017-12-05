@@ -1,14 +1,3 @@
-
-<nav aria-label="Page navigation example">
-    <ul class="pagination" >
-        <li (click)="pagAnterior()" class="page-item">
-          <a class="popup" (mouseover)="atras()" style="margin: 15px;padding-right: 25px">
-            <span class="popuptext" id="myPopup" style="color: white">Regresar a contenido</span>
-            <img src="./assets/flecha2.jpg">
-          </a>
-        </li>
-    </ul>
-</nav>
 <div class="container" style="background-color: #455A64;">
     <div class="card-columns">
       <app-cat *ngFor="let content of data.content" [content]="content">

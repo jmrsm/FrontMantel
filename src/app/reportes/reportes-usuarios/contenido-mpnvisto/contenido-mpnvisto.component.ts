@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportesService } from '../../../services/reportes.service';
+import { UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-contenido-mpnvisto',
   templateUrl: './contenido-mpnvisto.component.html',
-  styleUrls: ['./contenido-mpnvisto.component.css']
+  styleUrls: ['./contenido-mpnvisto.component.css'],
+  providers: [UserService]
 
 })
 export class ContenidoMpnvistoComponent implements OnInit {
