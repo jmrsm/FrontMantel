@@ -78,8 +78,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem( 'email' , form.value.email);
       localStorage.setItem('idUsuario', JSON.parse(p['_body'])['id']);
       // Por mientras, recordar descomentar esto y comentar la linea siguiente(o borrarla).
-      //localStorage.setItem('tipo','No_pago');
-      localStorage.setItem('tipo','Usuario');
+      localStorage.setItem('tipo','No_pago');
+      //localStorage.setItem('tipo','Usuario');
       this.router.navigate(['/suscribir']);
     }
     

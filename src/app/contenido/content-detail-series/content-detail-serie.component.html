@@ -66,14 +66,22 @@
         <ngx-tile NgxCarouselItem *ngFor="let tm of temporadasMostrar; let i = index;">
             <div class="wBg">
                 <div class="tile" >
-                    <div class="col-sm-12 thumbnail text-center" >
-                    <a href='reproSeries/{{idcontent}}@{{tm.id}}'>
-                        <img class="img-fluid mx-auto d-block" src="{{poster}}" alt="slide 2">
-                        <div class="caption">
-                            <h1>{{tm.capitulo}}</h1>
-                        </div>
-                    </a>
-                </div>
+                    <div *ngIf="tipo==='Usuario'" class="col-sm-12 thumbnail text-center" >
+                        <a href='reproSeries/{{idcontent}}@{{tm.id}}'>
+                            <img class="img-fluid mx-auto d-block" src="{{poster}}" alt="slide 2">
+                            <div class="caption">
+                                <h1>{{tm.capitulo}}</h1>
+                            </div>
+                        </a>
+                    </div>
+                    <div *ngIf="tipo==='No_pago'" class="col-sm-12 thumbnail text-center" >
+                        <a href='suscribir'>
+                            <img class="img-fluid mx-auto d-block" src="{{poster}}" alt="slide 2">
+                            <div class="caption">
+                                <h1>{{tm.capitulo}}</h1>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </ngx-tile>
