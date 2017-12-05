@@ -42,7 +42,7 @@ export class ContentDetailSerieComponent implements OnInit {
   public carouselTileTwoItems: Array<any> = [];
   public carouselTileTwo: NgxCarousel;
   private indexT:number= -1;
-
+  private tipo:string;
 
   constructor(private contentservice:ContentService,
     private _route: ActivatedRoute,
@@ -56,6 +56,8 @@ export class ContentDetailSerieComponent implements OnInit {
       this.idcontent = params['Id'];
       this.idUser=localStorage.getItem('idUsuario');
       this.emailUsuario=localStorage.getItem('email');
+      this.tipo= localStorage.getItem('tipo'); 
+      console.log(this.tipo);
       var body='?idContenido='+this.idcontent;
       this.contentservice.getDatoContenido(body).subscribe(data=>{
         this.contendio=JSON.parse(data['_body']);

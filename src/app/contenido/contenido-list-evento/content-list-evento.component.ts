@@ -30,8 +30,8 @@ export class ContentListEventComponent implements OnInit {
   }
   
   anterior() {
-      this.end_index = this.end_index - this.size_page;
-      this.start_index = this.start_index - this.size_page;
+      this.end_index= this.end_index - this.size_page;
+      this.start_index= this.start_index - this.size_page;
       if (this.start_index===0) {
         this.iniciob=true;
       }

@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs/Subscription';
 import { AngularFireDatabase,AngularFireObject,AngularFireList } from 'angularfire2/database';
 
 @Component({
-  selector: 'app-repro-vivo',
+  selector: 'app-repro-vivo-list',
   templateUrl: './contenido-vivo.component.html',
   styleUrls: ['./contenido-vivo.component.css'],
   providers: [ContentService]
@@ -43,6 +43,7 @@ export class ContenidoVivoComponent implements OnInit {
   cFecheDate: Date;
   fechaServidor: string;
   sFechaDate: Date;
+  private nombreEvento:string;
 
   constructor(
     private _route: ActivatedRoute,
@@ -57,12 +58,11 @@ export class ContenidoVivoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._route.params.forEach((params: Params) => {
-      this.srcVideo = localStorage.getItem('videoSrc');
-      this.startTimeVideo = localStorage.getItem('videoTime');
-      this.idVideo = localStorage.getItem('videoId');
-
-      this.cFecheDate = new Date(this.fechaComienzo);
+    this._route.params.forEach((params:Params) => {
+      this.srcVideo= localStorage.getItem('videoSrc');
+      this.startTimeVideo= localStorage.getItem('videoTime');
+      this.idVideo= localStorage.getItem('videoId');
+      this.cFecheDate= new Date(this.fechaComienzo);
       this.cargarFechaServidor();
       this.st.newTimer('1sec', 1);
 

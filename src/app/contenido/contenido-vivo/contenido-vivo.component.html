@@ -3,8 +3,8 @@
       <div class="col-9">
         <ng-template #nTerminado>
           <div *ngIf="!empezo">
-    	       <div style="background-color: white">
-                <h6>La reproduccion de este contenido comenzara en:  {{ message }}</h6>
+    	       <div style="background-color: white; color: red;">
+                <h4>La reproduccion de este contenido comenzara en:  {{ message }}</h4>
              </div>
           </div>
         </ng-template>
@@ -12,7 +12,7 @@
           <div style="color: white">
             <strong>
               <h1>
-                Transmision Terminada, vuelvas pronto!!!    
+                Transmision Terminada.    
               </h1>
             </strong>
           </div>

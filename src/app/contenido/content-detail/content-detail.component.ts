@@ -26,8 +26,8 @@ export class ContentDetailComponent implements OnInit {
   comentario:string[]=[];
   emailUsuario:string;
   esPayperview:boolean;
-  pagado:boolean;
-  monto:number;
+  pagado:boolean= false;
+  monto:number= 0;
   ranking:string;
   tipoContenido:string;
   fechaInicio:number;
@@ -65,7 +65,7 @@ export class ContentDetailComponent implements OnInit {
       });
     })
     
-  
+  this.verificarPago(this.idcontent, this.emailUsuario);
         
   }
 altacomentario(comentario:NgForm){
@@ -81,10 +81,17 @@ setranking(Ranking:NgForm){
     });
   }
 verificarPago(idcontent, emailUsuario) {
+  console.log('val: '+idcontent+' val2: '+emailUsuario);
   this.contentservice.verificarPago(idcontent, emailUsuario).subscribe(
       result => {
-        if (!result) {
+        let val = JSON.parse(result['_body']);
+        if (val !== null) {
+          if (!val) {
           this.paypal();  
+          }
+          else {
+            this.pagado= true;
+          }  
         }
         
       },
@@ -126,7 +133,7 @@ private paypal() {
         onAuthorize: function(data, actions) {
           return actions.payment.execute().then(function(payment) {
             var xhttp = new XMLHttpRequest();
-            var urlAndParams = "http://174.138.54.167:8080/api/usuario/comprarContenidoPayPerView/"
+            var urlAndParams = "http://localhost:8080/api/usuario/comprarContenidoPayPerView/"
 
             urlAndParams += "?idContenido=" + idContenido;
             urlAndParams += "&email=" + emailUsuario;
@@ -145,21 +152,17 @@ private paypal() {
   }
 
   private showPaypalBoton() {
-    if (this.esPayperview && this.pagado) {
-      console.log('1');
+    
+    if (this.monto===0) {
       return false;
       
     }
-    else if (!this.esPayperview) {
-     console.log('2');
+    else if (this.pagado){
       return false;
     }
     else {
-      this.verificarPago(this.idcontent, this.emailUsuario);
-      console.log('3');
       return true;
     }
-    
   }
 
   private esEvento() {

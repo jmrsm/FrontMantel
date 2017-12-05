@@ -72,6 +72,7 @@ export class ContenidoVivoComponent implements OnInit {
   private autoHide:boolean= true;
   private autoHideTime:number= 5000;
   private controls:boolean= false;
+  private nombreEvento:string;
 //----------------------------------------------------------------------//  
 
   constructor(
@@ -82,19 +83,22 @@ export class ContenidoVivoComponent implements OnInit {
     private db: AngularFireDatabase,
     private datePipe: DatePipe
   ) {
-    this.itemsRef = db.list('prueba12');
-    this.item = db.list('prueba12').valueChanges();
+    
     this.nick=localStorage.getItem('email');
   }
 
   ngOnInit() {
     this._route.params.forEach((params: Params) => {
       this.srcVideo = localStorage.getItem('videoSrc');
-      
+      this.nombreEvento= localStorage.getItem('nombreEvento');
+      this.itemsRef = this.db.list(this.nombreEvento);
+      this.item = this.db.list(this.nombreEvento).valueChanges();
       this.duracionString = localStorage.getItem('duracion');
+
       this.duracion = +this.duracionString;
       
       this.fechaInicioString = localStorage.getItem('fechaComienzo');
+
       this.fechaInicio = +this.fechaInicioString;
       this.fechaInicioString = this.datePipe.transform(new Date(this.fechaInicio), 'MM/dd/yyyy HH:mm:ss');
       this.fechaInicioDate = new Date(this.fechaInicioString);

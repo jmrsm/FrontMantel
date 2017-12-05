@@ -56,10 +56,10 @@
     </ngx-carousel>
     <h2>Peliculas</h2>
     <ngx-carousel [inputs]="carouselTileTwo" (carouselLoad)="carouselTileTwoLoad()">
-        <ngx-tile NgxCarouselItem *ngFor="let content of data.content; let i = index;">
-            <div class="wBg" *ngIf="content">
+        <ngx-tile NgxCarouselItem *ngFor="let peli of peliculas; let i = index;">
+            <div class="wBg">
                 <div class="tile">
-                    <app-content  [content]="content" ></app-content>
+                    <app-content  [content]="peli" ></app-content>
                 </div>
             </div>
         </ngx-tile>
@@ -85,7 +85,7 @@
         <ngx-tile NgxCarouselItem *ngFor="let evento of eventos.content; let i = index;">
             <div class="wBg">
                 <div class="tile">
-                    <app-content  [content]="evento" ></app-content>
+                    <app-content-evento [content]="evento"></app-content-evento>
                 </div>
             </div>
         </ngx-tile>

@@ -30,7 +30,7 @@ private token:string;
       this.token= this.links.id;
        console.log(this.token);
       if (this.token !== '')
-        localStorage.setItem('pago' , 'si');
+        localStorage.setItem('tipo' , 'Usuario');
         this.suscribir(this.email, this.token);
         
     },e => this.error = e, () => this.isLoading= false);  
