@@ -82,17 +82,17 @@ import { BloqueoUsuarioComponent } from './admin/bloqueo-usuario/bloqueo-usuario
 import { BloqueoContenidoComponent } from './admin/bloqueo-contenido/bloqueo-contenido.component';
 import { ContentDetailSerieComponent } from './contenido/content-detail-series/content-detail-serie.component';
 
-import { ReportesAdminComponent } from './reportes/reportes-admin/reportes-admin.component';
+import { ReportesAdminComponent } from './reportes/reportes-admin.component';
 import { HorasVistasxanioComponent} from './reportes/reportes-admin/horas-vistasxanio/horas-vistasxanio.component';
 import { HorasVistasxdiaComponent} from './reportes/reportes-admin/horas-vistasxdia/horas-vistasxdia.component';
 import { HorasVistasxmesComponent} from './reportes/reportes-admin/horas-vistasxmes/horas-vistasxmes.component';
 import { HorasVistasxsemanaComponent} from './reportes/reportes-admin/horas-vistasxsemana/horas-vistasxsemana.component';
-import { ReportesSuperadminComponent } from './reportes/reportes-superadmin/reportes-superadmin.component';
+import { ReportesSuperadminComponent } from './reportes/reportes-superadmin.component';
 import { HorasVitasxdiaComponent } from './reportes/reportes-superadmin/horas-vitasxdia/horas-vitasxdia.component';
 import { HorasVitasxsemanaComponent } from './reportes/reportes-superadmin/horas-vitasxsemana/horas-vitasxsemana.component';
 import { HorasVitasxmesComponent } from './reportes/reportes-superadmin/horas-vitasxmes/horas-vitasxmes.component';
 import { HorasVitasxanioComponent } from './reportes/reportes-superadmin/horas-vitasxanio/horas-vitasxanio.component';
-import { ReportesUsuariosComponent } from './reportes/reportes-usuarios/reportes-usuarios.component';
+import { ReportesUsuariosComponent } from './reportes/reportes-usuarios.component';
 import { UsuariosTotalesComponent } from './reportes/reportes-superadmin/usuarios-totales/usuarios-totales.component';
 import { UsuariosHabilitComponent } from './reportes/reportes-superadmin/usuarios-habilit/usuarios-habilit.component';
 import { HorasVisualizadasComponent } from './reportes/reportes-superadmin/horas-visualizadas/horas-visualizadas.component';

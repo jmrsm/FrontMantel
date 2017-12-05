@@ -42,18 +42,6 @@
         <button NgxCarouselPrev class="leftRs">&lt;</button>
         <button NgxCarouselNext class="rightRs">&gt;</button>
     </ngx-carousel>
-    <h2 *ngIf="favoritosIndex > 0">Mi Lista</h2>
-    <ngx-carousel [inputs]="carouselTileTwo" (carouselLoad)="carouselTileTwoLoad()">
-        <ngx-tile NgxCarouselItem *ngFor="let favorito of favoritos.content; let i = index;">
-            <div class="wBg" *ngIf="content">
-                <div class="tile">
-                    <app-content  [content]="favorito" ></app-content>
-                </div>
-            </div>
-        </ngx-tile>
-        <button NgxCarouselPrev class="leftRs">&lt;</button>
-        <button NgxCarouselNext class="rightRs">&gt;</button>
-    </ngx-carousel>
     <h2>Peliculas</h2>
     <ngx-carousel [inputs]="carouselTileTwo" (carouselLoad)="carouselTileTwoLoad()">
         <ngx-tile NgxCarouselItem *ngFor="let peli of peliculas; let i = index;">

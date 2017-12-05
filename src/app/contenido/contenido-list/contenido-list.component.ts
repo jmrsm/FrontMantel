@@ -118,14 +118,6 @@ export class ContenidoListComponent implements OnInit {
       this.series= this.links.content;
     });
   }
-  public getFavoritos() {
-    this.userservice.getFavoritos().subscribe(favoritos => {
-      this.favoritos= favoritos;
-      for(let val of this.favoritos.content) {
-        this.favoritosIndex++;
-      }
-    })
-  }
 
   public getContents(start_index, endIndex) {
       this.contentservice.getData(start_index, endIndex).subscribe(data => {
@@ -159,7 +151,6 @@ export class ContenidoListComponent implements OnInit {
     this.getContents(this.start_index, this.end_index);
     this.getEventos(this.start_index, this.end_index);
     this.getSeries(this.start_index, this.end_index);
-    this.getFavoritos();
     this.router.navigate(['/contenido']);
   }
   
